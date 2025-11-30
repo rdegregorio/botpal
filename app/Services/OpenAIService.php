@@ -10,26 +10,26 @@ class OpenAIService
 {
     public const CHAT_LOG = 'chat_log';
 
-    // Updated models - GPT-5.x series
-    public const MODEL_5_NANO = 'gpt-5-nano'; // Fastest, most cost-efficient
-    public const MODEL_5_MINI = 'gpt-5-mini'; // Fast and cost-efficient
-    public const MODEL_5 = 'gpt-5'; // Intelligent reasoning model
-    public const MODEL_5_PRO = 'gpt-5-pro'; // Smarter and more precise
-    public const MODEL_5_1 = 'gpt-5.1'; // Best for coding and agentic tasks
-    public const MODEL_4_1 = 'gpt-4.1'; // Smartest non-reasoning model
+    // Current OpenAI models (2025)
+    public const MODEL_4O = 'gpt-4o';
+    public const MODEL_4O_MINI = 'gpt-4o-mini';
+    public const MODEL_4_1 = 'gpt-4.1';
+    public const MODEL_4_1_MINI = 'gpt-4.1-mini';
+    public const MODEL_4_1_NANO = 'gpt-4.1-nano';
+    public const MODEL_O3_MINI = 'o3-mini';
 
     public const AVAILABLE_MODELS = [
-        self::MODEL_5_NANO => 'GPT-5 nano - Fastest, most cost-efficient',
-        self::MODEL_5_MINI => 'GPT-5 mini - Fast and cost-efficient',
-        self::MODEL_5 => 'GPT-5 - Intelligent reasoning model',
-        self::MODEL_5_PRO => 'GPT-5 pro - Smarter and more precise',
-        self::MODEL_5_1 => 'GPT-5.1 - Best for coding and agentic tasks',
-        self::MODEL_4_1 => 'GPT-4.1 - Smartest non-reasoning model',
+        self::MODEL_4_1_NANO => 'GPT-4.1 nano - Fastest, most cost-efficient',
+        self::MODEL_4_1_MINI => 'GPT-4.1 mini - Fast and cost-efficient',
+        self::MODEL_4_1 => 'GPT-4.1 - Best for coding and complex tasks',
+        self::MODEL_4O_MINI => 'GPT-4o mini - Fast multimodal model',
+        self::MODEL_4O => 'GPT-4o - Advanced multimodal model',
+        self::MODEL_O3_MINI => 'o3-mini - Advanced reasoning model',
     ];
 
     // Legacy constants for backward compatibility
-    public const MODEL_35_TURBO = 'gpt-5-nano';
-    public const MODEL_4_PREVIEW = 'gpt-5';
+    public const MODEL_35_TURBO = 'gpt-4o-mini';
+    public const MODEL_4_PREVIEW = 'gpt-4o';
 
     private $apiKey;
     private $model;
