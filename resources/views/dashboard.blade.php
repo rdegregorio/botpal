@@ -37,16 +37,20 @@
             <h2 class="dashboard-card-title"><i class="bi bi-key me-2"></i>OpenAI API Key</h2>
         </div>
         <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Enter your OpenAI API key to power your chatbot.</p>
-        <div class="row align-items-end">
-            <div class="col-lg-9 col-md-8">
-                <div class="form-group mb-3">
-                    <div data-editable>
-                        <input type="text" readonly autocomplete="off" class="form-control" name="open_ai_token" id="open_ai_token"
-                               placeholder="{{Auth::user()->open_ai_token ? '••••••••••••••••••••' : 'sk-proj-...'}}">
-                    </div>
+        <div class="row align-items-center">
+            <div class="col-lg-8 col-md-7 mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="open_ai_token" id="open_ai_token" autocomplete="off"
+                           placeholder="{{ Auth::user()->open_ai_token ? 'API Key saved (click Edit to change)' : 'Enter your OpenAI API key (sk-proj-...)' }}">
+                    <button class="btn btn-primary" type="button" id="saveApiKey">
+                        <i class="bi bi-check-lg me-1"></i> Save
+                    </button>
                 </div>
+                @if(Auth::user()->open_ai_token)
+                    <small class="text-success mt-1 d-block"><i class="bi bi-check-circle me-1"></i> API Key configured</small>
+                @endif
             </div>
-            <div class="col-lg-3 col-md-4 mb-3">
+            <div class="col-lg-4 col-md-5 mb-3">
                 <a href="https://platform.openai.com/api-keys" class="btn btn-outline-secondary w-100" target="_blank">
                     <i class="bi bi-box-arrow-up-right me-1"></i> Get API Key
                 </a>
@@ -122,63 +126,36 @@
     <script>
         // OpenAI Key and Model handling
         $(function() {
-            // Editable fields
-            $('input:read-only').click(function () {
-                $(this).closest('[data-editable]')?.find('[data-edit]')?.click();
-            });
+            // Save API Key button
+            $('#saveApiKey').on('click', function() {
+                var $btn = $(this);
+                var $input = $('#open_ai_token');
+                var value = $input.val().trim();
 
-            $('[data-editable]').mouseover(function () {
-                if ($(this).find('.edit-buttons').length) return;
+                if (!value) {
+                    alert('Please enter your OpenAI API key');
+                    return;
+                }
 
-                var $buttons = $('<div class="edit-buttons"><button data-edit class="btn btn-sm btn-primary">Edit</button></div>');
-                $(this).append($buttons);
-            });
+                $btn.prop('disabled', true).html('<i class="bi bi-hourglass-split me-1"></i> Saving...');
 
-            $('[data-editable]').mouseleave(function () {
-                if ($(this).data('edit-mode')) return;
-                $(this).find('.edit-buttons').remove();
-            });
-
-            $(document).on('click', '[data-editable] [data-edit]', function () {
-                var $block = $(this).closest('[data-editable]');
-                $block.data('edit-mode', true);
-                $block.find('input').prop('readonly', false).focus();
-
-                var buttons = '<button data-save class="btn btn-sm btn-success">Save</button> ' +
-                    '<button data-cancel class="btn btn-sm btn-secondary">Cancel</button>';
-                $block.find('.edit-buttons').html(buttons);
-            });
-
-            $(document).on('click', '[data-editable] [data-cancel]', function () {
-                var $block = $(this).closest('[data-editable]');
-                $block.data('edit-mode', false);
-                $block.find('input').prop('readonly', true).val('');
-                $block.find('.edit-buttons').remove();
-            });
-
-            $(document).on('click', '[data-editable] [data-save]', function () {
-                var $block = $(this).closest('[data-editable]');
-                $block.data('edit-mode', false);
-                $block.find('input').prop('readonly', true);
-
-                var field = $block.find('input').attr('name');
-                var data = {
-                    field: field,
-                    value: $block.find('input').val(),
+                $.post('{{route('account.update')}}', {
+                    field: 'open_ai_token',
+                    value: value,
                     _token: '{{csrf_token()}}'
-                };
+                }, function (res) {
+                    $btn.prop('disabled', false).html('<i class="bi bi-check-lg me-1"></i> Save');
+                    $input.val('').attr('placeholder', 'API Key saved (click Edit to change)');
 
-                $.post('{{route('account.update')}}', data, function (res) {
-                    if (res) {
-                        $block.find('.edit-buttons').remove();
-                        if (field === 'open_ai_token') {
-                            $block.find('input').attr('placeholder', '••••••••••••••••••••').val('');
-                        }
+                    // Add success indicator if not already there
+                    if (!$input.parent().next('.text-success').length) {
+                        $input.closest('.input-group').after('<small class="text-success mt-1 d-block"><i class="bi bi-check-circle me-1"></i> API Key configured</small>');
                     }
+
+                    alert('API Key saved successfully!');
                 }).fail(function (err) {
-                    alert('Error: ' + (err.responseJSON?.message || 'Something went wrong'));
-                    $block.find('input').prop('readonly', false);
-                    $block.data('edit-mode', true);
+                    $btn.prop('disabled', false).html('<i class="bi bi-check-lg me-1"></i> Save');
+                    alert('Error: ' + (err.responseJSON?.message || 'Failed to save API key'));
                 });
             });
 
@@ -188,18 +165,12 @@
                 $('.model-option').removeClass('border-dark bg-light');
                 $option.addClass('border-dark bg-light');
 
-                var data = {
+                $.post('{{route('account.update')}}', {
                     field: 'open_ai_model',
                     value: $(this).val(),
                     _token: '{{csrf_token()}}'
-                };
-
-                $.post('{{route('account.update')}}', data, function (res) {
-                    if (!res) {
-                        alert('Error saving model selection');
-                    }
                 }).fail(function (err) {
-                    alert('Error: ' + (err.responseJSON?.message || 'Something went wrong'));
+                    alert('Error: ' + (err.responseJSON?.message || 'Failed to save model'));
                 });
             });
         });

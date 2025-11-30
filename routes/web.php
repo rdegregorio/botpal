@@ -81,6 +81,7 @@ Route::group(['as' => 'forms.'], function () {
 Route::group(['middleware' => 'auth', 'prefix' => 'account', 'as' => 'account.'], function () {
     Route::get('/', [AccountController::class, 'account'])->name('index');
     Route::get('/billing', [AccountController::class, 'billing'])->name('billing');
+    Route::get('/usage', [AccountController::class, 'usage'])->name('usage');
     Route::get('invoices', [AccountController::class, 'invoices'])->name('invoices');
     Route::get('stats', [AccountController::class, 'stats'])->name('stats');
     Route::post('swap', [AccountController::class, 'swap'])->name('swap');

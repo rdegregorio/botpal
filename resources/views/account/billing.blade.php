@@ -82,51 +82,6 @@
     </div>
     @endif
 
-    <!-- Usage Stats -->
-    <div class="dashboard-card" id="usage">
-        <div class="dashboard-card-header">
-            <h2 class="dashboard-card-title"><i class="bi bi-bar-chart me-2"></i>Usage Statistics</h2>
-            <input type="text" id="datePicker" class="form-control" style="max-width: 150px;" placeholder="Select date">
-        </div>
-        <p class="text-muted mb-4">AI chatbot responses to user interactions</p>
-
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="p-3 border rounded" style="background: var(--bg-cream);">
-                    <canvas id="usageChart" height="200"></canvas>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="row">
-                    <div class="col-6 mb-3">
-                        <div class="p-3 border rounded text-center" style="background: var(--bg-cream);">
-                            <p class="text-muted small mb-1">Total Messages</p>
-                            <h3 class="mb-0" id="totalMessages">-</h3>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <div class="p-3 border rounded text-center" style="background: var(--bg-cream);">
-                            <p class="text-muted small mb-1">This Month</p>
-                            <h3 class="mb-0" id="thisMonthMessages">-</h3>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <div class="p-3 border rounded text-center" style="background: var(--bg-cream);">
-                            <p class="text-muted small mb-1">Daily Average</p>
-                            <h3 class="mb-0" id="dailyAverage">-</h3>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <div class="p-3 border rounded text-center" style="background: var(--bg-cream);">
-                            <p class="text-muted small mb-1">Peak Day</p>
-                            <h3 class="mb-0" id="peakDay">-</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Invoices Modal -->
     <div class="modal fade" id="invoices" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -144,10 +99,6 @@
 @endsection
 
 @push('bottom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.standalone.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script>
         // Change card handler
         $(document).on('click', '[data-change-card]', function () {
@@ -184,60 +135,5 @@
                 $modal.find('.modal-body').html(html);
             });
         }
-
-        // Usage chart
-        var ctx = document.getElementById('usageChart').getContext('2d');
-        var usageChart;
-
-        $('#datePicker').datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            autoclose: true,
-            endDate: new Date()
-        }).on('changeDate', function() {
-            fetchData($("#datePicker").datepicker('getFormattedDate'));
-        });
-
-        function fetchData(startDate) {
-            $.ajax({
-                url: '{{ route('account.stats') }}',
-                type: 'GET',
-                data: { start_date: startDate },
-                success: function(response) {
-                    if (usageChart) usageChart.destroy();
-
-                    usageChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: response.labels,
-                            datasets: response.datasets
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                y: { beginAtZero: true }
-                            },
-                            plugins: {
-                                legend: { display: false }
-                            }
-                        }
-                    });
-
-                    // Calculate stats
-                    var data = response.datasets[0]?.data || [];
-                    var total = data.reduce((a, b) => a + b, 0);
-                    var avg = data.length ? Math.round(total / data.length) : 0;
-                    var peak = Math.max(...data, 0);
-
-                    $('#totalMessages').text(total);
-                    $('#thisMonthMessages').text(total);
-                    $('#dailyAverage').text(avg);
-                    $('#peakDay').text(peak);
-                }
-            });
-        }
-
-        fetchData(null);
     </script>
 @endpush

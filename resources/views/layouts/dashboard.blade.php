@@ -341,7 +341,7 @@
 
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">Analytics</div>
-                    <a href="{{ route('account.index') }}#usage" class="sidebar-link">
+                    <a href="{{ route('account.usage') }}" class="sidebar-link {{ request()->routeIs('account.usage') ? 'active' : '' }}">
                         <i class="bi bi-bar-chart"></i>
                         Usage & Stats
                     </a>
