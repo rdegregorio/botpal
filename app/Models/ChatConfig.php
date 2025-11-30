@@ -22,6 +22,7 @@ class ChatConfig extends Model
     public const SETTINGS_COLOR_SECONDARY = 'color_secondary';
     public const SETTINGS_COLOR_CHARACTER_BG = 'color_character_bg';
     public const SETTINGS_COPYRIGHT_ENABLED = 'copyright_enabled';
+    public const SETTINGS_AI_MODEL = 'ai_model';
 
     public const TYPES
         = [

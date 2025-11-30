@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\ChatConfig;
 use App\Models\ChatLog;
 use App\Services\OpenAIService;
 use Illuminate\Bus\Queueable;
@@ -28,18 +29,20 @@ class ProcessChatRequestJob implements ShouldQueue
             return;
         }
 
-        // Use shared API key and default model from config
+        // Use shared API key from config
         $apiKey = config('services.openai.api_key');
-        $model = config('services.openai.default_model', 'gpt-5-mini');
 
         if (!$apiKey) {
             \Log::channel('openai')->info("OpenAI API key not configured");
             return;
         }
 
-        $service = new OpenAIService($apiKey, $model);
-
         $chatConfig = $this->chatLog->chatConfig;
+
+        // Get model from chat config settings, fallback to default
+        $model = $chatConfig->getSettings(ChatConfig::SETTINGS_AI_MODEL) ?? config('services.openai.default_model', 'gpt-5-mini');
+
+        $service = new OpenAIService($apiKey, $model);
 
         $systemPrompt = $chatConfig->general_prompt;
         $systemPrompt .= "\n\n$chatConfig->welcome_message\n\nEnsure to avoid answering questions that are unrelated to the service.";

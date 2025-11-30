@@ -16,7 +16,7 @@ class ChatLogPublicResource extends JsonResource
             'chat_uuid' => $this->chat_uuid,
             'message_uuid' => $this->message_uuid,
 //            'question' => $this->question,
-            'answer' => nl2br($this->answer),
+            'answer' => $this->answer ? nl2br($this->answer) : null,
 //            'failed' => $this->failed,
 //            'fail_reason' => $this->fail_reason,
 //            'ip_address' => $this->ip_address,
