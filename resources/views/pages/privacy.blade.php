@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="content-wrapper-2">
-        <div class="col-md-6 mx-auto">
-            <h2 class="mt-2 mb-1 text-center">Privacy Policy</h2>
-            <p class="mt-4 mb-2 fw-bold">Effective date: August 21st, 2023</p>
+        <div class="container">
+            <div class="col-lg-8 mx-auto" style="background: white; border-radius: 16px; padding: 48px; border: 1px solid #e8e8e8;">
+                <h1 class="mb-4" style="font-size: 32px;">Privacy Policy</h1>
+                <p class="mb-4" style="color: #6b6b6b;">Effective date: August 21, 2023</p>
             <p class="mt-0 mb-2">SNAPI LLC ("us", "we", or "our") operates the https://www.iamsam.ai website (hereinafter referred to as the "Service").</p>
             <p class="mt-0 mb-2">This page informs you of our policies regarding the collection, use and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
             <p class="mt-0 mb-2">We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from https://www.iamsam.ai</p>
@@ -136,9 +137,10 @@
                 <h6 class="mt-4 mb-1 fw-bold">Changes to This Privacy Policy</h6>
                 <p class="mt-0 mb-2">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
                 <p class="mt-0 mb-2">You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-                <h6 class="mt-4 mb-1 fw-bold">Contact Us</h6>
-                <p class="mt-0 mb-5">If you have any questions about this Privacy Policy, please contact us.</p>
+                <h5 class="mt-4 mb-2">Contact Us</h5>
+                <p class="mb-0">If you have any questions about this Privacy Policy, please contact us.</p>
             </li>
+            </div>
         </div>
     </div>
 @endsection
