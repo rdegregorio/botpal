@@ -1,230 +1,248 @@
-@extends('layouts.main')
+@extends('layouts.landing')
 
 @section('content')
-    <div class="content-wrapper mt-lg-2 mt-md-2 mt-sm-0">
-        <div id="name-container" style="font-family: 'Koulen', sans-serif; font-weight: 500; font-size: 55px; line-height: 3rem"> <span class="gray-text">Your</span><span id="name" style="color: #D3103E;"> AI SUPPORT</span><span class="gray-text"> pal!</span> </div>
-        <p class="mx-auto mt-4" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 24px;letter-spacing: -1.2px;color: #21259;max-width: 40em;">Create your own personalized chatbot for customer support. Harness the power of AI technology in your business.</p>
-        <div class="d-flex justify-content-center"> <a href="{{route('register')}}" class="btn btn-custom mb-4">Create</a> </div>
-        
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-lg-11 mx-auto mb-4 mt-2">
-             <img src="/images/homeanima.gif" class="img-fluid shadow" style="border: 1px solid #CCC; border-radius: 15px;">
+    <!-- Header -->
+    <header class="landing-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a href="/" class="logo-link">
+                        <span class="logo-text">Bot<span>Pal</span></span>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <nav class="landing-nav justify-content-end">
+                        <a href="{{ route('pricing') }}" class="landing-nav-link">Pricing</a>
+                        <a href="{{ route('login') }}" class="landing-nav-link">Log in</a>
+                        <a href="{{ route('register') }}" class="landing-btn-primary">Start for free</a>
+                    </nav>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </header>
 
-<div class="mt-4" style="background-color: #EEEEF0;">
-<div class="container mt-4 mb-4">
-    <div class="row">
-        <div class="col-12 mt-4">
-            <nav class="nav justify-content-center">
-                <a class="nav-home-link active" href="#" data-section="section1"><i class="bi bi-people"></i> Choose</a>
-                <a class="nav-home-link" href="#" data-section="section2"><i class="bi bi-palette"></i> Customize</a>
-                <a class="nav-home-link" href="#" data-section="section3"><i class="bi bi-envelope"></i> Manage</a>
-            </nav>
-        </div>
-    </div>
-    
-    <!-- Section 1 -->
-    <div class="row justify-content-center mt-4 mb-4">
-        <!-- Section 1: Choose -->
-        <div id="section1" class="content-section active-section col-12 mb-4">
-            <div class="row">
-                <div class="col-12 col-lg-4">
-                    <img src="/images/web1.png" class="img-fluid" alt="Responsive Image 1">
-                </div>
-                <div class="col-12 col-lg-8 text-start">
-                    <h2 class="mt-4" style="color: #A4A3B1"><span style="color: #D3103E">Choose</span> Your Character</h2>
-                    <p style="color: #21259">Our platform offers a variety of chatbot characters to enhance user engagement, making conversations more personal. Easily select a design that suits your style, ensuring your chatbot stands out.</p>
-                     <p style="color: #21259">For a unique touch, upload your own character or image, aligning your chatbot with your brand identity. This option offers flexibility, allowing for a perfectly customized interaction experience for your audience.</p>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-badge animate-fade-in">
+                <span class="hero-badge-dot"></span>
+                <span>New: GPT-4 Integration Available</span>
             </div>
-        </div>
-        
-        <!-- Section 2: -->
-        <div id="section2" class="content-section col-12 mb-4">
-            <div class="row">
-                <div class="col-12 col-lg-4">
-                    <img src="/images/web2.png" class="img-fluid" alt="Responsive Image 2">
-                </div>
-                <div class="col-12 col-lg-8 text-start">
-                    <h2 class="mt-4" style="color: #A4A3B1"><span style="color: #D3103E">Customize</span> Your Chat’s Look & Feel</h2>
-                    <p style="color: #21259">Customize your chatbot to reflect your unique brand identity with our easy-to-use customization features. Adjust colors, fonts, font families, and character sizes to create a chat experience that aligns with your style.</p>
-                    <p style="color: #21259">Our platform extends these customization capabilities, allowing you to not only modify basic aesthetic elements but also scale characters and more.</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Section 3: -->
-        <div id="section3" class="content-section col-12 mb-4">
-            <div class="row">
-                <div class="col-12 col-lg-4">
-                    <img src="/images/web3.png" class="img-fluid" alt="Responsive Image 3">
-                </div>
-                <div class="col-12 col-lg-8 text-start">
-                    <h2 class="mt-4" style="color: #A4A3B1"><span style="color: #D3103E">Manage</span> Conversations</h2>
-                    <p style="color: #21259">Oversee chatbot interactions with ease using our conversational inbox. Here, you can analyze responses, streamline FAQs, and enhance your bot’s learning. It’s your control center for improving your chatbot.</p>
-                   <p style="color: #21259">It functions similarly to a mailbox, designed specifically for improving your chatbot's effectiveness and user engagement.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-        
-<div class="container py-5">
-    <div class="row text-center g-4 justify-content-center">
-        <!-- Icon 1 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="p-4 rounded-circle circle-homepage mx-auto">
-                <i class="bi bi-journal-bookmark-fill" style="color: #FFF; font-size: 2rem;"></i>
-            </div>
-            <h2 class="mt-3 circle-heading">Knowledge</h2>
-            <p>Train your bot effectively using FAQs, plain text, or PDF documents.</p>
-        </div>
-        <!-- Icon 2 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="p-4 rounded-circle circle-homepage mx-auto">
-                <i class="bi bi-cpu-fill" style="color: #FFF; font-size: 2rem;"></i>
-            </div>
-            <h2 class="mt-3 circle-heading ">AI Model</h2>
-            <p>Seamlessly switch between OpenAI models to find the perfect fit for your chatbot. </p>
-        </div>
-        <!-- Icon 3 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="p-4 rounded-circle circle-homepage mx-auto">
-                <i class="bi bi-eye-fill" style="color: #FFF; font-size: 2rem;"></i>
-            </div>
-            <h2 class="mt-3 circle-heading">Preview</h2>
-            <p>Preview and interact with your chatbot to test its responses and behavior.</p>
-        </div>
-    </div>
-    <!-- Row for the bottom 2 icons, ensuring centering -->
-    <div class="row text-center g-4 justify-content-center mt-3">
-        <!-- Icon 4 -->
-        <div class="col-lg-4 col-md-6 d-flex justify-content-center">
-            <div>
-                <div class="p-4 rounded-circle circle-homepage mx-auto">
-                    <i class="bi bi-code-slash" style="color: #FFF; font-size: 2rem;"></i>
-                </div>
-                <h2 class="mt-3 circle-heading">Easy Integration</h2>
-                <p>Easily integrate the bot into your website with our embed code.</p>
-            </div>
-        </div>
-        <!-- Icon 5 -->
-        <div class="col-lg-4 col-md-6 d-flex justify-content-center">
-            <div>
-                <div class="p-4 rounded-circle circle-homepage mx-auto">
-                    <i class="bi bi-bar-chart-fill" style="color: #FFF; font-size: 2rem;"></i>
-                </div>
-                <h2 class="mt-3 circle-heading">Analyze</h2>
-                <p>Analyze your AI bot usage and responses.</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="mt-2" style="background-color: #EFEFEF;">
-        <div class="container mb-4 mt-4">
-            <div class="row">
-                <div class="col-lg-10 mx-auto mb-4">
-                    <img src="/images/animated.gif" class="img-fluid" style="background-color: #EEEEEF;">
+            <h1 class="hero-title animate-fade-in delay-1">
+                Build <span class="highlight">AI Chatbots</span><br>
+                That Convert
+            </h1>
+
+            <p class="hero-subtitle animate-fade-in delay-2">
+                Create intelligent, personalized chatbots for customer support in minutes.
+                No coding required. Powered by the latest AI technology.
+            </p>
+
+            <div class="hero-cta animate-fade-in delay-3">
+                <a href="{{ route('register') }}" class="landing-btn-primary">Get Started Free</a>
+                <a href="{{ route('pricing') }}" class="landing-btn-secondary">View Pricing</a>
+            </div>
+
+            <div class="product-preview animate-fade-in delay-4">
+                <img src="/images/homeanima.gif" alt="BotPal Dashboard Preview" class="product-preview-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10<span class="accent">K+</span></div>
+                    <div class="stat-label">Active Chatbots</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5<span class="accent">M+</span></div>
+                    <div class="stat-label">Messages Handled</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98<span class="accent">%</span></div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24<span class="accent">/7</span></div>
+                    <div class="stat-label">Always Available</div>
                 </div>
             </div>
         </div>
-</div>    
-             
-<div class="mt-4" style="background-color: #FFF">     
-    <h1 style="color: #A4A3B1; font-family: 'Koulen', sans-serif; font-weight: 500; font-size: 55px; margin-top: 100px;">Get Started</h1>             
-    <p class="mx-auto" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 24px;letter-spacing: -1.2px;color: #21259;max-width: 40em;">Start for Free, no credit card needed.<br>Join now and unleash the potential of AI technology!</p>
-    <div class="d-flex justify-content-center" style="margin-bottom: 100px;"> <a href="{{route('register')}}" class="btn btn-custom mb-4">Create</a> </div>
-</div>
-        
-</div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Everything You Need</h2>
+                <p class="section-subtitle">Powerful features to create, customize, and deploy intelligent chatbots that understand your business.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-journal-bookmark-fill"></i>
+                    </div>
+                    <h3 class="feature-title">Knowledge Base</h3>
+                    <p class="feature-description">Train your bot with FAQs, documents, and PDFs. Your chatbot learns from your content to provide accurate, contextual responses.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-cpu-fill"></i>
+                    </div>
+                    <h3 class="feature-title">AI Model Selection</h3>
+                    <p class="feature-description">Choose from multiple OpenAI models to find the perfect balance of speed, accuracy, and cost for your needs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-palette-fill"></i>
+                    </div>
+                    <h3 class="feature-title">Full Customization</h3>
+                    <p class="feature-description">Match your brand perfectly with custom colors, fonts, avatars, and messaging styles. Make it truly yours.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <h3 class="feature-title">Easy Integration</h3>
+                    <p class="feature-description">Add your chatbot to any website with a simple embed code. Works with WordPress, Shopify, and custom sites.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-chat-dots-fill"></i>
+                    </div>
+                    <h3 class="feature-title">Conversation Inbox</h3>
+                    <p class="feature-description">Monitor all conversations in real-time. Review, analyze, and improve your bot's responses from one dashboard.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-bar-chart-fill"></i>
+                    </div>
+                    <h3 class="feature-title">Analytics & Insights</h3>
+                    <p class="feature-description">Track performance with detailed analytics. Understand user behavior and optimize your chatbot's effectiveness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get your AI chatbot up and running in three simple steps.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Choose & Create</h3>
+                    <p class="step-description">Sign up and create your first chatbot. Select from our library of characters or upload your own avatar.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Train & Customize</h3>
+                    <p class="step-description">Add your knowledge base, customize the appearance, and configure your bot's personality and responses.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Deploy & Engage</h3>
+                    <p class="step-description">Embed your chatbot on your website and start engaging with visitors 24/7 with intelligent conversations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built for Every Business</h2>
+                <p class="section-subtitle">From startups to enterprises, BotPal adapts to your unique needs.</p>
+            </div>
+
+            <div class="use-case-content">
+                <div class="use-case-text">
+                    <h3>Customer Support</h3>
+                    <p>Reduce support ticket volume by up to 70% with AI-powered responses that handle common questions instantly, freeing your team for complex issues.</p>
+                    <ul class="use-case-list">
+                        <li>Instant responses 24/7</li>
+                        <li>Handles FAQs automatically</li>
+                        <li>Seamless handoff to humans</li>
+                        <li>Multi-language support</li>
+                    </ul>
+                </div>
+                <div class="use-case-image">
+                    <img src="/images/web1.png" alt="Customer Support Chatbot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Customer Experience?</h2>
+            <p class="cta-subtitle">Join thousands of businesses using BotPal to deliver exceptional support. Start free, no credit card required.</p>
+            <div class="cta-buttons">
+                <a href="{{ route('register') }}" class="landing-btn-primary">Get Started Free</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-text">Bot<span>Pal</span></div>
+                    <p>AI-powered chatbots that help businesses deliver exceptional customer experiences around the clock.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="{{ route('pricing') }}">Pricing</a></li>
+                        <li><a href="{{ route('register') }}">Get Started</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="{{ route('pages.about') }}">About</a></li>
+                        <li><a href="{{ route('pages.contact') }}">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="{{ route('pages.privacy') }}">Privacy Policy</a></li>
+                        <li><a href="{{ route('pages.terms') }}">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; {{ date('Y') }} BotPal. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 @endsection
-
-@push('bottom')
-
-    <div class="modal fade" id="characterModal" tabindex="-1" aria-labelledby="characterModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <!-- Use modal-lg for a larger modal -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div style="font-family: 'BerlinSansFBDemiBold', sans-serif; color: #D4103E; font-size: 18px;" class="modal-title"> Create your own AI powered Chatbot!</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex flex-column" style="height: 600px;">
-                    <p>Our platform enables you to create AI-powered assistants tailored to your specific needs. Here's how a chatbot created through our service can transform your user engagement:</p>
-                        <ul>
-                            <li><strong>E-commerce Assistance:</strong> Do your users need help navigating your products or services? Create a chatbot to offer them 24/7 assistance with product details, order tracking, and more.</li>
-                            <li><strong>Customer FAQs:</strong> Equip your chatbot with answers to frequently asked questions. Whether it's about your company, policies, or services, your users will get instant responses.</li>
-                            <li><strong>Technical Support:</strong> Make troubleshooting easy. Your chatbot can guide users through solving common technical issues or direct them to your support team for more complex queries.</li>
-                            <li><strong>Personalized User Experience:</strong> Enhance user engagement by providing personalized recommendations and support, tailored to individual user preferences and behaviors.</li>
-                        </ul>
-                    <p>Start building your AI chatbot today and elevate the user experience for your customers!</p>
-                </div>
-            </div>
-        </div>
-</div>   
-        
-        
-        
-        
-    </div>
-
-    <script>
-      $(function(e) {
-        $('#characters img').on('click', function(e) {
-          e.preventDefault();
-          const $modal = $('#characterModal');
-          $modal.modal('show').on('hidden.bs.modal');
-        });
-      });
-    </script>
-<script>
-let currentSection = 1;
-const totalSections = 3;
-let sectionChangeInterval; // Define a variable to keep track of the interval
-
-function showSection(sectionNumber) {
-    // Hide all sections
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active-section');
-    });
-    document.querySelectorAll('.nav-home-link').forEach(navLink => {
-        navLink.classList.remove('active');
-    });
-
-    // Show the current section
-    document.getElementById(`section${sectionNumber}`).classList.add('active-section');
-    document.querySelector(`.nav-home-link[data-section="section${sectionNumber}"]`).classList.add('active');
-}
-
-function nextSection() {
-    currentSection = currentSection >= totalSections ? 1 : currentSection + 1;
-    showSection(currentSection);
-}
-
-function startSectionChangeInterval() {
-    clearInterval(sectionChangeInterval); // Clear existing intfor erval
-    sectionChangeInterval = setInterval(nextSection, 10000); // Start a new interval
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    startSectionChangeInterval(); // Initialize the interval when the document is ready
-
-    // Setup click event listeners for nav links
-    document.querySelectorAll('.nav-home-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const sectionId = this.getAttribute('data-section').replace('section', '');
-            currentSection = parseInt(sectionId);
-            showSection(currentSection);
-            startSectionChangeInterval(); // Restart the interval whenever a nav link is clicked
-        });
-    });
-});
-</script>
-
-@endpush
