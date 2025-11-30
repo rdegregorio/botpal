@@ -4,12 +4,17 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ChatConfigsController;
 use App\Http\Controllers\ChatLogsController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// Google OAuth Routes
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 Route::get('/', [PagesController::class, 'main'])->name('main');
 Route::get('pricing', [PagesController::class, 'pricing'])->name('pricing');
