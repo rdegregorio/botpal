@@ -9,7 +9,7 @@
                     <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
                     BotPal
                 </a>
-                <div class="navbar-right">
+                <div class="navbar-right" id="navbarMenu">
                     <div class="navbar-links">
                         <a href="#features" class="navbar-link">Features</a>
                         <a href="#how-it-works" class="navbar-link">How it works</a>
@@ -21,6 +21,9 @@
                         <a href="{{ route('register') }}" class="btn btn-primary">Start Free Trial</a>
                     </div>
                 </div>
+                <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
+                    <i class="bi bi-list"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -454,6 +457,28 @@
 
 @push('scripts')
 <script>
+// Mobile menu toggle
+const navbarToggle = document.getElementById('navbarToggle');
+const navbarMenu = document.getElementById('navbarMenu');
+
+navbarToggle.addEventListener('click', function() {
+    navbarMenu.classList.toggle('active');
+    // Toggle icon between menu and X
+    const icon = this.querySelector('i');
+    icon.classList.toggle('bi-list');
+    icon.classList.toggle('bi-x-lg');
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.navbar-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navbarMenu.classList.remove('active');
+        const icon = navbarToggle.querySelector('i');
+        icon.classList.add('bi-list');
+        icon.classList.remove('bi-x-lg');
+    });
+});
+
 // FAQ Toggle
 document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
