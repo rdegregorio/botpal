@@ -18,7 +18,7 @@
                     </div>
                     <div class="navbar-cta">
                         <a href="{{ route('login') }}" class="navbar-link">Log in</a>
-                        <a href="{{ route('register') }}" class="btn btn-primary">Start Free Trial</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Get started</a>
                     </div>
                 </div>
                 <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
@@ -32,57 +32,47 @@
     <section class="hero">
         <div class="container">
             <div class="hero-inner">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="hero-badge-dot"></span>
-                        Now with GPT-4 Support
-                    </div>
-                    <h1 class="hero-title">
-                        Automate Support.<br>
-                        <span>Delight Customers.</span>
-                    </h1>
-                    <p class="hero-description">
-                        Create an AI chatbot trained on your content in minutes. Reduce support tickets by 70% while delivering instant, accurate answers 24/7.
-                    </p>
-                    <div class="hero-cta">
-                        <a href="{{ route('register') }}" class="btn btn-primary btn-large">Start Free Trial</a>
-                        <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <i class="bi bi-check-circle-fill hero-stat-icon"></i>
-                            <span class="hero-stat-text"><strong>No credit card</strong> required</span>
-                        </div>
-                        <div class="hero-stat">
-                            <i class="bi bi-check-circle-fill hero-stat-icon"></i>
-                            <span class="hero-stat-text"><strong>5-minute</strong> setup</span>
-                        </div>
-                    </div>
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Now with GPT-4 support
                 </div>
-                <div class="hero-visual">
-                    <div class="hero-demo">
-                        <div class="hero-demo-header">
-                            <span class="hero-demo-dot red"></span>
-                            <span class="hero-demo-dot yellow"></span>
-                            <span class="hero-demo-dot green"></span>
+                <h1 class="hero-title">
+                    The easiest way to build<br>AI chatbots
+                </h1>
+                <p class="hero-description">
+                    Create custom AI chatbots trained on your content in minutes. Reduce support tickets and delight customers with instant, accurate answers 24/7.
+                </p>
+                <div class="hero-cta">
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-large">Get started free</a>
+                    <a href="#how-it-works" class="btn btn-secondary btn-large">See how it works</a>
+                </div>
+                <p class="hero-note">No credit card required</p>
+            </div>
+
+            <!-- Hero Demo -->
+            <div class="hero-demo-wrapper">
+                <div class="hero-demo">
+                    <div class="hero-demo-header">
+                        <span class="hero-demo-dot red"></span>
+                        <span class="hero-demo-dot yellow"></span>
+                        <span class="hero-demo-dot green"></span>
+                    </div>
+                    <div class="hero-demo-content">
+                        <div class="chat-message">
+                            <div class="chat-avatar"><i class="bi bi-robot"></i></div>
+                            <div class="chat-bubble">Hi! I'm your AI assistant. How can I help you today?</div>
                         </div>
-                        <div class="hero-demo-content">
-                            <div class="chat-message">
-                                <div class="chat-avatar"><i class="bi bi-robot"></i></div>
-                                <div class="chat-bubble">Hi! I'm your AI assistant. How can I help you today?</div>
-                            </div>
-                            <div class="chat-message user">
-                                <div class="chat-avatar user"><i class="bi bi-person"></i></div>
-                                <div class="chat-bubble">How do I reset my password?</div>
-                            </div>
-                            <div class="chat-message">
-                                <div class="chat-avatar"><i class="bi bi-robot"></i></div>
-                                <div class="chat-bubble">To reset your password, go to Settings > Security > Change Password. You'll receive a confirmation email within 2 minutes.</div>
-                            </div>
-                            <div class="chat-message user">
-                                <div class="chat-avatar user"><i class="bi bi-person"></i></div>
-                                <div class="chat-bubble">That was fast! Thanks!</div>
-                            </div>
+                        <div class="chat-message user">
+                            <div class="chat-avatar user"><i class="bi bi-person"></i></div>
+                            <div class="chat-bubble">How do I reset my password?</div>
+                        </div>
+                        <div class="chat-message">
+                            <div class="chat-avatar"><i class="bi bi-robot"></i></div>
+                            <div class="chat-bubble">To reset your password, go to Settings > Security > Change Password. You'll receive a confirmation email within 2 minutes.</div>
+                        </div>
+                        <div class="chat-message user">
+                            <div class="chat-avatar user"><i class="bi bi-person"></i></div>
+                            <div class="chat-bubble">That was fast! Thanks!</div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +83,7 @@
     <!-- Logos Section -->
     <section class="logos-section">
         <div class="container">
-            <p class="logos-label">Trusted by 1,000+ businesses worldwide</p>
+            <p class="logos-label">Trusted by 1,000+ businesses</p>
             <div class="logos-grid">
                 <span class="logo-item">Startups</span>
                 <span class="logo-item">E-commerce</span>
@@ -104,68 +94,139 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
+    <!-- Feature Section 1: Train on Your Content -->
+    <section class="feature-section" id="features">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">70%</div>
-                    <div class="stat-label">Fewer Support Tickets</div>
+            <div class="feature-row">
+                <div class="feature-content">
+                    <span class="feature-label">Train on your content</span>
+                    <h2 class="feature-title">Build chatbots that actually understand your business</h2>
+                    <p class="feature-description">
+                        Upload your FAQs, documents, PDFs, or website content. Your chatbot learns everything about your business and speaks your language.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="bi bi-check2"></i> Import from websites, PDFs, docs</li>
+                        <li><i class="bi bi-check2"></i> Train on your FAQ database</li>
+                        <li><i class="bi bi-check2"></i> Automatic content syncing</li>
+                        <li><i class="bi bi-check2"></i> Multi-language support</li>
+                    </ul>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Always Available</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">&lt;3s</div>
-                    <div class="stat-label">Response Time</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Satisfaction Rate</div>
+                <div class="feature-visual">
+                    <div class="feature-card-grid">
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-file-earmark-text"></i></div>
+                                <h4>Documents</h4>
+                            </div>
+                            <p>Upload PDFs, Word docs, and text files</p>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-globe"></i></div>
+                                <h4>Websites</h4>
+                            </div>
+                            <p>Crawl and import your entire website</p>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-question-circle"></i></div>
+                                <h4>FAQs</h4>
+                            </div>
+                            <p>Import existing FAQ databases</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
+    <!-- Feature Section 2: Customization -->
+    <section class="feature-section alt">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Features</span>
-                <h2 class="section-title">Everything you need to automate support</h2>
-                <p class="section-description">Powerful features that help you create, train, and deploy AI chatbots that actually understand your business.</p>
+            <div class="feature-row reverse">
+                <div class="feature-content">
+                    <span class="feature-label">Full customization</span>
+                    <h2 class="feature-title">Make it yours with complete styling control</h2>
+                    <p class="feature-description">
+                        Match your brand perfectly with custom colors, fonts, avatars, and chat styles. Your chatbot will feel native to your website.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="bi bi-check2"></i> Custom colors and branding</li>
+                        <li><i class="bi bi-check2"></i> Personalized welcome messages</li>
+                        <li><i class="bi bi-check2"></i> Custom bot personality</li>
+                        <li><i class="bi bi-check2"></i> White-label options</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-card-grid">
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-palette"></i></div>
+                                <h4>Themes</h4>
+                            </div>
+                            <p>Light, dark, or custom color schemes</p>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-person-circle"></i></div>
+                                <h4>Avatar</h4>
+                            </div>
+                            <p>Upload your own bot avatar</p>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-chat-square-text"></i></div>
+                                <h4>Tone</h4>
+                            </div>
+                            <p>Set your bot's personality and tone</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="bi bi-book"></i></div>
-                    <h3 class="feature-title">Train on Your Content</h3>
-                    <p class="feature-description">Upload FAQs, documents, PDFs, or website content. Your chatbot learns your business and speaks your language.</p>
+        </div>
+    </section>
+
+    <!-- Feature Section 3: Analytics -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-row">
+                <div class="feature-content">
+                    <span class="feature-label">Analytics & insights</span>
+                    <h2 class="feature-title">Understand what your customers need</h2>
+                    <p class="feature-description">
+                        Track conversations, identify trending questions, and continuously improve your chatbot's responses with actionable insights.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="bi bi-check2"></i> Real-time conversation monitoring</li>
+                        <li><i class="bi bi-check2"></i> Popular questions dashboard</li>
+                        <li><i class="bi bi-check2"></i> Resolution rate tracking</li>
+                        <li><i class="bi bi-check2"></i> Customer satisfaction scores</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="bi bi-cpu"></i></div>
-                    <h3 class="feature-title">Powered by GPT-4</h3>
-                    <p class="feature-description">Choose from multiple AI models including GPT-4 and GPT-3.5 to balance performance and cost for your needs.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="bi bi-palette"></i></div>
-                    <h3 class="feature-title">Full Customization</h3>
-                    <p class="feature-description">Match your brand with custom colors, fonts, avatars, and chat styles. Make it feel native to your website.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="bi bi-code-slash"></i></div>
-                    <h3 class="feature-title">One-Line Integration</h3>
-                    <p class="feature-description">Add your chatbot to any website with a single line of code. Works with WordPress, Shopify, and any platform.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="bi bi-inbox"></i></div>
-                    <h3 class="feature-title">Conversation Inbox</h3>
-                    <p class="feature-description">Monitor all conversations in real-time. Review, analyze, and improve your bot's responses from one dashboard.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="bi bi-graph-up"></i></div>
-                    <h3 class="feature-title">Analytics & Insights</h3>
-                    <p class="feature-description">Track resolution rates, popular questions, and user satisfaction. Make data-driven improvements.</p>
+                <div class="feature-visual">
+                    <div class="feature-card-grid">
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-graph-up"></i></div>
+                                <h4>Metrics</h4>
+                            </div>
+                            <p>Track resolution rates and response times</p>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-inbox"></i></div>
+                                <h4>Inbox</h4>
+                            </div>
+                            <p>Review all conversations in one place</p>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <div class="mini-card-icon"><i class="bi bi-lightning"></i></div>
+                                <h4>Insights</h4>
+                            </div>
+                            <p>AI-powered suggestions to improve</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -175,24 +236,24 @@
     <section class="how-it-works" id="how-it-works">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">How It Works</span>
+                <span class="section-label">How it works</span>
                 <h2 class="section-title">Go live in 5 minutes</h2>
                 <p class="section-description">Three simple steps to transform your customer support.</p>
             </div>
             <div class="steps-grid">
                 <div class="step-item">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Add Your Content</h3>
-                    <p class="step-description">Upload your FAQs, help docs, or website URL. Our AI analyzes and learns from your content instantly.</p>
+                    <h3 class="step-title">Add your content</h3>
+                    <p class="step-description">Upload your FAQs, help docs, or paste your website URL. Our AI learns from your content instantly.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Customize & Preview</h3>
+                    <h3 class="step-title">Customize & test</h3>
                     <p class="step-description">Style your chatbot to match your brand. Test it out and refine responses until it's perfect.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Deploy & Relax</h3>
+                    <h3 class="step-title">Deploy & relax</h3>
                     <p class="step-description">Add one line of code to your site. Your AI assistant is now live, handling support 24/7.</p>
                 </div>
             </div>
@@ -209,13 +270,6 @@
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <div class="testimonial-stars">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
                     <p class="testimonial-text">"BotPal reduced our support tickets by 65% in the first month. The AI actually understands our product and gives accurate answers."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">SK</div>
@@ -226,13 +280,6 @@
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <div class="testimonial-stars">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
                     <p class="testimonial-text">"Setup took 10 minutes. Now our customers get instant answers at 3am instead of waiting for business hours. Game changer."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">MR</div>
@@ -243,13 +290,6 @@
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <div class="testimonial-stars">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
                     <p class="testimonial-text">"The customization options are incredible. Our chatbot looks and feels like it was built in-house. Customers love it."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">JL</div>
@@ -271,11 +311,6 @@
                 <h2 class="section-title">Simple, transparent pricing</h2>
                 <p class="section-description">Start free. Upgrade when you're ready.</p>
             </div>
-            <div class="pricing-toggle">
-                <button class="pricing-toggle-btn active">Monthly</button>
-                <button class="pricing-toggle-btn">Yearly</button>
-            </div>
-            <p class="pricing-save">Save 20% with yearly billing</p>
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3 class="pricing-name">Free</h3>
@@ -284,31 +319,31 @@
                         <span class="pricing-amount">$0</span>
                         <span class="pricing-period">/month</span>
                     </div>
-                    <a href="{{ route('register') }}" class="btn btn-secondary">Get Started</a>
                     <ul class="pricing-features">
-                        <li><i class="bi bi-check-lg"></i> 1 chatbot</li>
-                        <li><i class="bi bi-check-lg"></i> 100 messages/month</li>
-                        <li><i class="bi bi-check-lg"></i> Basic customization</li>
-                        <li><i class="bi bi-check-lg"></i> Email support</li>
+                        <li><i class="bi bi-check2"></i> 1 chatbot</li>
+                        <li><i class="bi bi-check2"></i> 100 messages/month</li>
+                        <li><i class="bi bi-check2"></i> Basic customization</li>
+                        <li><i class="bi bi-check2"></i> Email support</li>
                     </ul>
+                    <a href="{{ route('register') }}" class="btn btn-secondary">Get started</a>
                 </div>
                 <div class="pricing-card featured">
-                    <span class="pricing-badge">Most Popular</span>
+                    <span class="pricing-badge">Popular</span>
                     <h3 class="pricing-name">Pro</h3>
                     <p class="pricing-description">For growing businesses</p>
                     <div class="pricing-price">
                         <span class="pricing-amount">$29</span>
                         <span class="pricing-period">/month</span>
                     </div>
-                    <a href="{{ route('register') }}" class="btn btn-primary">Start Free Trial</a>
                     <ul class="pricing-features">
-                        <li><i class="bi bi-check-lg"></i> Unlimited chatbots</li>
-                        <li><i class="bi bi-check-lg"></i> 5,000 messages/month</li>
-                        <li><i class="bi bi-check-lg"></i> Full customization</li>
-                        <li><i class="bi bi-check-lg"></i> GPT-4 access</li>
-                        <li><i class="bi bi-check-lg"></i> Analytics dashboard</li>
-                        <li><i class="bi bi-check-lg"></i> Priority support</li>
+                        <li><i class="bi bi-check2"></i> Unlimited chatbots</li>
+                        <li><i class="bi bi-check2"></i> 5,000 messages/month</li>
+                        <li><i class="bi bi-check2"></i> Full customization</li>
+                        <li><i class="bi bi-check2"></i> GPT-4 access</li>
+                        <li><i class="bi bi-check2"></i> Analytics dashboard</li>
+                        <li><i class="bi bi-check2"></i> Priority support</li>
                     </ul>
+                    <a href="{{ route('register') }}" class="btn btn-primary">Start free trial</a>
                 </div>
                 <div class="pricing-card">
                     <h3 class="pricing-name">Enterprise</h3>
@@ -316,15 +351,15 @@
                     <div class="pricing-price">
                         <span class="pricing-amount">Custom</span>
                     </div>
-                    <a href="{{ route('pages.contact') }}" class="btn btn-secondary">Contact Sales</a>
                     <ul class="pricing-features">
-                        <li><i class="bi bi-check-lg"></i> Everything in Pro</li>
-                        <li><i class="bi bi-check-lg"></i> Unlimited messages</li>
-                        <li><i class="bi bi-check-lg"></i> Custom integrations</li>
-                        <li><i class="bi bi-check-lg"></i> SLA guarantee</li>
-                        <li><i class="bi bi-check-lg"></i> Dedicated support</li>
-                        <li><i class="bi bi-check-lg"></i> On-premise option</li>
+                        <li><i class="bi bi-check2"></i> Everything in Pro</li>
+                        <li><i class="bi bi-check2"></i> Unlimited messages</li>
+                        <li><i class="bi bi-check2"></i> Custom integrations</li>
+                        <li><i class="bi bi-check2"></i> SLA guarantee</li>
+                        <li><i class="bi bi-check2"></i> Dedicated support</li>
+                        <li><i class="bi bi-check2"></i> On-premise option</li>
                     </ul>
+                    <a href="{{ route('pages.contact') }}" class="btn btn-secondary">Contact sales</a>
                 </div>
             </div>
         </div>
@@ -335,7 +370,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-label">FAQ</span>
-                <h2 class="section-title">Frequently asked questions</h2>
+                <h2 class="section-title">Questions? We've got answers.</h2>
             </div>
             <div class="faq-grid">
                 <div class="faq-item open">
@@ -391,13 +426,12 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Ready to transform your customer support?</h2>
-                <p class="cta-description">Join 1,000+ businesses using BotPal to deliver instant, intelligent support around the clock.</p>
+                <h2 class="cta-title">Ready to get started?</h2>
+                <p class="cta-description">Join 1,000+ businesses using BotPal to deliver instant, intelligent customer support.</p>
                 <div class="cta-buttons">
-                    <a href="{{ route('register') }}" class="btn btn-primary btn-large">Start Free Trial</a>
-                    <a href="{{ route('pages.contact') }}" class="btn btn-secondary btn-large" style="background: transparent; border-color: #475569; color: white;">Contact Sales</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-large">Get started free</a>
+                    <a href="{{ route('pages.contact') }}" class="btn btn-secondary btn-large">Contact sales</a>
                 </div>
-                <p class="cta-note">No credit card required. Free plan available forever.</p>
             </div>
         </div>
     </section>
@@ -411,7 +445,7 @@
                         <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
                         BotPal
                     </a>
-                    <p>AI-powered chatbots that help businesses deliver exceptional customer support around the clock.</p>
+                    <p>AI-powered chatbots that help businesses deliver exceptional customer support.</p>
                 </div>
                 <div class="footer-column">
                     <h4>Product</h4>
@@ -431,15 +465,15 @@
                 <div class="footer-column">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="{{ route('pages.privacy') }}">Privacy Policy</a></li>
-                        <li><a href="{{ route('pages.terms') }}">Terms of Service</a></li>
+                        <li><a href="{{ route('pages.privacy') }}">Privacy</a></li>
+                        <li><a href="{{ route('pages.terms') }}">Terms</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="{{ route('pages.contact') }}">Help Center</a></li>
-                        <li><a href="{{ route('pages.contact') }}">Contact Us</a></li>
+                        <li><a href="{{ route('pages.contact') }}">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -463,7 +497,6 @@ const navbarMenu = document.getElementById('navbarMenu');
 
 navbarToggle.addEventListener('click', function() {
     navbarMenu.classList.toggle('active');
-    // Toggle icon between menu and X
     const icon = this.querySelector('i');
     icon.classList.toggle('bi-list');
     icon.classList.toggle('bi-x-lg');
@@ -495,14 +528,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    });
-});
-
-// Pricing toggle (placeholder functionality)
-document.querySelectorAll('.pricing-toggle-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.pricing-toggle-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
     });
 });
 </script>
