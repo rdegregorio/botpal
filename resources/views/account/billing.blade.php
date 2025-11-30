@@ -18,7 +18,6 @@
         @include('includes.subscriptions._plans-selector')
     </div>
 
-    @if($subscription && Auth::user()->stripe_id)
     <!-- Payment Details -->
     <div class="row">
         <div class="col-lg-6">
@@ -26,15 +25,23 @@
                 <div class="dashboard-card-header">
                     <h2 class="dashboard-card-title"><i class="bi bi-credit-card me-2"></i>Payment Method</h2>
                 </div>
+                @if($subscription && Auth::user()->stripe_id && Auth::user()->card_last_four)
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="mb-1"><strong>Card ending in:</strong> {{ Auth::user()->card_last_four ?? '••••' }}</p>
+                        <p class="mb-1"><strong>Card ending in:</strong> {{ Auth::user()->card_last_four }}</p>
                         <p class="text-muted small mb-0">Your default payment method</p>
                     </div>
                     <button data-change-card class="btn btn-outline-primary btn-sm">
                         <i class="bi bi-pencil me-1"></i> Change
                     </button>
                 </div>
+                @else
+                <div class="text-center py-4" style="background: var(--bg-cream); border-radius: 8px;">
+                    <i class="bi bi-credit-card" style="font-size: 32px; color: var(--text-secondary);"></i>
+                    <p class="mt-2 mb-0 text-muted">No payment method on file</p>
+                    <small class="text-muted">Add a card when you upgrade to a paid plan</small>
+                </div>
+                @endif
             </div>
         </div>
 
@@ -43,13 +50,22 @@
                 <div class="dashboard-card-header">
                     <h2 class="dashboard-card-title"><i class="bi bi-receipt me-2"></i>Billing History</h2>
                 </div>
+                @if($subscription && Auth::user()->stripe_id)
                 <button id="get-invoices" onclick="invoicesModal()" class="btn btn-outline-primary btn-sm">
                     <i class="bi bi-file-text me-1"></i> View Invoices
                 </button>
+                @else
+                <div class="text-center py-4" style="background: var(--bg-cream); border-radius: 8px;">
+                    <i class="bi bi-receipt" style="font-size: 32px; color: var(--text-secondary);"></i>
+                    <p class="mt-2 mb-0 text-muted">No billing history</p>
+                    <small class="text-muted">Invoices will appear here after your first payment</small>
+                </div>
+                @endif
             </div>
         </div>
     </div>
 
+    @if($subscription && Auth::user()->stripe_id)
     <!-- Subscription Details -->
     <div class="dashboard-card">
         <div class="dashboard-card-header">

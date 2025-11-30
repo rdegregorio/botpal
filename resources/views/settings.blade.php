@@ -213,49 +213,6 @@
                         <div class="form-group mb-4" data-editable> <textarea readonly name="general_prompt" class="form-control" id="exampleTextarea" rows="5" placeholder="'e.g. Our company is called Lumina. We specialize in artisanal candles, handcrafted to perfection. Based in the US, Lumina offers a diverse range of candles, from enchanting scents to timeless classics. Each candle promises to illuminate your space with elegance and warmth. Dive into a world of ambient glow and mesmerizing aromas with Lumina." style="background-color: #F4F4F7;">{{$chatConfig?->general_prompt}}</textarea> </div>
                     </div>
                 </div>
-                <div class="row align-items-center mb-4">
-                    <div class="col-md-2 col-12 mb-1"> Chat Code: </div>
-                    <div class="col-md-10 col-12">
-                        <div class="code-container position-relative">
-                            <pre id="chatCodeBox" class="code-box mt-3" readonly>
-@if(!\Auth::user()?->chatConfigLatest()->exists())
-First update your chat config.@else
-&lt;!-- Start of iamsam.ai Embed Code--&gt;
-&lt;script async src=&quot;{{route('api.chat.embed', $chatConfig->uuid)}}&quot;&gt;&lt;/script&gt;
-&lt;!-- End of iamsam.ai Embed Code --&gt;@endif</pre>
-<button class="btn" style="position: absolute; top: 0; right: 0;" onclick="document.getElementById('chatCodeBox').click();" title="Copy Code">
-    <i class="bi bi-clipboard" style="font-size: 22px;"></i>
-</button>
-                        </div>
-                    </div>
-                </div>
-                @php($copyrightEnabled = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_COPYRIGHT_ENABLED) ?? true)
-                <div class="row align-items-center mb-4">
-                    <div class="col-md-2 col-12 mb-1">Powered by:</div>
-                    <div class="col-md-10 col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="poweredByCheckbox" @checked($copyrightEnabled)>
-                            <label class="form-check-label" for="poweredByCheckbox">
-                                Created your ownn AI chatbot with iamsam.ai
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                @push('bottom')
-                    <script>
-                        $('#poweredByCheckbox').on('click', function (e) {
-                          @freeUser
-                        e.preventDefault();
-                          window.showUpgradeModal();
-                          return;
-                          @endfreeUser
-
-                          @paidUser
-                          updateChatConfig({target: {name: 'settings[{{\App\Models\ChatConfig::SETTINGS_COPYRIGHT_ENABLED}}]', value: $(this).prop('checked') ? 1 : 0}});
-                          @endpaidUser
-                        });
-                    </script>
-                @endpush
     </div>
 @endsection
 

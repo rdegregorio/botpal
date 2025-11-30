@@ -40,46 +40,44 @@
             <div class="tab-content" id="knowledgeTabContent">
                 <!-- FAQ Tab -->
                 <div class="tab-pane fade {{ $currentType === 'faq' ? 'show active' : '' }}" id="faq-content" role="tabpanel">
-                    <p class="text-muted mb-3">FAQ's are the easiest way to train your AI support agent. Add questions and answers below.</p>
+                    <p class="text-muted mb-3">FAQ's are the easiest way to train your AI support agent.</p>
 
                     <div id="faqContainer">
-                        <div class="mb-3">
-                            <button type="button" id="addFaq" class="btn btn-outline-primary btn-sm">
-                                <i class="bi bi-plus-lg me-1"></i> Add Question
+                        <div class="text-left mb-3">
+                            <button type="button" id="addFaq" class="btn btn-lg addFaq" title="Add Question">
+                                <i class="bi bi-plus-lg"></i>
                             </button>
                         </div>
 
                         @forelse($chatConfig?->items ?? [] as $item)
-                            <div class="faqPair border rounded p-3 mb-3" style="background: var(--bg-cream);">
-                                <div class="d-flex justify-content-end mb-2">
-                                    <button type="button" class="btn btn-sm btn-outline-danger deleteFaq">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                            <div class="faqPair mb-1 mt-2">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button type="button" class="btn btn-sm deleteFaq"><i class="bi bi-x-lg"></i></button>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label small text-muted">Question</label>
+                                <div class="input-group mb-2 mt-2">
+                                    <span class="input-group-text">Q</span>
                                     <input type="text" class="form-control question" placeholder="Enter your question" value="{{$item['q']}}" name="q[]">
                                 </div>
-                                <div>
-                                    <label class="form-label small text-muted">Answer</label>
-                                    <textarea rows="2" class="form-control answer" placeholder="Enter the answer" name="a[]">{{$item['a']}}</textarea>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text">A</span>
+                                    <textarea rows="1" class="form-control answer" placeholder="Enter the answer" name="a[]">{{$item['a']}}</textarea>
                                 </div>
+                                <hr>
                             </div>
                         @empty
-                            <div class="faqPair border rounded p-3 mb-3" style="background: var(--bg-cream);">
-                                <div class="d-flex justify-content-end mb-2">
-                                    <button type="button" class="btn btn-sm btn-outline-danger deleteFaq">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                            <div class="faqPair mb-1 mt-2">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button type="button" class="btn btn-sm deleteFaq"><i class="bi bi-x-lg"></i></button>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label small text-muted">Question</label>
+                                <div class="input-group mb-2 mt-2">
+                                    <span class="input-group-text">Q</span>
                                     <input type="text" class="form-control question" placeholder="Enter your question" value="" name="q[]">
                                 </div>
-                                <div>
-                                    <label class="form-label small text-muted">Answer</label>
-                                    <textarea rows="2" class="form-control answer" placeholder="Enter the answer" name="a[]"></textarea>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text">A</span>
+                                    <textarea rows="1" class="form-control answer" placeholder="Enter the answer" name="a[]"></textarea>
                                 </div>
+                                <hr>
                             </div>
                         @endforelse
                     </div>
@@ -94,18 +92,12 @@
                 <!-- PDF Tab -->
                 <div class="tab-pane fade {{ $currentType === 'pdf' ? 'show active' : '' }}" id="pdf-content" role="tabpanel">
                     <p class="text-muted mb-3">Upload a PDF document to train your chatbot.</p>
-                    <div class="border rounded p-4 text-center" style="background: var(--bg-cream); border-style: dashed !important;">
-                        <i class="bi bi-cloud-upload" style="font-size: 48px; color: var(--text-secondary);"></i>
-                        <p class="mt-2 mb-3">Drag and drop your PDF here, or click to browse</p>
-                        <input type="file" name="file" class="form-control" accept=".pdf" style="max-width: 300px; margin: 0 auto;">
-                    </div>
+                    <input type="file" name="file" class="form-control" accept=".pdf">
                 </div>
             </div>
 
             <div class="text-end mt-4">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-lg me-1"></i> Save Knowledge Base
-                </button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>
@@ -190,30 +182,32 @@
             }
 
             // Add FAQ
-            $('#addFaq').on('click', function() {
+            $('#addFaq').on('click', function(e) {
+                e.preventDefault();
                 var newFaq = `
-                    <div class="faqPair border rounded p-3 mb-3" style="background: var(--bg-cream);">
-                        <div class="d-flex justify-content-end mb-2">
-                            <button type="button" class="btn btn-sm btn-outline-danger deleteFaq">
-                                <i class="bi bi-trash"></i>
-                            </button>
+                    <div class="faqPair mb-1 mt-2">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button type="button" class="btn btn-sm deleteFaq"><i class="bi bi-x-lg"></i></button>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label small text-muted">Question</label>
+                        <div class="input-group mb-2 mt-2">
+                            <span class="input-group-text">Q</span>
                             <input type="text" class="form-control question" placeholder="Enter your question" name="q[]">
                         </div>
-                        <div>
-                            <label class="form-label small text-muted">Answer</label>
-                            <textarea rows="2" class="form-control answer" placeholder="Enter the answer" name="a[]"></textarea>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">A</span>
+                            <textarea rows="1" class="form-control answer" placeholder="Enter the answer" name="a[]"></textarea>
                         </div>
+                        <hr>
                     </div>
                 `;
                 $('#faqContainer').append(newFaq);
             });
 
             // Delete FAQ
-            $(document).on('click', '.deleteFaq', function() {
+            $(document).on('click', '.deleteFaq', function(e) {
+                e.preventDefault();
                 $(this).closest('.faqPair').remove();
+                saveFaqChanges();
             });
 
             // Auto-save on blur
@@ -241,6 +235,17 @@
                     }
                 });
             }
+
+            // Auto-resize textareas
+            $(document).on('input', 'textarea.answer', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+            $('textarea.answer').each(function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
         });
     </script>
 @endpush
