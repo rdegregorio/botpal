@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="content-wrapper-2">
-        <div class="col-md-6 mx-auto">
-            <h2 class="mt-2 mb-1 text-center">Terms and Condition</h2>
-            <p class="mt-4 mb-2 fst-italic fw-bold fs-6">Last updated: 08/21/2023</p>
+        <div class="container">
+            <div class="col-lg-8 mx-auto" style="background: white; border-radius: 16px; padding: 48px; border: 1px solid #e8e8e8;">
+                <h1 class="mb-4" style="font-size: 32px;">Terms and Conditions</h1>
+                <p class="mb-4" style="color: #6b6b6b;">Last updated: August 21, 2023</p>
             <p class="mt-4 mb-2 fw-bold">Introduction</p>
             <p class="mt-0 mb-2">Welcome to iamsam.ai, a service provided by Snapi LLC, registered in Miami, Florida, USA. By creating an account, clicking on the "Accept Terms and Conditions" box, and further engaging with iamsam.ai, you are expressly consenting to these Terms. Should you find yourself in disagreement with any part of these Terms, please refrain from using our platform or associated services. If you are accessing and utilizing iamsam.ai on behalf of an entity such as your place of employment or another organization, you are binding that organization to these Terms. It is your responsibility to ensure that you possess the requisite authority to enter into these Terms on behalf of the said organization. In such circumstances, references to "you" or "your" within these Terms shall pertain to the aforementioned organization.</p>
             <p>
@@ -211,9 +212,9 @@
             <p class="mt-2 mb-2 fw-bold">Contact Information</p>
             <p class="mt-0 mb-2">For any concerns regarding these T&Cs, please reach out to us via our contact form.</p>
             
-            <p class="mt-2 mb-2 fw-bold">Miscellaneous</p>
-            <p class="mt-0 mb-5">Snapi LLC's failure to enforce any right or provision of these terms will not be considered a waiver of such right or provision. The section titles in these terms are for convenience only and have no legal or contractual effect. Snapi LLC is not responsible for any third-party links or services that may be incorporated into or used in conjunction with the service.</p>
-            
+            <h5 class="mt-4 mb-2">Miscellaneous</h5>
+            <p class="mb-0">Snapi LLC's failure to enforce any right or provision of these terms will not be considered a waiver of such right or provision. The section titles in these terms are for convenience only and have no legal or contractual effect. Snapi LLC is not responsible for any third-party links or services that may be incorporated into or used in conjunction with the service.</p>
+            </div>
         </div>
     </div>
 @endsection
