@@ -339,6 +339,11 @@ class AccountController extends Controller
         return view('account.billing', compact('subscription'));
     }
 
+    public function usage(Request $request)
+    {
+        return view('account.usage');
+    }
+
     public function stats(Request $request)
     {
         $request->validate([
