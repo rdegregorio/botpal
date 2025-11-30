@@ -310,10 +310,10 @@
 
         const chatConfig = this.getAttribute('data-chat-config');
         sendButton.disabled = true;
+        document.getElementById('userMessage').value = '';
 
         insertNewMessage(userMsg, 'user');
-
-        setTimeout(showTyping, 250);
+        showTyping(true);
 
         fetch('{{route("api.chat.message")}}', {
           method: 'POST',
@@ -327,12 +327,19 @@
             messageUuid: lastMessage?.message_uuid || null,
           }),
         }).then(response => response.json()).then(data => {
+          showTyping(false);
           lastMessage = data.message;
           localStorage.setItem(lastChatMessageIdKey, JSON.stringify(lastMessage));
-          document.getElementById('userMessage').value = '';
-          getAnswer();
+
+          // Answer comes directly in response - no polling needed
+          if (data.message.answer) {
+            insertNewMessage(data.message, 'server');
+          }
+          sendButton.disabled = false;
         }).catch(error => {
-          alert('error');
+          showTyping(false);
+          sendButton.disabled = false;
+          console.error('Chat error:', error);
         });
       });
 
