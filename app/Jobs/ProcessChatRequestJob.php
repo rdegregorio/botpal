@@ -28,15 +28,16 @@ class ProcessChatRequestJob implements ShouldQueue
             return;
         }
 
-        $user = $this->chatLog?->chatConfig?->user;
+        // Use shared API key and default model from config
+        $apiKey = config('services.openai.api_key');
+        $model = config('services.openai.default_model', 'gpt-5-mini');
 
-        if (!$user) {
-            \Log::channel('openai')->info("User not found for config ID: {$this->chatLog->chat_config_id}");
-
+        if (!$apiKey) {
+            \Log::channel('openai')->info("OpenAI API key not configured");
             return;
         }
 
-        $service = new OpenAIService($user->open_ai_token, $user->open_ai_model);
+        $service = new OpenAIService($apiKey, $model);
 
         $chatConfig = $this->chatLog->chatConfig;
 
