@@ -1,0 +1,79 @@
+html,
+body,
+.container-fluid,
+.row {
+    height: 100%;
+}
+#sidebar {
+    background-color: #D5103E;
+}
+#sidebar .nav-link {
+    color: white !important;
+}
+#sidebar .nav-link:hover {
+    color: #FFF !important;
+}
+.x_title {
+    display:flex;
+    align-items: center;
+    gap: 15px;
+}
+a {
+    color: #D5103E;
+    text-decoration: underline;
+}
+a:hover{
+	font-weight: 400;
+    color: #A40D2F;
+    text-decoration: underline;
+}
+.view-btn.active {
+    background: #D5103E !important;
+}
+#business-plan-create {
+    font-weight: bold;
+    color: #D5103E;
+    cursor: pointer;
+}
+.view-btn {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border-radius: 7px;
+    color: #fff;
+    background: #878696 !important;
+}
+.view-btn.active {
+    background: #2991ff !important;
+}
+tr:hover .delete-user {
+    display: inline-block !important;
+}
+td span {
+    line-height: 1.2;
+}
+#business-plan-create {
+    cursor: pointer;
+}
+.token-disabled {
+    color: orange;
+    font-weight: bold;
+}
+tbody {
+    background-color: #FFF;
+}
+.btn-outline-custom {
+	background-color: #D5103E;
+	border: 1px solid #ced4da;
+	color: #FFF;
+}
+
+.btn-outline-custom:hover {
+	background-color: #D5103E !important;
+	color: #FFF !important;
+}
+
+.btn-outline-custom.active, .btn-outline-custom:active {
+	background-color: #FFF;
+	border: 1px solid #ced4da;
+	color: #000;
+}

@@ -1,0 +1,9 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "concat_space": "one",
+        "line_length": {
+            "max": 180
+        }
+    }
+}
