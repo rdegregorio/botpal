@@ -4,15 +4,12 @@
 @php($fontSize = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_FONT_SIZE) ?? 15)
 @php($fontFamily = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_FONT_FAMILY) ?? 'Tahoma')
 
-@extends('layouts.main')
+@extends('layouts.dashboard')
+
+@section('page-title', 'Settings')
 
 @section('content')
-    <div class="content-wrapper-2">
-        <div class="container">
-            <div class="row col-lg-10 col-12 mx-auto">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0"><i class="bi bi-gear"></i> Settings</h4>
-                </div>
+    <div class="dashboard-card">
                 <div class="row align-items-center mb-2">
                     <div class="col-md-2 col-12">
                         <p class="mb-3">Character:</p>
@@ -259,8 +256,6 @@ First update your chat config.@else
                         });
                     </script>
                 @endpush
-            </div>
-        </div>
     </div>
 @endsection
 

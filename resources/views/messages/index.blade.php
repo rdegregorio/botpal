@@ -1,18 +1,16 @@
 @php
     /** @var \App\Models\ChatConfig $chatConfig */
 @endphp
-@extends('layouts.main')
+@extends('layouts.dashboard')
+
+@section('page-title', 'Messages')
 
 @section('content')
-    <div class="content-wrapper-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-12  mx-auto">
-                    <h4 class="mb-0"><i class="bi bi-chat-dots"></i> Messages</h4>
-                    <div class="content-wrapper-2">
-                        <div class="container">
-                            <div class="row mt-4">
-                                <!-- Message Tabs -->
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <h2 class="dashboard-card-title">Chat Messages</h2>
+        </div>
+        <!-- Message Tabs -->
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item"><a class="nav-link active" href="#inbox" data-tab-type="inbox"
                                                             data-bs-toggle="tab">Inbox
@@ -37,12 +35,6 @@
                                 </div>
                                 @endif
                                 @endfreeUser
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 

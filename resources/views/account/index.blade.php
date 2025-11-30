@@ -1,17 +1,13 @@
-@extends('layouts.main')
+@extends('layouts.dashboard')
+
+@section('page-title', 'My Account')
 
 @section('content')
-    <div class="content-wrapper-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-12  mx-auto">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <h4 class="mt-0 mb-2"><i class="bi bi-person"></i> Account</h4>
-                    <div class="form-group mb-3">
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <h2 class="dashboard-card-title">Profile Information</h2>
+        </div>
+        <div class="form-group mb-3">
                         <div data-editable>
                             <input type="text" readonly class="form-control" name="name" id="name"
                                    value="{{Auth::user()->name}}">
@@ -246,9 +242,6 @@
 
                         </div>
                     @endif
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 

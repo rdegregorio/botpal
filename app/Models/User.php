@@ -30,6 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'open_ai_token',
         'open_ai_model',
+        'google_id',
+        'email_verified_at',
     ];
 
     /**

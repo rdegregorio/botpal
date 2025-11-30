@@ -1,18 +1,17 @@
 @php
     /** @var \App\Models\ChatConfig $chatConfig */
 @endphp
-@extends('layouts.main')
+@extends('layouts.dashboard')
+
+@section('page-title', 'Knowledge Base')
 
 @section('content')
-    <div class="content-wrapper-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-12  mx-auto">
-                    <form action="{{route('knowledge')}}" id="knowledge-form" method="post"
-                          enctype="multipart/form-data">
-                        @csrf
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0"><i class="bi bi-book"></i> Knowledge</h4>
+    <div class="dashboard-card">
+        <form action="{{route('knowledge')}}" id="knowledge-form" method="post"
+              enctype="multipart/form-data">
+            @csrf
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="dashboard-card-title mb-0">Train Your ChatBot</h2>
 
                             <div class="row ml-auto">
                                 <div class="col-auto">
@@ -87,14 +86,10 @@
                                                                                                             class="form-control"
                                                                                                             accept=".pdf">
                         </div>
-                        <div class="text-end mt-4">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
+            <div class="text-end mt-4">
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 
