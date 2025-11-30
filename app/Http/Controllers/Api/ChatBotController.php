@@ -19,16 +19,13 @@ class ChatBotController extends Controller
     {
         $chatConfig = ChatConfig::whereUuid($uuid)->active()->first();
 
-        $user = $chatConfig->user;
-        $isFreeUser = $user->getCurrentActiveSubscription()?->isFree();
-
-        if (!$user->open_ai_token) {
-            $content = view('api.chat-error', ['message' => 'OpenAI token not found'])->render();
-        } elseif (!$user->open_ai_model) {
-            $content = view('api.chat-error', ['message' => 'OpenAI model not set'])->render();
-        } elseif (!$chatConfig) {
+        if (!$chatConfig) {
             $content = view('api.chat-error', ['message' => 'Chat config not found'])->render();
+        } elseif (!config('services.openai.api_key')) {
+            $content = view('api.chat-error', ['message' => 'OpenAI API key not configured'])->render();
         } elseif ($chatConfig->hasLimits()) {
+            $user = $chatConfig->user;
+            $isFreeUser = $user->getCurrentActiveSubscription()?->isFree();
             $content = view('api.chat', compact('chatConfig', 'isFreeUser'))->render();
         } else {
             $content = view('api.chat-error', ['message' => 'Chat quota limit exceeded'])->render();

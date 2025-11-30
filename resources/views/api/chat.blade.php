@@ -413,11 +413,7 @@
       }
 
     @if(request('blockId'))
-      const blockId = document.getElementById('{{request('
-      blockId;
-      ')}}';
-    )
-      ;
+      const blockId = document.getElementById('{{ request("blockId") }}');
       const chatEmbed = document.querySelector('.chat-block-id');
       if (blockId) {
         blockId.insertAdjacentElement('beforeend', chatEmbed);

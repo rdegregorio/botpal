@@ -8,53 +8,6 @@
 @section('content')
     <div class="dashboard-card">
         <div class="dashboard-card-header">
-            <h2 class="dashboard-card-title"><i class="bi bi-key me-2"></i>OpenAI API Key</h2>
-        </div>
-        <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Enter your OpenAI API key to power your chatbot.</p>
-        <div class="row align-items-center">
-            <div class="col-lg-8 col-md-7 mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="open_ai_token" id="open_ai_token" autocomplete="off"
-                           placeholder="{{ Auth::user()->open_ai_token ? 'API Key saved (click Edit to change)' : 'Enter your OpenAI API key (sk-proj-...)' }}">
-                    <button class="btn btn-primary" type="button" id="saveApiKey">
-                        <i class="bi bi-check-lg me-1"></i> Save
-                    </button>
-                </div>
-                @if(Auth::user()->open_ai_token)
-                    <small class="text-success mt-1 d-block"><i class="bi bi-check-circle me-1"></i> API Key configured</small>
-                @endif
-            </div>
-            <div class="col-lg-4 col-md-5 mb-3">
-                <a href="https://platform.openai.com/api-keys" class="btn btn-outline-secondary w-100" target="_blank">
-                    <i class="bi bi-box-arrow-up-right me-1"></i> Get API Key
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="dashboard-card">
-        <div class="dashboard-card-header">
-            <h2 class="dashboard-card-title"><i class="bi bi-cpu me-2"></i>OpenAI Model</h2>
-        </div>
-        <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Select the AI model for your chatbot.</p>
-        <div class="row">
-            @foreach(\App\Services\OpenAIService::AVAILABLE_MODELS as $modelKey => $modelLabel)
-            <div class="col-lg-4 col-md-6 mb-3">
-                <div class="form-check model-option p-3 border rounded {{ Auth::user()->open_ai_model === $modelKey ? 'border-dark bg-light' : '' }}">
-                    <input class="form-check-input" type="radio" name="open_ai_model" id="model_{{ $loop->index }}"
-                           value="{{ $modelKey }}" {{ Auth::user()->open_ai_model === $modelKey ? 'checked' : '' }}>
-                    <label class="form-check-label d-block" for="model_{{ $loop->index }}" style="cursor: pointer;">
-                        <strong>{{ explode(' - ', $modelLabel)[0] }}</strong>
-                        <small class="d-block text-muted">{{ explode(' - ', $modelLabel)[1] ?? '' }}</small>
-                    </label>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="dashboard-card">
-        <div class="dashboard-card-header">
             <h2 class="dashboard-card-title"><i class="bi bi-code-slash me-2"></i>Chat Widget Code</h2>
         </div>
         <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
@@ -110,56 +63,7 @@
             });
         }
 
-        // OpenAI Key and Model handling
         $(function() {
-            // Save API Key button
-            $('#saveApiKey').on('click', function() {
-                var $btn = $(this);
-                var $input = $('#open_ai_token');
-                var value = $input.val().trim();
-
-                if (!value) {
-                    alert('Please enter your OpenAI API key');
-                    return;
-                }
-
-                $btn.prop('disabled', true).html('<i class="bi bi-hourglass-split me-1"></i> Saving...');
-
-                $.post('{{route('account.update')}}', {
-                    field: 'open_ai_token',
-                    value: value,
-                    _token: '{{csrf_token()}}'
-                }, function (res) {
-                    $btn.prop('disabled', false).html('<i class="bi bi-check-lg me-1"></i> Save');
-                    $input.val('').attr('placeholder', 'API Key saved (click Edit to change)');
-
-                    // Add success indicator if not already there
-                    if (!$input.parent().next('.text-success').length) {
-                        $input.closest('.input-group').after('<small class="text-success mt-1 d-block"><i class="bi bi-check-circle me-1"></i> API Key configured</small>');
-                    }
-
-                    alert('API Key saved successfully!');
-                }).fail(function (err) {
-                    $btn.prop('disabled', false).html('<i class="bi bi-check-lg me-1"></i> Save');
-                    alert('Error: ' + (err.responseJSON?.message || 'Failed to save API key'));
-                });
-            });
-
-            // Model selection
-            $(document).on('change', '[name=open_ai_model]', function () {
-                var $option = $(this).closest('.model-option');
-                $('.model-option').removeClass('border-dark bg-light');
-                $option.addClass('border-dark bg-light');
-
-                $.post('{{route('account.update')}}', {
-                    field: 'open_ai_model',
-                    value: $(this).val(),
-                    _token: '{{csrf_token()}}'
-                }).fail(function (err) {
-                    alert('Error: ' + (err.responseJSON?.message || 'Failed to save model'));
-                });
-            });
-
             // Powered By checkbox
             $('#poweredByCheckbox').on('click', function(e) {
                 @freeUser

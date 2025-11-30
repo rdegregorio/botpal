@@ -1,9 +1,7 @@
 @php
     /** @var \App\Models\ChatConfig $chatConfig */
     $chatConfig = Auth::user()->chatConfigLatest;
-    $hasApiKey = !empty(Auth::user()->open_ai_token);
-    $hasModel = !empty(Auth::user()->open_ai_model);
-    $isReady = $chatConfig?->uuid && $hasApiKey && $hasModel;
+    $isReady = $chatConfig?->uuid;
 @endphp
 
 @extends('layouts.dashboard')
@@ -23,34 +21,9 @@
             <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
                 <i class="bi bi-robot" style="font-size: 48px; color: var(--text-secondary);"></i>
                 <h5 class="mt-3 mb-3">Complete Setup to Preview</h5>
-                <div class="text-start mx-auto" style="max-width: 300px;">
-                    <div class="d-flex align-items-center mb-2">
-                        @if($chatConfig?->uuid)
-                            <i class="bi bi-check-circle-fill text-success me-2"></i>
-                        @else
-                            <i class="bi bi-circle text-muted me-2"></i>
-                        @endif
-                        <span style="color: var(--text-secondary);">ChatBot configured</span>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        @if($hasApiKey)
-                            <i class="bi bi-check-circle-fill text-success me-2"></i>
-                        @else
-                            <i class="bi bi-circle text-muted me-2"></i>
-                        @endif
-                        <span style="color: var(--text-secondary);">OpenAI API key added</span>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
-                        @if($hasModel)
-                            <i class="bi bi-check-circle-fill text-success me-2"></i>
-                        @else
-                            <i class="bi bi-circle text-muted me-2"></i>
-                        @endif
-                        <span style="color: var(--text-secondary);">OpenAI model selected</span>
-                    </div>
-                </div>
-                <a href="{{ route('dashboard') }}" class="btn btn-primary">
-                    <i class="bi bi-gear me-1"></i> Go to ChatBot Setup
+                <p style="color: var(--text-secondary);">Configure your chatbot in the Appearance section first.</p>
+                <a href="{{ route('settings') }}" class="btn btn-primary">
+                    <i class="bi bi-palette me-1"></i> Go to Appearance
                 </a>
             </div>
         @endif
