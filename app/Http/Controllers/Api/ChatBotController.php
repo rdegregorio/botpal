@@ -7,9 +7,9 @@ use App\Http\Requests\Api\ChatLogApiRequest;
 use App\Http\Resources\ChatLogPublicResource;
 use App\Http\Resources\ChatLogPublicWithQuestionResource;
 use App\Jobs\ChatLogSetCountryCodeJob;
-use App\Jobs\ProcessChatRequestJob;
 use App\Models\ChatConfig;
 use App\Models\ChatLog;
+use App\Services\OpenAIService;
 use App\Services\Subscriptions\SubscriptionService;
 use Illuminate\Http\Request;
 
@@ -82,10 +82,6 @@ class ChatBotController extends Controller
         }
 
         $chatUuid = $request->input('chatUuid');
-
-        $chatConfig = ChatConfig::whereUuid($request->input('chatConfig'))
-            ->firstOrFail();
-
         $ip = $request->ip();
 
         /** @var ChatLog $message */
@@ -95,14 +91,94 @@ class ChatBotController extends Controller
             'ip_address' => $ip,
         ]);
 
-        dispatch(new ProcessChatRequestJob($message));
+        // Process OpenAI request synchronously for instant response
+        $answer = $this->processOpenAIRequest($message, $chatConfig);
+
+        $message->update([
+            'answer' => $answer['text'],
+            'prompt_tokens' => $answer['prompt_tokens'] ?? null,
+            'completion_tokens' => $answer['completion_tokens'] ?? null,
+            'failed' => $answer['failed'] ?? false,
+            'processed_at' => now(),
+        ]);
+
+        // Background job for country code (non-blocking)
         dispatch(new ChatLogSetCountryCodeJob($message->id, $ip));
 
         SubscriptionService::incrementRequestsCounter($s);
 
+        // Refresh to get updated answer
+        $message->refresh();
+
         return response()->json([
             'message' => new ChatLogPublicResource($message),
         ]);
+    }
+
+    private function processOpenAIRequest(ChatLog $chatLog, ChatConfig $chatConfig): array
+    {
+        $apiKey = config('services.openai.api_key');
+
+        if (!$apiKey) {
+            return ['text' => 'OpenAI API key not configured', 'failed' => true];
+        }
+
+        $model = $chatConfig->getSettings(ChatConfig::SETTINGS_AI_MODEL)
+            ?? config('services.openai.default_model', 'gpt-5-mini');
+
+        $service = new OpenAIService($apiKey, $model);
+
+        $systemPrompt = $chatConfig->general_prompt;
+        $systemPrompt .= "\n\n{$chatConfig->welcome_message}\n\nEnsure to avoid answering questions that are unrelated to the service.";
+
+        $context = $chatConfig->getContext();
+        if ($context) {
+            $systemPrompt .= "\n\nContext: " . $context;
+        }
+
+        // Get conversation history
+        $history = ChatLog::whereChatUuid($chatLog->chat_uuid)
+            ->where('id', '<>', $chatLog->id)
+            ->orderBy('id')
+            ->get();
+
+        $config = $service->getConfig(OpenAIService::CHAT_LOG);
+        $config['system_prompt'] = $systemPrompt;
+        $config['prompt'] = $chatLog->question;
+
+        if ($history->isNotEmpty()) {
+            foreach ($history as $log) {
+                $config['conversation'][] = [
+                    'role' => 'user',
+                    'content' => $log->question,
+                ];
+                if ($log->answer) {
+                    $config['conversation'][] = [
+                        'role' => 'assistant',
+                        'content' => $log->answer,
+                    ];
+                }
+            }
+        }
+
+        try {
+            $response = $service->requestGptTurbo($config);
+            $text = trim($response['choices'][0]['message']['content'], " \t\n\r\0\x0B\"");
+
+            return [
+                'text' => $text,
+                'prompt_tokens' => $response['usage']['prompt_tokens'],
+                'completion_tokens' => $response['usage']['completion_tokens'],
+                'failed' => false,
+            ];
+        } catch (\Exception $e) {
+            \Log::channel('openai')->error('[Chat error] ' . $e->getMessage());
+
+            return [
+                'text' => 'Sorry, I encountered an error processing your request. Please try again.',
+                'failed' => true,
+            ];
+        }
     }
 
     private function getChatLog(string $chatUuid): ChatLog
