@@ -9,15 +9,17 @@
                     <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
                     BotPal
                 </a>
-                <div class="navbar-links">
-                    <a href="#features" class="navbar-link">Features</a>
-                    <a href="#how-it-works" class="navbar-link">How it works</a>
-                    <a href="#pricing" class="navbar-link">Pricing</a>
-                    <a href="#faq" class="navbar-link">FAQ</a>
-                </div>
-                <div class="navbar-cta">
-                    <a href="{{ route('login') }}" class="navbar-link">Log in</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary">Start Free Trial</a>
+                <div class="navbar-right">
+                    <div class="navbar-links">
+                        <a href="#features" class="navbar-link">Features</a>
+                        <a href="#how-it-works" class="navbar-link">How it works</a>
+                        <a href="#pricing" class="navbar-link">Pricing</a>
+                        <a href="#faq" class="navbar-link">FAQ</a>
+                    </div>
+                    <div class="navbar-cta">
+                        <a href="{{ route('login') }}" class="navbar-link">Log in</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Start Free Trial</a>
+                    </div>
                 </div>
             </div>
         </div>
