@@ -288,7 +288,7 @@ class AccountController extends Controller
 
         if ($field === 'open_ai_model') {
             validator(['open_ai_model' => $value], [
-                'open_ai_model' => ['required', Rule::in(OpenAIService::AVAILABLE_MODELS)],
+                'open_ai_model' => ['required', Rule::in(array_keys(OpenAIService::AVAILABLE_MODELS))],
             ])->validate();
         }
 
