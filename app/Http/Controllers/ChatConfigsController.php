@@ -14,10 +14,6 @@ class ChatConfigsController extends Controller
     {
         $chatConfig = auth()->user()->chatConfigLatest;
 
-        if($chatConfig) {
-            return redirect()->route('settings');
-        }
-
         return view('dashboard', compact('chatConfig'));
     }
     public function settings()
