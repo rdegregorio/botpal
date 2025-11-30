@@ -316,14 +316,14 @@
 
             <nav class="sidebar-nav">
                 <div class="sidebar-section">
-                    <div class="sidebar-section-title">Menu</div>
+                    <div class="sidebar-section-title">ChatBot</div>
                     <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="bi bi-robot"></i>
                         ChatBot Setup
                     </a>
                     <a href="{{ route('settings') }}" class="sidebar-link {{ request()->routeIs('settings') ? 'active' : '' }}">
-                        <i class="bi bi-sliders"></i>
-                        Settings
+                        <i class="bi bi-palette"></i>
+                        Appearance
                     </a>
                     <a href="{{ route('knowledge') }}" class="sidebar-link {{ request()->routeIs('knowledge') ? 'active' : '' }}">
                         <i class="bi bi-book"></i>
@@ -333,27 +333,35 @@
                         <i class="bi bi-chat-left-text"></i>
                         Messages
                     </a>
+                    <a href="{{ route('preview') }}" class="sidebar-link {{ request()->routeIs('preview') ? 'active' : '' }}">
+                        <i class="bi bi-eye"></i>
+                        Preview
+                    </a>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Analytics</div>
+                    <a href="{{ route('account.index') }}#usage" class="sidebar-link">
+                        <i class="bi bi-bar-chart"></i>
+                        Usage & Stats
+                    </a>
                 </div>
 
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">Account</div>
-                    <a href="{{ route('account.index') }}" class="sidebar-link {{ request()->routeIs('account.*') ? 'active' : '' }}">
+                    <a href="{{ route('account.index') }}" class="sidebar-link {{ request()->routeIs('account.index') && !request()->has('tab') ? 'active' : '' }}">
                         <i class="bi bi-person"></i>
-                        My Account
+                        Profile
                     </a>
-                    <a href="{{ route('pricing') }}" class="sidebar-link">
+                    <a href="{{ route('account.billing') }}" class="sidebar-link {{ request()->routeIs('account.billing') ? 'active' : '' }}">
                         <i class="bi bi-credit-card"></i>
                         Billing & Plans
                     </a>
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-section-title">Resources</div>
-                    <a href="{{ route('preview') }}" class="sidebar-link">
-                        <i class="bi bi-eye"></i>
-                        Preview ChatBot
-                    </a>
-                    <a href="{{ route('pages.contact') }}" class="sidebar-link">
+                    <div class="sidebar-section-title">Support</div>
+                    <a href="{{ route('pages.contact') }}" class="sidebar-link {{ request()->routeIs('pages.contact') ? 'active' : '' }}">
                         <i class="bi bi-envelope"></i>
                         Contact Support
                     </a>

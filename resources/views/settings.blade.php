@@ -6,7 +6,7 @@
 
 @extends('layouts.dashboard')
 
-@section('page-title', 'Settings')
+@section('page-title', 'Chatbot Appearance')
 
 @section('content')
     <div class="dashboard-card">

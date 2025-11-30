@@ -10,12 +10,26 @@ class OpenAIService
 {
     public const CHAT_LOG = 'chat_log';
 
-    public const MODEL_35_TURBO = 'gpt-4o-mini'; // Fast and affordable
-    public const MODEL_4_PREVIEW = 'gpt-4o'; // Most capable model
+    // Updated models - GPT-5.x series
+    public const MODEL_5_NANO = 'gpt-5-nano'; // Fastest, most cost-efficient
+    public const MODEL_5_MINI = 'gpt-5-mini'; // Fast and cost-efficient
+    public const MODEL_5 = 'gpt-5'; // Intelligent reasoning model
+    public const MODEL_5_PRO = 'gpt-5-pro'; // Smarter and more precise
+    public const MODEL_5_1 = 'gpt-5.1'; // Best for coding and agentic tasks
+    public const MODEL_4_1 = 'gpt-4.1'; // Smartest non-reasoning model
+
     public const AVAILABLE_MODELS = [
-        self::MODEL_35_TURBO,
-        self::MODEL_4_PREVIEW,
+        self::MODEL_5_NANO => 'GPT-5 nano - Fastest, most cost-efficient',
+        self::MODEL_5_MINI => 'GPT-5 mini - Fast and cost-efficient',
+        self::MODEL_5 => 'GPT-5 - Intelligent reasoning model',
+        self::MODEL_5_PRO => 'GPT-5 pro - Smarter and more precise',
+        self::MODEL_5_1 => 'GPT-5.1 - Best for coding and agentic tasks',
+        self::MODEL_4_1 => 'GPT-4.1 - Smartest non-reasoning model',
     ];
+
+    // Legacy constants for backward compatibility
+    public const MODEL_35_TURBO = 'gpt-5-nano';
+    public const MODEL_4_PREVIEW = 'gpt-5';
 
     private $apiKey;
     private $model;

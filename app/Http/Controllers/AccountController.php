@@ -257,9 +257,14 @@ class AccountController extends Controller
 
     public function update(Request $request)
     {
+        $field = $request->input('field');
+
+        // Different max lengths for different fields
+        $maxLength = $field === 'open_ai_token' ? 500 : 255;
+
         $this->validate($request, [
             'field' => 'required|in:name,email,password,open_ai_token,open_ai_model',
-            'value' => 'required|string|min:3|max:55',
+            'value' => "required|string|min:3|max:{$maxLength}",
         ]);
 
         $field = $request->input('field');
@@ -321,6 +326,17 @@ class AccountController extends Controller
         }
 
         return view('account.index', compact('subscription'));
+    }
+
+    public function billing(Request $request)
+    {
+        $subscription = Auth::user()->getCurrentActiveSubscription();
+
+        if(!$subscription) {
+            return redirect()->route('pricing');
+        }
+
+        return view('account.billing', compact('subscription'));
     }
 
     public function stats(Request $request)
