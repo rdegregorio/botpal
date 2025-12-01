@@ -94,6 +94,6 @@ class RegisteredUserController extends Controller
             SubscriptionService::createFreeSubscription($user);
         }
 
-        return redirect('/dashboard')->with('success', 'Welcome! Your account is now active.');
+        return redirect()->route('knowledge')->with('success', 'Welcome! Let\'s set up your chatbot knowledge base.');
     }
 }

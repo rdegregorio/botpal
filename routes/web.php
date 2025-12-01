@@ -109,6 +109,7 @@ Route::middleware('auth')->group(function () {
     Route::get('stripe/checkout', [StripeController::class, 'checkout'])->name('stripe.checkout');
     Route::get('stripe/success', [StripeController::class, 'success'])->name('stripe.success');
     Route::get('stripe/cancel', [StripeController::class, 'cancel'])->name('stripe.cancel');
+    Route::get('stripe/portal', [StripeController::class, 'portal'])->name('stripe.portal');
 });
 
 // Stripe Webhook (no CSRF, no auth)
