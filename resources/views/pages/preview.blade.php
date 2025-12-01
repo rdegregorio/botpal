@@ -16,6 +16,11 @@
         <p class="mb-4" style="color: var(--text-secondary);">Test your chatbot below to see how it will appear and respond to your visitors.</p>
 
         @if($isReady)
+            <div class="d-flex justify-content-end mb-2">
+                <button class="btn btn-sm btn-outline-secondary" id="clearChatBtn">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Clear Chat
+                </button>
+            </div>
             <div id="chat-box" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
         @else
             <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
@@ -52,29 +57,42 @@
     <script>
         // Clear and reload chat widget when navigating back to the page
         (function() {
-            // Remove any existing chat widget to prevent duplicates
-            const existingWrapper = document.getElementById('chat-wrapper');
-            if (existingWrapper) {
-                existingWrapper.remove();
-            }
-
-            // Also remove any chat that was moved into the chat-box
-            const chatBox = document.getElementById('chat-box');
-            if (chatBox) {
-                chatBox.innerHTML = '';
-            }
-
-            // Remove any old chat styles
-            document.querySelectorAll('style').forEach(style => {
-                if (style.innerText && style.innerText.includes('chat-wrapper')) {
-                    style.remove();
+            function loadChatWidget() {
+                // Remove any existing chat widget to prevent duplicates
+                const existingWrapper = document.getElementById('chat-wrapper');
+                if (existingWrapper) {
+                    existingWrapper.remove();
                 }
-            });
 
-            // Load the chat widget script
-            const script = document.createElement('script');
-            script.src = "{{ route('api.chat.embed', $chatConfig->uuid) }}?blockId=chat-box&t=" + Date.now();
-            document.body.appendChild(script);
+                // Also remove any chat that was moved into the chat-box
+                const chatBox = document.getElementById('chat-box');
+                if (chatBox) {
+                    chatBox.innerHTML = '';
+                }
+
+                // Remove any old chat styles
+                document.querySelectorAll('style').forEach(style => {
+                    if (style.innerText && style.innerText.includes('chat-wrapper')) {
+                        style.remove();
+                    }
+                });
+
+                // Clear localStorage for this chat
+                localStorage.removeItem('chat_{{ $chatConfig->uuid }}');
+
+                // Load the chat widget script
+                const script = document.createElement('script');
+                script.src = "{{ route('api.chat.embed', $chatConfig->uuid) }}?blockId=chat-box&t=" + Date.now();
+                document.body.appendChild(script);
+            }
+
+            // Initial load
+            loadChatWidget();
+
+            // Clear Chat button handler
+            document.getElementById('clearChatBtn').addEventListener('click', function() {
+                loadChatWidget();
+            });
         })();
     </script>
     <script>
@@ -105,15 +123,16 @@
             background: #fafafa;
             display: flex !important;
             flex-direction: column !important;
-            height: 450px !important;
+            height: 500px !important;
         }
         /* Hide the floating avatar button - not needed for test page */
         #chat-wrapper .chat-avatar,
         #chatAvatar {
             display: none !important;
         }
-        /* Hide close button */
-        .chat-dialog .chat-close {
+        /* Hide close and expand buttons in embedded mode */
+        #chat-box .chat-close-btn,
+        #chat-box #chatExpandBtn {
             display: none !important;
         }
         /* Make chat fill the container */
@@ -123,41 +142,21 @@
             flex: 1 !important;
             height: 100% !important;
         }
-        #chat-box .chat-dialog {
-            display: flex !important;
-            flex-direction: column !important;
-            flex: 1 !important;
+        #chat-box .chat-widget {
             height: 100% !important;
             max-height: none !important;
-            overflow: visible !important;
-            padding: 15px !important;
+            border-radius: 12px !important;
         }
         #chat-box .chat-body {
             display: flex !important;
             flex-direction: column !important;
             flex: 1 !important;
+            min-height: 0 !important;
         }
-        #chat-box .chat-content {
+        #chat-box .chat-messages {
             flex: 1 !important;
             overflow-y: auto !important;
-            margin-bottom: 15px !important;
-        }
-        #chat-box .chat-input-group {
-            display: flex !important;
-            flex-shrink: 0 !important;
-        }
-        #chat-box .chat-input {
-            flex: 1 !important;
-            padding: 10px !important;
-            border: 1px solid #ccc !important;
-            border-radius: 5px !important;
-            margin-right: 10px !important;
-        }
-        #chat-box .chat-send-btn {
-            padding: 10px 20px !important;
-            border: none !important;
-            border-radius: 5px !important;
-            cursor: pointer !important;
+            min-height: 0 !important;
         }
         /* Hide the copyright in preview - it shows outside container */
         #chat-box .chat-copy {

@@ -154,6 +154,39 @@
             border-radius: 50%;
         }
 
+        .chat-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-header-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .chat-header-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+
+        .chat-header-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
         .chat-close-btn {
             width: 36px;
             height: 36px;
@@ -179,6 +212,13 @@
             stroke: white;
             stroke-width: 2;
             fill: none;
+        }
+
+        /* Expanded widget state */
+        .chat-widget.expanded {
+            width: 500px;
+            height: 80vh;
+            max-height: 800px;
         }
 
         /* Chat Body */
@@ -535,9 +575,17 @@
                             <h2>{{$botName}}</h2>
                             <p>Online now</p>
                         </div>
-                        <button class="chat-close-btn" id="chatCloseBtn">
-                            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
+                        <div class="chat-header-actions">
+                            <button class="chat-header-btn" id="chatRefreshBtn" title="New conversation">
+                                <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3v5h-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 16H3v5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <button class="chat-header-btn" id="chatExpandBtn" title="Expand chat">
+                                <svg viewBox="0 0 24 24" id="expandIcon"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <button class="chat-close-btn" id="chatCloseBtn">
+                                <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="chat-body">
                         <div class="chat-messages" id="chatMessages">
@@ -548,13 +596,13 @@
                                     <div class="msg-time">Just now</div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="typingIndicator" class="typing-indicator" style="display: none; padding: 0 24px 20px;">
-                            <img class="msg-avatar" src="{{$chatConfig?->character_url}}" alt="{{$botName}}">
-                            <div class="typing-bubble">
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
+                            <div id="typingIndicator" class="typing-indicator" style="display: none;">
+                                <img class="msg-avatar" src="{{$chatConfig?->character_url}}" alt="{{$botName}}">
+                                <div class="typing-bubble">
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -635,6 +683,9 @@
     const modal = document.getElementById('chatModal');
     const launcher = document.getElementById('chatLauncher');
     const closeBtn = document.getElementById('chatCloseBtn');
+    const refreshBtn = document.getElementById('chatRefreshBtn');
+    const expandBtn = document.getElementById('chatExpandBtn');
+    const chatWidget = document.querySelector('.chat-widget');
     const sendBtn = document.getElementById('sendBtn');
     const input = document.getElementById('userMessage');
 
@@ -660,6 +711,62 @@
 
     launcher.addEventListener('click', () => toggleChat());
     closeBtn.addEventListener('click', () => toggleChat());
+
+    // Refresh/Clear chat - start new conversation
+    refreshBtn.addEventListener('click', function() {
+        const messagesContainer = document.getElementById('chatMessages');
+        const avatarUrl = '{{$chatConfig?->character_url}}';
+        const botName = '{{$botName}}';
+        const welcomeMessage = '{{$chatConfig?->welcome_message ?? "Hi there! How can I help you today?"}}';
+
+        // Clear stored chat data
+        localStorage.removeItem(storageKey);
+        lastMsg = null;
+
+        // Reset messages to just the welcome message
+        messagesContainer.innerHTML = \`
+            <div class="msg-group bot">
+                <img class="msg-avatar" src="\${avatarUrl}" alt="\${botName}">
+                <div class="msg-content">
+                    <div class="msg-bubble bot">\${welcomeMessage}</div>
+                    <div class="msg-time">Just now</div>
+                </div>
+            </div>
+            <div id="typingIndicator" class="typing-indicator" style="display: none;">
+                <img class="msg-avatar" src="\${avatarUrl}" alt="\${botName}">
+                <div class="typing-bubble">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        \`;
+    });
+
+    // Expand/Collapse chat widget
+    const expandedKey = 'chatExpanded_{{$chatConfig->uuid}}';
+    let isExpanded = localStorage.getItem(expandedKey) === 'true';
+
+    function setExpanded(expanded) {
+        isExpanded = expanded;
+        if (expanded) {
+            chatWidget.classList.add('expanded');
+            expandBtn.title = 'Collapse chat';
+        } else {
+            chatWidget.classList.remove('expanded');
+            expandBtn.title = 'Expand chat';
+        }
+        localStorage.setItem(expandedKey, expanded);
+    }
+
+    // Restore expanded state
+    if (isExpanded) {
+        setExpanded(true);
+    }
+
+    expandBtn.addEventListener('click', function() {
+        setExpanded(!isExpanded);
+    });
 
     // Send message
     input.addEventListener('keydown', (e) => {
