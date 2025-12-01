@@ -9,10 +9,10 @@ class ChatLogApiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'required',
+            'message' => 'required|string',
             'chatConfig' => 'required|uuid',
-            'chatUuid' => 'nullable|uuid|required_with:messageUuid',
-            'messageUuid' => 'nullable|uuid|required_with:chatUuid',
+            'chatUuid' => 'nullable|uuid',
+            'messageUuid' => 'nullable|uuid',
         ];
     }
 
