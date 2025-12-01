@@ -17,8 +17,14 @@
                         <a href="#faq" class="navbar-link">FAQ</a>
                     </div>
                     <div class="navbar-cta">
-                        <a href="{{ route('login') }}" class="navbar-link">Log in</a>
-                        <a href="{{ route('register') }}" class="btn btn-primary">Get started</a>
+                        @auth
+                            <a href="{{ route('account.index') }}" class="navbar-link">Account</a>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                        @else
+                            <a href="{{ route('login') }}" class="navbar-link">Log in</a>
+                            <a href="{{ route('register') }}" class="btn btn-primary">Get started</a>
+                        @endauth
                     </div>
                 </div>
                 <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">
@@ -32,10 +38,6 @@
     <section class="hero">
         <div class="container">
             <div class="hero-inner">
-                <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    Now with GPT-4 support
-                </div>
                 <h1 class="hero-title">
                     The easiest way to build<br>AI chatbots
                 </h1>
@@ -49,7 +51,7 @@
                 <p class="hero-note">No credit card required</p>
             </div>
 
-            <!-- Hero Demo -->
+            <!-- Hero Demo - Animated Chat -->
             <div class="hero-demo-wrapper">
                 <div class="hero-demo">
                     <div class="hero-demo-header">
@@ -57,23 +59,8 @@
                         <span class="hero-demo-dot yellow"></span>
                         <span class="hero-demo-dot green"></span>
                     </div>
-                    <div class="hero-demo-content">
-                        <div class="chat-message">
-                            <div class="chat-avatar"><i class="bi bi-robot"></i></div>
-                            <div class="chat-bubble">Hi! I'm your AI assistant. How can I help you today?</div>
-                        </div>
-                        <div class="chat-message user">
-                            <div class="chat-avatar user"><i class="bi bi-person"></i></div>
-                            <div class="chat-bubble">How do I reset my password?</div>
-                        </div>
-                        <div class="chat-message">
-                            <div class="chat-avatar"><i class="bi bi-robot"></i></div>
-                            <div class="chat-bubble">To reset your password, go to Settings > Security > Change Password. You'll receive a confirmation email within 2 minutes.</div>
-                        </div>
-                        <div class="chat-message user">
-                            <div class="chat-avatar user"><i class="bi bi-person"></i></div>
-                            <div class="chat-bubble">That was fast! Thanks!</div>
-                        </div>
+                    <div class="hero-demo-content" id="chat-demo">
+                        <!-- Messages will be animated here -->
                     </div>
                 </div>
             </div>
@@ -232,6 +219,78 @@
         </div>
     </section>
 
+    <!-- Integrations Section -->
+    <section class="feature-section alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Integrations</span>
+                <h2 class="section-title">Works with your favorite platforms</h2>
+                <p class="section-description">Easily integrate BotPal with any website. Just paste one line of code.</p>
+            </div>
+            <div class="integrations-grid">
+                <div class="integration-item">
+                    <div class="integration-icon">
+                        <svg viewBox="0 0 109.5 124.5" width="40" height="40">
+                            <path fill="#95BF47" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0,0,0 c-0.3,0-0.6,0-1,0.1c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.2c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5 c-6.9,2.1-11.7,3.6-11.8,3.7c-3.5,1.1-3.6,1.2-4,4.5C9.4,40.4,0,111.9,0,111.9l75.6,13.1V14.6C75.2,14.7,74.9,14.7,74.7,14.8z"/>
+                            <path fill="#5E8E3E" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0,0,0 c-0.3,0-0.6,0-1,0.1c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.2c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5"/>
+                            <path fill="#FFF" d="M57.6,3.9c0.3,0,0.6,0,0.9,0c4.3,0,7.5,2.6,10,7.3c1.8,3.6,3,7.6,3.6,10.6c-5.5,1.7-11.4,3.5-17.5,5.4 c1.7-6.5,4.9-12.9,8.8-17.6C54.9,7.8,56.5,5.5,57.6,3.9z M49.1,0.3c0.7,0,1.4,0.2,2.1,0.5c-4.1,1.9-8.5,6.9-11.6,14.8 c-2.5,0.8-4.9,1.5-7.2,2.2c2-6.3,6.7-14.6,13.3-17.2C46.7,0.4,47.8,0.3,49.1,0.3z"/>
+                            <path fill="#F5F5F5" d="M72.8,15.5c-0.4,0.1-0.7,0.2-1.1,0.3c-0.6-3.2-1.9-7.3-3.8-11.1c3.8,0.5,6.4,4.9,4.9,10.8z"/>
+                            <path fill="#95BF47" d="M75.6,125l33.9-7.3c0,0-14.5-93.9-14.6-94.4c-0.1-0.5-0.5-0.8-0.9-0.8c-0.4,0-8.2-0.2-8.2-0.2 s-4.3-4-6.1-5.6V125z"/>
+                        </svg>
+                    </div>
+                    <span>Shopify</span>
+                </div>
+                <div class="integration-item">
+                    <div class="integration-icon">
+                        <svg viewBox="0 0 122.5 122.5" width="40" height="40">
+                            <path fill="#21759B" d="M8.7,61.3c0,19.1,11.1,35.6,27.2,43.4L12.3,38.4C10,45.4,8.7,53.2,8.7,61.3z M96.6,58.6 c0-6-2.1-10.1-4-13.3c-2.4-4-4.7-7.3-4.7-11.3c0-4.4,3.4-8.5,8.1-8.5c0.2,0,0.4,0,0.6,0c-8.6-7.9-20-12.7-32.5-12.7 c-16.8,0-31.6,8.6-40.2,21.7c1.1,0,2.2,0.1,3.1,0.1c5,0,12.8-0.6,12.8-0.6c2.6-0.2,2.9,3.7,0.3,4c0,0-2.6,0.3-5.5,0.5l17.5,52 l10.5-31.5l-7.5-20.5c-2.6-0.2-5-0.5-5-0.5c-2.6-0.2-2.3-4.1,0.3-4c0,0,8,0.6,12.6,0.6c5,0,12.8-0.6,12.8-0.6 c2.6-0.2,2.9,3.7,0.3,4c0,0-2.6,0.3-5.5,0.5l17.4,51.7l4.8-16C95.3,67.1,96.6,62.3,96.6,58.6z M61.8,66l-14.4,41.9 c4.3,1.3,8.9,2,13.7,2c5.6,0,11-1,16-2.7c-0.1-0.2-0.3-0.5-0.4-0.7L61.8,66z M103.3,35.5c0.2,1.6,0.4,3.3,0.4,5.2 c0,5.1-1,10.9-3.9,18.1l-15.8,45.6c15.4-9,25.7-25.7,25.7-44.9C109.7,50,107.4,41.9,103.3,35.5z"/>
+                            <path fill="#21759B" d="M61.3,0C27.4,0,0,27.4,0,61.3s27.4,61.3,61.3,61.3s61.3-27.4,61.3-61.3S95.1,0,61.3,0z M61.3,119.4 c-32.1,0-58.2-26.1-58.2-58.2s26.1-58.2,58.2-58.2s58.2,26.1,58.2,58.2S93.4,119.4,61.3,119.4z"/>
+                        </svg>
+                    </div>
+                    <span>WordPress</span>
+                </div>
+                <div class="integration-item">
+                    <div class="integration-icon">
+                        <svg viewBox="0 0 100 100" width="40" height="40">
+                            <path fill="#F26322" d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M78.8,72.6c-0.8,1.9-2.3,3.4-4.2,4.2 c-7.2,3-30-0.2-30-0.2s-22.8,3.2-30,0.2c-1.9-0.8-3.4-2.3-4.2-4.2c-3-7.2,0.2-30,0.2-30s-3.2-22.8-0.2-30c0.8-1.9,2.3-3.4,4.2-4.2 c7.2-3,30,0.2,30,0.2s22.8-3.2,30-0.2c1.9,0.8,3.4,2.3,4.2,4.2c3,7.2-0.2,30-0.2,30S81.8,65.4,78.8,72.6z"/>
+                            <path fill="#F26322" d="M50,22.5L35.5,50L50,77.5L64.5,50L50,22.5z"/>
+                        </svg>
+                    </div>
+                    <span>Magento</span>
+                </div>
+                <div class="integration-item">
+                    <div class="integration-icon">
+                        <svg viewBox="0 0 100 100" width="40" height="40">
+                            <rect fill="#0C6EFC" width="100" height="100" rx="10"/>
+                            <path fill="#FFF" d="M25,30h50v10H25V30z M25,45h50v10H25V45z M25,60h30v10H25V60z"/>
+                        </svg>
+                    </div>
+                    <span>Square</span>
+                </div>
+                <div class="integration-item">
+                    <div class="integration-icon">
+                        <svg viewBox="0 0 100 100" width="40" height="40">
+                            <rect fill="#0C6EFC" width="100" height="100" rx="10"/>
+                            <path fill="#FFF" d="M20,80l15-30l15,15l15-25l15,40H20z"/>
+                            <circle fill="#FFF" cx="35" cy="35" r="8"/>
+                        </svg>
+                    </div>
+                    <span>Wix</span>
+                </div>
+                <div class="integration-item">
+                    <div class="integration-icon">
+                        <svg viewBox="0 0 100 100" width="40" height="40">
+                            <rect fill="#333" width="100" height="100" rx="10"/>
+                            <text x="50" y="60" text-anchor="middle" fill="#FFF" font-size="24" font-weight="bold">&lt;/&gt;</text>
+                        </svg>
+                    </div>
+                    <span>Any Website</span>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); margin-top: 32px;">Just paste a single line of code to get started</p>
+        </div>
+    </section>
+
     <!-- How It Works Section -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
@@ -309,7 +368,7 @@
             <div class="section-header">
                 <span class="section-label">Pricing</span>
                 <h2 class="section-title">Simple, transparent pricing</h2>
-                <p class="section-description">Start free. Upgrade when you're ready.</p>
+                <p class="section-description">Start free. Upgrade when you're ready. Powered by the latest GPT models.</p>
             </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
@@ -389,6 +448,15 @@
                     </div>
                     <div class="faq-answer">
                         Yes! You can fully customize colors, fonts, avatar, chat bubble styles, and more to match your brand. The chatbot will look and feel native to your website.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What AI models does BotPal use?
+                        <i class="bi bi-plus-lg faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        BotPal supports all the latest GPT models including GPT-4, GPT-4 Turbo, and GPT-3.5. Pro and Enterprise plans get access to the most advanced models for the best responses.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -530,5 +598,67 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Animated chat demo
+const chatMessages = [
+    { type: 'bot', text: "Hi! I'm your AI assistant. How can I help you today?" },
+    { type: 'user', text: "How do I reset my password?" },
+    { type: 'bot', text: "To reset your password, go to Settings > Security > Change Password. You'll receive a confirmation email within 2 minutes." },
+    { type: 'user', text: "That was fast! Thanks!" },
+    { type: 'bot', text: "You're welcome! Is there anything else I can help you with?" }
+];
+
+const chatDemo = document.getElementById('chat-demo');
+let messageIndex = 0;
+
+function typeMessage(element, text, callback) {
+    let charIndex = 0;
+    const interval = setInterval(() => {
+        element.textContent = text.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex >= text.length) {
+            clearInterval(interval);
+            if (callback) setTimeout(callback, 800);
+        }
+    }, 30);
+}
+
+function addMessage() {
+    if (messageIndex >= chatMessages.length) {
+        // Reset and start over after a pause
+        setTimeout(() => {
+            chatDemo.innerHTML = '';
+            messageIndex = 0;
+            addMessage();
+        }, 3000);
+        return;
+    }
+
+    const msg = chatMessages[messageIndex];
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'chat-message' + (msg.type === 'user' ? ' user' : '');
+
+    const avatarDiv = document.createElement('div');
+    avatarDiv.className = 'chat-avatar' + (msg.type === 'user' ? ' user' : '');
+    avatarDiv.innerHTML = msg.type === 'user' ? '<i class="bi bi-person"></i>' : '<i class="bi bi-robot"></i>';
+
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'chat-bubble';
+
+    messageDiv.appendChild(avatarDiv);
+    messageDiv.appendChild(bubbleDiv);
+    chatDemo.appendChild(messageDiv);
+
+    // Scroll to bottom
+    chatDemo.scrollTop = chatDemo.scrollHeight;
+
+    typeMessage(bubbleDiv, msg.text, () => {
+        messageIndex++;
+        addMessage();
+    });
+}
+
+// Start the animation after page loads
+setTimeout(addMessage, 1000);
 </script>
 @endpush

@@ -175,11 +175,57 @@ body {
     background: var(--bg-cream);
     border-color: var(--text-muted);
     text-decoration: none;
+    color: var(--text-primary);
 }
 
 .btn-large {
     padding: 14px 28px;
     font-size: 15px;
+}
+
+/* ========================================
+   INTEGRATIONS SECTION
+   ======================================== */
+.integrations-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.integration-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    min-width: 120px;
+    transition: all 0.2s;
+}
+
+.integration-item:hover {
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.integration-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.integration-item span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 /* ========================================
