@@ -97,11 +97,25 @@ class StripeController extends Controller
         $userId = $session['metadata']['user_id'] ?? Auth::id();
         $customerId = $session['customer'] ?? null;
 
-        // Update user with Stripe customer ID
+        // Update user with Stripe customer ID and payment method
         if ($customerId) {
             $user = User::find($userId);
             if ($user) {
                 $user->stripe_id = $customerId;
+
+                // Fetch payment method details from Stripe
+                $paymentMethodId = $session['payment_method'] ?? null;
+                if (!$paymentMethodId && isset($subscriptionData['default_payment_method'])) {
+                    $paymentMethodId = $subscriptionData['default_payment_method'];
+                }
+
+                if ($paymentMethodId) {
+                    $cardLastFour = $this->getCardLastFour($paymentMethodId);
+                    if ($cardLastFour) {
+                        $user->card_last_four = $cardLastFour;
+                    }
+                }
+
                 $user->save();
             }
         }
@@ -335,5 +349,34 @@ class StripeController extends Controller
 
             Log::warning('Payment failed', ['subscription_id' => $subscriptionId]);
         }
+    }
+
+    /**
+     * Get card last four digits from Stripe payment method
+     */
+    private function getCardLastFour(string $paymentMethodId): ?string
+    {
+        $secretKey = config('services.stripe.secret');
+
+        $ch = curl_init('https://api.stripe.com/v1/payment_methods/' . $paymentMethodId);
+
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $secretKey,
+            ],
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode !== 200) {
+            return null;
+        }
+
+        $data = json_decode($response, true);
+
+        return $data['card']['last4'] ?? null;
     }
 }

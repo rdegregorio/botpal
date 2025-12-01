@@ -129,7 +129,8 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: url("{{url('icons/close-medium.svg')}}") no-repeat center #dcdcdc;
+            background: url("{{url('icons/close-medium.svg')}}") no-repeat center center #dcdcdc;
+            background-size: 50% 50%;
             transform: scale(1.1);
         }
         .chat-avatar:hover {

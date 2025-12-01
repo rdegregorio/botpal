@@ -70,13 +70,29 @@
     <!-- Logos Section -->
     <section class="logos-section">
         <div class="container">
-            <p class="logos-label">Trusted by 1,000+ businesses</p>
-            <div class="logos-grid">
-                <span class="logo-item">Startups</span>
-                <span class="logo-item">E-commerce</span>
-                <span class="logo-item">SaaS</span>
-                <span class="logo-item">Agencies</span>
-                <span class="logo-item">Enterprise</span>
+            <p class="logos-label">TRUSTED BY 1,000+ BUSINESSES</p>
+            <div class="integrations-logos">
+                <div class="integration-logo">
+                    <img src="/images/shopify.png" alt="Shopify" height="40">
+                </div>
+                <div class="integration-logo">
+                    <img src="/images/wordpress.png" alt="WordPress" height="40">
+                </div>
+                <div class="integration-logo">
+                    <img src="/images/magento.png" alt="Magento" height="40">
+                </div>
+                <div class="integration-logo">
+                    <img src="/images/wix.png" alt="Wix" height="40">
+                </div>
+                <div class="integration-logo">
+                    <img src="/images/squarespace.png" alt="Squarespace" height="40">
+                </div>
+                <div class="integration-logo">
+                    <svg viewBox="0 0 48 48" width="40" height="40">
+                        <rect fill="#1a1a1a" width="48" height="48" rx="8"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">&lt;/&gt;</text>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
@@ -216,41 +232,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Integrations Section -->
-    <section class="feature-section alt">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Integrations</span>
-                <h2 class="section-title">Works with your favorite platforms</h2>
-                <p class="section-description">Easily integrate aisupport.bot with any website. Just paste one line of code.</p>
-            </div>
-            <div class="integrations-logos">
-                <div class="integration-logo">
-                    <img src="/images/shopify.png" alt="Shopify" height="48">
-                </div>
-                <div class="integration-logo">
-                    <img src="/images/wordpress.png" alt="WordPress" height="48">
-                </div>
-                <div class="integration-logo">
-                    <img src="/images/magento.png" alt="Magento" height="48">
-                </div>
-                <div class="integration-logo">
-                    <img src="/images/wix.png" alt="Wix" height="48">
-                </div>
-                <div class="integration-logo">
-                    <img src="/images/squarespace.png" alt="Squarespace" height="48">
-                </div>
-                <div class="integration-logo">
-                    <svg viewBox="0 0 48 48" width="48" height="48">
-                        <rect fill="#1a1a1a" width="48" height="48" rx="8"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">&lt;/&gt;</text>
-                    </svg>
-                </div>
-            </div>
-            <p style="text-align: center; color: var(--text-muted); margin-top: 32px;">Just paste a single line of code to get started</p>
         </div>
     </section>
 
