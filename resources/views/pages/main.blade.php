@@ -229,22 +229,22 @@
             </div>
             <div class="integrations-logos">
                 <div class="integration-logo">
-                    <img src="/images/logos/shopify.png" alt="Shopify" height="48">
+                    <img src="/images/shopify.png" alt="Shopify" height="48">
                 </div>
                 <div class="integration-logo">
-                    <img src="/images/logos/wordpress.png" alt="WordPress" height="48">
+                    <img src="/images/wordpress.png" alt="WordPress" height="48">
                 </div>
                 <div class="integration-logo">
-                    <img src="/images/logos/magento.png" alt="Magento" height="48">
+                    <img src="/images/magento.png" alt="Magento" height="48">
                 </div>
                 <div class="integration-logo">
-                    <img src="/images/logos/wix.png" alt="Wix" height="48">
+                    <img src="/images/wix.png" alt="Wix" height="48">
                 </div>
                 <div class="integration-logo">
-                    <img src="/images/logos/squarespace.png" alt="Squarespace" height="48">
+                    <img src="/images/squarespace.png" alt="Squarespace" height="48">
                 </div>
                 <div class="integration-logo">
-                    <img src="/images/logos/square.png" alt="Square" height="48">
+                    <img src="/images/square.png" alt="Square" height="48">
                 </div>
             </div>
             <p style="text-align: center; color: var(--text-muted); margin-top: 32px;">Just paste a single line of code to get started</p>
