@@ -38,7 +38,7 @@
     @elseif(request()->routeIs('settings'))
         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
             <picture>
-                <img @paid src="/icons/plus.svg" alt="Add character" class="image-hover add-character mx-auto d-block"
+                <img @paid src="/site-icons/plus.svg" alt="Add character" class="image-hover add-character mx-auto d-block"
                      data-bs-toggle="tooltip" title="Add own character"
                      style="width: 100px; height: 100px; cursor: pointer;"/>
             </picture>
