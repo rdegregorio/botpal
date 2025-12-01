@@ -20,7 +20,7 @@
                     </div>
                     <div class="navbar-cta">
                         @auth
-                            <a href="{{ route('account.index') }}" class="navbar-link">Account</a>
+                            <a href="/dashboard" class="navbar-link">Account</a>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                         @else
