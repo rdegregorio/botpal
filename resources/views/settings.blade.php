@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                @php($characterSize = (int) ($chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_CHARACTER_SIZE) ?? 80))
+                @php($characterSize = (int) ($chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_CHARACTER_SIZE) ?? 80))
                 <div class="row align-items-center mb-2">
                     <div class="col-md-2 col-12 mt-4"> Character Size: </div>
                     <div class="col-md-10 col-12 mt-4">
@@ -67,7 +67,7 @@
                 @endpush
 
 
-                @php($chatPlacement = $chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_CHAT_PLACEMENT))
+                @php($chatPlacement = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_CHAT_PLACEMENT))
                 <div class="row align-items-center mb-3">
                     <div class="col-md-2 col-12 mt-4"> Chat Placement: </div>
                     <div class="col-md-10 col-12 mt-4">
@@ -91,9 +91,9 @@
                     </script>
                 @endpush
 
-                @php($colorPrimary = $chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_PRIMARY))
-                @php($colorSecondary = $chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_SECONDARY))
-                @php($colorCharacterBg = $chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_CHARACTER_BG))
+                @php($colorPrimary = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_PRIMARY))
+                @php($colorSecondary = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_SECONDARY))
+                @php($colorCharacterBg = $chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_CHARACTER_BG))
                 <div class="row align-items-center mb-3">
                     <div class="col-md-2 col-12 mt-4"> Chat Colors: </div>
                     <div class="col-md-10 col-12">
@@ -297,7 +297,7 @@
     </script>
     <script>
         @if($chatConfig?->character)
-        $('[data-character="{{$chatConfig->character}}"]').addClass('selected-image');
+        $('[data-character="{{$chatConfig?->character}}"]').addClass('selected-image');
         @endif
 
         function debounce(func, delay) {
@@ -474,7 +474,7 @@
                 <div class="modal-header">
                     <div class="modal-title">
                         <div class="row align-items-center">
-                            <div class="col-auto"> <img id="avatarImage" src="{{$chatConfig->character_url}}" data-character-name="Ben" alt="Ben" width="{{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_CHARACTER_SIZE)}}" style="background-color: {{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_CHARACTER_BG)}}; border-radius: 50%"> </div>
+                            <div class="col-auto"> <img id="avatarImage" src="{{$chatConfig?->character_url ?? '/images/ch3.png'}}" data-character-name="Ben" alt="Ben" width="{{$chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_CHARACTER_SIZE) ?? 80}}" style="background-color: {{$chatConfig?->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_CHARACTER_BG) ?? '#ffffff'}}; border-radius: 50%"> </div>
                             <div class="col">
                                 <div class="message--server" style="font-size: {{$fontSize}}px; background-color: {{$colorSecondary}}; padding: 5px 10px; border-radius: 10px" id="chatbotGreeting">{{$chatConfig?->welcome_message ?? ' Hi there! I\'m Ben an AI support agent. How can I help?'}} </div>
                             </div>

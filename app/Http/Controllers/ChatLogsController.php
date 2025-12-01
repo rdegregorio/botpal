@@ -88,7 +88,7 @@ class ChatLogsController extends Controller
                     'is_deleted' => true,
                 ]);
             })
-            ->when(\Auth::user()->getCurrentActiveSubscription()->isFree(), function () use (&$perPage) {
+            ->when(\Auth::user()->getCurrentActiveSubscription()?->isFree(), function () use (&$perPage) {
                 $perPage = 1;
             })->latest()->simplePaginate($perPage);
 

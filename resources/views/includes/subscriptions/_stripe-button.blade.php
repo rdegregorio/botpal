@@ -1,13 +1,14 @@
 @php
     /** @var \App\Models\Subscription $subscription */
     $planType = $planType ?? null;
+    $subscription = $subscription ?? null;
     $amount = \App\Models\Subscription::getPriceByType($planType);
     $name = \App\Models\Subscription::getNameByType($planType);
     $planName = \App\Models\Subscription::getPlanNameByType($planType);
     $showDeleteAccountBtn = $showDeleteAccountBtn ?? false;
 @endphp
 
-@if($subscription?->type === $planType)
+@if($subscription && $subscription->type === $planType)
     <button class="btn btn-plan" disabled="">
         Selected
     </button>
@@ -66,95 +67,93 @@
     @else
         @include('includes.subscriptions._unsubscribe-btn-and-modal')
     @endif
-@else
-    @if($subscription)
-        <form id="change-{{$planType}}" method="post" action="{{route('account.swap')}}">
-            {{csrf_field()}}
-            <input type="hidden" name="planType" value="{{$planType}}">
-            <button class="btn btn-plan">
-                @if($subscription->price > $amount)
-                Downgrade
-                @elseif(Auth::user()->can('subscribe-trial'))
-                Upgrade
-                @else
-                Activate
-                @endif
-            </button>
-        </form>
-
-        @push('bottom')
-            <script>
-                $('#change-{{$planType}}').submit(function (e) {
-                    e.preventDefault();
-                    const $form = $(this);
-
-                    @if($subscription->isFree())
-                        @if(Auth::user()->can('subscribe-trial'))
-                        const message = 'You\'ll be prompt to enter your CC details to start your free trial';
-                        @else
-                        const message = 'You\'ll be prompt to enter your CC details without trial.';
-                        @endif
-                    @else
-                    const message = 'Upgrades and Downgrades get pro-rated at the end of your subscription period. Are you sure you want to change your subscription?';
-                    @endif
-
-                    if (confirm(message)) {
-                      $form.find('.btn-plan').prop('disabled', true);
-                      $.post($form.attr('action'), $form.serialize(), function (e) {
-                        $.post('{{route('account.checkout.get-session-id')}}', {
-                          plan: '{{$planName}}',
-                          _token: '{{csrf_token()}}'
-                        }, function (e) {
-                          //redirect to stripe checkout
-                          var stripe = Stripe('{{config('cashier.key')}}');
-                          stripe.redirectToCheckout({
-                            sessionId: e.sessionId
-                          }).then(function (result) {
-                            console.log(result);
-                          });
-                        }).fail(function (e) {
-                          console.log(e.responseJSON.error);
-                          $form.find('.btn-plan').prop('disabled', false);
-                        });
-                      });
-                    }
-                });
-            </script>
-        @endpush
-    @else
-        @push('bottom')
-            <script>
-                $(document).on('click', '[data-plan="{{$planName}}"]', function () {
-                    $(this).prop('disabled', true);
-                    //get stripe session_id
-                    $.post('{{route('account.checkout.get-session-id')}}', {
-                        plan: $(this).data('plan'),
-                        _token: '{{csrf_token()}}'
-                    }, function (e) {
-                        //redirect to stripe checkout
-                        var stripe = Stripe('{{config('cashier.key')}}');
-                        stripe.redirectToCheckout({
-                            sessionId: e.sessionId
-                        }).then(function (result) {
-                            console.log(result);
-                        });
-                    }).fail(function (e) {
-                        console.log(e.responseJSON.error);
-                    });
-                });
-            </script>
-        @endpush
-        <button type="button" data-plan="{{$planName}}" class="btn btn-plan selectplan">
-            @can('subscribe-trial')
-                Select Plan
+@elseif($subscription)
+    <form id="change-{{$planType}}" method="post" action="{{route('account.swap')}}">
+        {{csrf_field()}}
+        <input type="hidden" name="planType" value="{{$planType}}">
+        <button class="btn btn-plan">
+            @if($subscription->price > $amount)
+            Downgrade
+            @elseif(Auth::user()->can('subscribe-trial'))
+            Upgrade
             @else
-                Select Plan
-            @endcan
+            Activate
+            @endif
         </button>
-        @if($showDeleteAccountBtn)
-            @can('delete-account')
-                @include('includes.subscriptions._delete-account-btn-and-modal')
-            @endcan
-        @endif
+    </form>
+
+    @push('bottom')
+        <script>
+            $('#change-{{$planType}}').submit(function (e) {
+                e.preventDefault();
+                const $form = $(this);
+
+                @if($subscription->isFree())
+                    @if(Auth::user()->can('subscribe-trial'))
+                    const message = 'You\'ll be prompt to enter your CC details to start your free trial';
+                    @else
+                    const message = 'You\'ll be prompt to enter your CC details without trial.';
+                    @endif
+                @else
+                const message = 'Upgrades and Downgrades get pro-rated at the end of your subscription period. Are you sure you want to change your subscription?';
+                @endif
+
+                if (confirm(message)) {
+                  $form.find('.btn-plan').prop('disabled', true);
+                  $.post($form.attr('action'), $form.serialize(), function (e) {
+                    $.post('{{route('account.checkout.get-session-id')}}', {
+                      plan: '{{$planName}}',
+                      _token: '{{csrf_token()}}'
+                    }, function (e) {
+                      //redirect to stripe checkout
+                      var stripe = Stripe('{{config('cashier.key')}}');
+                      stripe.redirectToCheckout({
+                        sessionId: e.sessionId
+                      }).then(function (result) {
+                        console.log(result);
+                      });
+                    }).fail(function (e) {
+                      console.log(e.responseJSON.error);
+                      $form.find('.btn-plan').prop('disabled', false);
+                    });
+                  });
+                }
+            });
+        </script>
+    @endpush
+@else
+    @push('bottom')
+        <script>
+            $(document).on('click', '[data-plan="{{$planName}}"]', function () {
+                $(this).prop('disabled', true);
+                //get stripe session_id
+                $.post('{{route('account.checkout.get-session-id')}}', {
+                    plan: $(this).data('plan'),
+                    _token: '{{csrf_token()}}'
+                }, function (e) {
+                    //redirect to stripe checkout
+                    var stripe = Stripe('{{config('cashier.key')}}');
+                    stripe.redirectToCheckout({
+                        sessionId: e.sessionId
+                    }).then(function (result) {
+                        console.log(result);
+                    });
+                }).fail(function (e) {
+                    console.log(e.responseJSON.error);
+                });
+            });
+        </script>
+    @endpush
+    <button type="button" data-plan="{{$planName}}" class="btn btn-plan selectplan">
+        @can('subscribe-trial')
+            Select Plan
+        @else
+            Select Plan
+        @endcan
+    </button>
+    @if($showDeleteAccountBtn)
+        @can('delete-account')
+            @include('includes.subscriptions._delete-account-btn-and-modal')
+        @endcan
     @endif
 @endif

@@ -271,6 +271,11 @@ class SubscriptionService
 
     public static function createFreeSubscription(User $user): Subscription
     {
+        // Admin users get Premium plan automatically
+        if ($user->isAdmin()) {
+            return self::createPremiumSubscription($user);
+        }
+
         $s = $user->subscriptions->filter(function ($s) {
             /**
              * @var Subscription $s
@@ -283,6 +288,27 @@ class SubscriptionService
         $s->type = Subscription::PLAN_FREE;
         $s->custom_available_requests = 0;
         $s->custom_price = 0;
+        $s->expires_at = now()->addMonth();
+        $user->subscriptions()->save($s);
+
+        return $s;
+    }
+
+    public static function createPremiumSubscription(User $user): Subscription
+    {
+        $s = $user->subscriptions->filter(function ($s) {
+            /**
+             * @var Subscription $s
+             */
+            return $s->type === Subscription::PLAN_PREMIUM;
+        })->first();
+
+        $s = $s ?? new Subscription();
+        $s->name = Subscription::PLAN_PREMIUM;
+        $s->type = Subscription::PLAN_PREMIUM;
+        $s->custom_available_requests = 0;
+        $s->custom_price = 0;
+        $s->expires_at = now()->addYear(); // Admin gets 1 year
         $user->subscriptions()->save($s);
 
         return $s;
