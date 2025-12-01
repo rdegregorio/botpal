@@ -1,5 +1,6 @@
 @php
     /** @var \App\Models\Subscription $subscription */
+    $planType = $planType ?? null;
     $amount = \App\Models\Subscription::getPriceByType($planType);
     $name = \App\Models\Subscription::getNameByType($planType);
     $planName = \App\Models\Subscription::getPlanNameByType($planType);
