@@ -33,17 +33,15 @@ class AppServiceProvider extends ServiceProvider
         // Temporarily allow all users full access (Stripe not configured)
         // When Stripe is ready, restore original logic
         Blade::directive('paid', function () {
-            // Original: return "<?php if(auth()->check() && auth()->user()->getCurrentActiveSubscription()?->isFree()) { echo 'data-premium'; } ?>";
+            // Original logic would output 'data-premium' for free users
             return "";  // Don't disable any buttons for now
         });
 
         Blade::if('freeUser', function () {
-            // Original: return auth()->check() && auth()->user()->getCurrentActiveSubscription()?->isFree();
             return false;  // Treat everyone as paid for now
         });
 
         Blade::if('paidUser', function () {
-            // Original: return auth()->check() && !auth()->user()->getCurrentActiveSubscription()?->isFree();
             return true;  // Treat everyone as paid for now
         });
     }
