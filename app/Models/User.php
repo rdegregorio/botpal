@@ -78,6 +78,12 @@ class User extends Authenticatable
 
         $subscriptions = SubscriptionService::getUserActiveSubscriptions($this);
 
+        // Auto-create Premium subscription for admin users if they don't have one
+        if ($subscriptions->isEmpty() && $this->isAdmin()) {
+            $subscription = SubscriptionService::createPremiumSubscription($this);
+            return $this->currentActiveSubscription = $subscription;
+        }
+
         if ($subscriptions->isEmpty()) {
             return $this->currentActiveSubscription = null;
         }
