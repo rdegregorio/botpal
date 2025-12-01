@@ -1,6 +1,6 @@
 @php
     /** @var \App\Models\ChatConfig $chatConfig */
-    $currentType = $chatConfig->type ?? \App\Models\ChatConfig::TYPE_FAQ;
+    $currentType = $chatConfig?->type ?? \App\Models\ChatConfig::TYPE_FAQ;
 @endphp
 @extends('layouts.dashboard')
 
