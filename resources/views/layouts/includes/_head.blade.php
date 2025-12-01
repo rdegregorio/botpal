@@ -1,12 +1,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'BotPal - Create Custom AI Chatbots for Your Business')</title>
-    <meta name="description" content="BotPal offers an easy-to-use platform for creating personalized AI chatbots using OpenAI technology. Ideal for customer support, e-commerce assistance, and enhancing user engagement.">
+    <title>@yield('title', 'aisupport.bot - Create Custom AI Chatbots for Your Business')</title>
+    <meta name="description" content="aisupport.bot offers an easy-to-use platform for creating personalized AI chatbots using OpenAI technology. Ideal for customer support, e-commerce assistance, and enhancing user engagement.">
     <meta name="keywords" content="AI Chatbot, OpenAI, Business Chatbots, Customer Support, E-commerce Assistance, Personalized Chatbot, AI Technology, Chatbot Creation">
-    <meta property="og:title" content="BotPal - Custom AI Chatbots">
-    <meta property="og:description" content="Create personalized AI chatbots for your business using OpenAI technology. Enhance customer support and engagement with BotPal.">
-    <meta property="og:url" content="https://botpal.io/">
+    <meta property="og:title" content="aisupport.bot - Custom AI Chatbots">
+    <meta property="og:description" content="Create personalized AI chatbots for your business using OpenAI technology. Enhance customer support and engagement with aisupport.bot.">
+    <meta property="og:url" content="https://aisupport.bot/">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

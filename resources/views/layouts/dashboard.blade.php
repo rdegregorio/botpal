@@ -310,7 +310,7 @@
                     <span class="sidebar-logo-icon">
                         <i class="bi bi-chat-dots-fill"></i>
                     </span>
-                    <span class="sidebar-logo-text">BotPal</span>
+                    <span class="sidebar-logo-text">aisupport.bot</span>
                 </a>
             </div>
 

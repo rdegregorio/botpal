@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'BotPal - AI-Powered Chatbots for Your Business')</title>
+    <title>@yield('title', 'aisupport.bot - AI-Powered Chatbots for Your Business')</title>
     <meta name="description" content="Create personalized AI chatbots for customer support. Harness the power of AI technology to transform your business communications.">
     <meta name="keywords" content="AI Chatbot, OpenAI, Business Chatbots, Customer Support, E-commerce Assistance, Personalized Chatbot, AI Technology">
-    <meta property="og:title" content="BotPal - AI-Powered Chatbots">
+    <meta property="og:title" content="aisupport.bot - AI-Powered Chatbots">
     <meta property="og:description" content="Create personalized AI chatbots for your business using cutting-edge AI technology.">
     <meta property="og:type" content="website">
 
