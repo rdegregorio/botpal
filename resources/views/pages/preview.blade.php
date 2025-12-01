@@ -28,11 +28,51 @@
             </div>
         @endif
     </div>
+
+    @if($isReady)
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <h2 class="dashboard-card-title"><i class="bi bi-code-slash me-2"></i>Chat Widget Code</h2>
+        </div>
+        <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
+        <div class="code-container position-relative">
+            <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; font-size: 13px; overflow-x: auto;">&lt;!-- Start of aisupport.bot Embed Code--&gt;
+&lt;script async src="{{ route('api.chat.embed', $chatConfig->uuid) }}"&gt;&lt;/script&gt;
+&lt;!-- End of aisupport.bot Embed Code --&gt;</pre>
+            <button class="btn btn-sm btn-outline-secondary copy-btn" style="position: absolute; top: 10px; right: 10px;" onclick="copyEmbedCode()" title="Copy Code">
+                <i class="bi bi-clipboard"></i> Copy
+            </button>
+        </div>
+    </div>
+    @endif
 @endsection
 
 @push('bottom')
     @if($isReady)
-    <script async src="{{route('api.chat.embed', $chatConfig->uuid)}}?blockId=chat-box"></script>
+    <script async src="{{ route('api.chat.embed', $chatConfig->uuid) }}?blockId=chat-box"></script>
+    <script>
+        function copyEmbedCode() {
+            var codeBox = document.getElementById('chatCodeBox');
+            var textToCopy = codeBox.textContent || codeBox.innerText;
+
+            navigator.clipboard.writeText(textToCopy.trim()).then(function() {
+                var btn = document.querySelector('.copy-btn');
+                var originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(function() {
+                var range = document.createRange();
+                range.selectNode(codeBox);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Code copied to clipboard!');
+            });
+        }
+    </script>
     <style>
         #chat-box {
             background: #fafafa;

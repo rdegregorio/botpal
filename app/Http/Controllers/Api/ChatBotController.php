@@ -96,8 +96,8 @@ class ChatBotController extends Controller
 
         $message->update([
             'answer' => $answer['text'],
-            'prompt_tokens' => $answer['prompt_tokens'] ?? null,
-            'completion_tokens' => $answer['completion_tokens'] ?? null,
+            'prompt_tokens' => $answer['prompt_tokens'] ?? 0,
+            'completion_tokens' => $answer['completion_tokens'] ?? 0,
             'failed' => $answer['failed'] ?? false,
             'processed_at' => now(),
         ]);
@@ -120,7 +120,12 @@ class ChatBotController extends Controller
         $apiKey = config('services.openai.api_key');
 
         if (!$apiKey) {
-            return ['text' => 'OpenAI API key not configured', 'failed' => true];
+            return [
+                'text' => 'OpenAI API key not configured',
+                'failed' => true,
+                'prompt_tokens' => 0,
+                'completion_tokens' => 0,
+            ];
         }
 
         $model = $chatConfig->getSettings(ChatConfig::SETTINGS_AI_MODEL)
@@ -177,6 +182,8 @@ class ChatBotController extends Controller
             return [
                 'text' => 'Sorry, I encountered an error processing your request. Please try again.',
                 'failed' => true,
+                'prompt_tokens' => 0,
+                'completion_tokens' => 0,
             ];
         }
     }
