@@ -22,8 +22,9 @@ class Subscription extends SubscriptionAlias
     public const TRIAL_PERIOD_REQUESTS = 100;
 
     protected static array $limits = [
-        self::PLAN_BASIC => 10000,
-        self::PLAN_PREMIUM => 50000,
+        self::PLAN_FREE => 1000,
+        self::PLAN_BASIC => 5000,
+        self::PLAN_PREMIUM => 10000,
     ];
 
     /*

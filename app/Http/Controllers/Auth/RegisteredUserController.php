@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChatConfig;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Services\Subscriptions\SubscriptionService;
@@ -47,6 +48,15 @@ class RegisteredUserController extends Controller
 
         // Create free subscription for new user
         SubscriptionService::createFreeSubscription($user);
+
+        // Create default chat config so user can access settings/knowledge
+        ChatConfig::create([
+            'user_id' => $user->id,
+            'name' => 'My Chatbot',
+            'general_prompt' => 'You are a helpful AI assistant.',
+            'welcome_message' => "Hi there! I'm an AI support agent. How can I help?",
+            'character' => 3,
+        ]);
 
         event(new Registered($user));
 
