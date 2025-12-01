@@ -202,6 +202,29 @@
           text-decoration: none;
           color: {{\App\Models\ChatConfig::DEFAULT_COLOR}};
         }
+        .typing-dots {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 8px 12px;
+          background: {{$colorSecondary}};
+          border-radius: 10px;
+          width: fit-content;
+        }
+        .typing-dots span {
+          width: 8px;
+          height: 8px;
+          background: #888;
+          border-radius: 50%;
+          animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0s; }
+        @keyframes typing {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+          40% { transform: scale(1); opacity: 1; }
+        }
     `;
 
     // HTML structure for the widget
@@ -224,7 +247,11 @@
                             </div>
                           
                           <div id="typingIndicator" style="display: none;">
-                              <img src="{{url('icons/typing-texting.gif')}}" width="50" alt="Typing..." />
+                              <div class="typing-dots">
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                              </div>
                           </div>
                         </div>
                         </div>
@@ -235,7 +262,7 @@
                     </div>
                 @if($chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_COPYRIGHT_ENABLED))
                 <div class="chat-copy">
-                    Create your own AI chatbot with <a href="{{url('/')}}" target="_blank">iamsam.ai</a>
+                    Create your own AI chatbot with <a href="{{url('/')}}" target="_blank">aisupport.bot</a>
                 </div>
                 @endif
                 </div>

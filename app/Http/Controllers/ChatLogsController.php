@@ -104,9 +104,11 @@ class ChatLogsController extends Controller
                     'is_deleted' => true,
                 ]);
             })
-            ->when(\Auth::user()->getCurrentActiveSubscription()?->isFree(), function () use (&$perPage) {
-                $perPage = 1;
-            })->latest()->simplePaginate($perPage);
+            // Temporarily removed free user limitation (Stripe not configured)
+            // ->when(\Auth::user()->getCurrentActiveSubscription()?->isFree(), function () use (&$perPage) {
+            //     $perPage = 1;
+            // })
+            ->latest()->simplePaginate($perPage);
 
         return ChatLogDashboardResource::collection($messages);
     }

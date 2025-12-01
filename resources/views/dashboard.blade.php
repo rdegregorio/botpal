@@ -34,9 +34,9 @@
         </div>
         <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
         <div class="code-container position-relative">
-            <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; cursor: pointer;" readonly>@if(!$chatConfig?->uuid)First update your chat config.@else&lt;!-- Start of iamsam.ai Embed Code--&gt;
+            <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; cursor: pointer;" readonly>@if(!$chatConfig?->uuid)First update your chat config.@else&lt;!-- Start of aisupport.bot Embed Code--&gt;
 &lt;script async src=&quot;{{route('api.chat.embed', $chatConfig->uuid)}}&quot;&gt;&lt;/script&gt;
-&lt;!-- End of iamsam.ai Embed Code --&gt;@endif</pre>
+&lt;!-- End of aisupport.bot Embed Code --&gt;@endif</pre>
             <button class="btn btn-sm btn-outline-secondary" style="position: absolute; top: 10px; right: 10px;" onclick="copyCode()" title="Copy Code">
                 <i class="bi bi-clipboard"></i> Copy
             </button>
@@ -51,7 +51,7 @@
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="poweredByCheckbox" @checked($copyrightEnabled)>
             <label class="form-check-label" for="poweredByCheckbox">
-                Show "Created your own AI chatbot with iamsam.ai" branding
+                Show "Created your own AI chatbot with aisupport.bot" branding
             </label>
         </div>
         <small class="text-muted d-block mt-2">Uncheck to remove branding (available on paid plans)</small>

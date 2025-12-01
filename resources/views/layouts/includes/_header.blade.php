@@ -54,8 +54,4 @@
 </header>
 @endguest
 
-@if(!request()->routeIs('preview'))
-<!-- Start of aisupport.bot Embed Code-->
-<script async src="https://iamsam.ai/api/chat/embed/139acdc0-0345-48bc-9e53-f3b733550765"></script>
-<!-- End of aisupport.bot Embed Code -->
-@endif
+{{-- External chat widget removed - use local installation --}}
