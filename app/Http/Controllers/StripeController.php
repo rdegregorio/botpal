@@ -240,6 +240,7 @@ class StripeController extends Controller
         // Create new Premium subscription
         Subscription::create([
             'user_id' => $userId,
+            'name' => 'premium',
             'type' => Subscription::TYPE_PREMIUM,
             'stripe_id' => $stripeId,
             'stripe_status' => 'active',
