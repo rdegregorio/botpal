@@ -80,6 +80,9 @@ class Subscription extends SubscriptionAlias
 
     public static function getPriceByType($type): ?float
     {
+        if ($type === null) {
+            return 0;
+        }
         return \Arr::get(static::$prices, $type, 0) / 100;
     }
 
