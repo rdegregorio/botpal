@@ -18,6 +18,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'coming_soon' => env('COMING_SOON', false),
+    'coming_soon_user' => env('COMING_SOON_USER', 'admin'),
+    'coming_soon_password' => env('COMING_SOON_PASSWORD', 'secret'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
