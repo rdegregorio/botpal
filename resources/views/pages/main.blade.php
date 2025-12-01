@@ -7,7 +7,7 @@
             <div class="navbar-inner">
                 <a href="/" class="navbar-logo">
                     <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                    BotPal
+                    aisupport.bot
                 </a>
                 <div class="navbar-right" id="navbarMenu">
                     <div class="navbar-links">
@@ -225,7 +225,7 @@
             <div class="section-header">
                 <span class="section-label">Integrations</span>
                 <h2 class="section-title">Works with your favorite platforms</h2>
-                <p class="section-description">Easily integrate BotPal with any website. Just paste one line of code.</p>
+                <p class="section-description">Easily integrate aisupport.bot with any website. Just paste one line of code.</p>
             </div>
             <div class="integrations-logos">
                 <div class="integration-logo">
@@ -290,7 +290,7 @@
             <div class="pricing-grid">
                 <div class="pricing-card" data-plan="free">
                     <h3 class="pricing-name">Free</h3>
-                    <p class="pricing-description">Perfect for trying out BotPal</p>
+                    <p class="pricing-description">Perfect for trying out aisupport.bot</p>
                     <div class="pricing-price">
                         <span class="pricing-amount">$0</span>
                         <span class="pricing-period">/month</span>
@@ -351,11 +351,11 @@
             <div class="faq-grid">
                 <div class="faq-item open">
                     <div class="faq-question">
-                        How does BotPal learn from my content?
+                        How does aisupport.bot learn from my content?
                         <i class="bi bi-plus-lg faq-icon"></i>
                     </div>
                     <div class="faq-answer">
-                        BotPal uses advanced AI to analyze your uploaded documents, FAQs, and website content. It understands context and meaning, not just keywords, allowing it to provide accurate, relevant answers to customer questions.
+                        aisupport.bot uses advanced AI to analyze your uploaded documents, FAQs, and website content. It understands context and meaning, not just keywords, allowing it to provide accurate, relevant answers to customer questions.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -369,11 +369,11 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        What AI models does BotPal use?
+                        What AI models does aisupport.bot use?
                         <i class="bi bi-plus-lg faq-icon"></i>
                     </div>
                     <div class="faq-answer">
-                        BotPal supports all the latest GPT models including GPT-4, GPT-4 Turbo, and GPT-3.5. Pro and Enterprise plans get access to the most advanced models for the best responses.
+                        aisupport.bot supports all the latest GPT models including GPT-4, GPT-4 Turbo, and GPT-3.5. Pro and Enterprise plans get access to the most advanced models for the best responses.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -412,7 +412,7 @@
         <div class="container">
             <div class="cta-content">
                 <h2 class="cta-title">Ready to get started?</h2>
-                <p class="cta-description">Join 1,000+ businesses using BotPal to deliver instant, intelligent customer support.</p>
+                <p class="cta-description">Join 1,000+ businesses using aisupport.bot to deliver instant, intelligent customer support.</p>
                 <div class="cta-buttons">
                     <a href="{{ route('register') }}" class="btn btn-primary btn-large">Get started free</a>
                 </div>
@@ -427,7 +427,7 @@
                 <div class="footer-brand">
                     <a href="/" class="navbar-logo">
                         <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                        BotPal
+                        aisupport.bot
                     </a>
                     <p>AI-powered chatbots that help businesses deliver exceptional customer support.</p>
                 </div>
@@ -462,7 +462,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} BotPal. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} aisupport.bot. All rights reserved.</p>
                 <div class="footer-social">
                     <a href="#"><i class="bi bi-twitter"></i></a>
                     <a href="#"><i class="bi bi-linkedin"></i></a>

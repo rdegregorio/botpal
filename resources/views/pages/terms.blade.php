@@ -1,6 +1,6 @@
 @extends('layouts.landing')
 
-@section('title', 'Terms and Conditions - BotPal')
+@section('title', 'Terms and Conditions - aisupport.bot')
 
 @section('content')
     <!-- Navigation -->
@@ -9,7 +9,7 @@
             <div class="navbar-inner">
                 <a href="/" class="navbar-logo">
                     <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                    BotPal
+                    aisupport.bot
                 </a>
                 <div class="navbar-right" id="navbarMenu">
                     <div class="navbar-links">
@@ -45,17 +45,17 @@
 
                 <div style="color: #444; font-size: 15px; line-height: 1.7;">
                     <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Introduction</h3>
-                    <p class="mb-4">Welcome to BotPal, a service provided by Snapi LLC, registered in Miami, Florida, USA. By creating an account and using BotPal, you are expressly consenting to these Terms. If you disagree with any part of these Terms, please refrain from using our platform or associated services.</p>
+                    <p class="mb-4">Welcome to aisupport.bot, a service provided by Snapi LLC, registered in Miami, Florida, USA. By creating an account and using aisupport.bot, you are expressly consenting to these Terms. If you disagree with any part of these Terms, please refrain from using our platform or associated services.</p>
 
                     <hr style="border-color: #e8e8e8; margin: 24px 0;">
 
                     <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Purpose of the Service</h3>
-                    <p class="mb-4">BotPal is a live chat AI platform designed for e-commerce businesses and individuals. Our service allows users to input their FAQs, text, or PDF documents to create customized AI chatbots. We utilize sophisticated AI capabilities to deliver prompt and intelligent responses, enhancing user engagement on your platform.</p>
+                    <p class="mb-4">aisupport.bot is a live chat AI platform designed for e-commerce businesses and individuals. Our service allows users to input their FAQs, text, or PDF documents to create customized AI chatbots. We utilize sophisticated AI capabilities to deliver prompt and intelligent responses, enhancing user engagement on your platform.</p>
 
                     <hr style="border-color: #e8e8e8; margin: 24px 0;">
 
                     <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Using Our Service</h3>
-                    <p class="mb-3">To use BotPal, users need to register an account. We offer various subscription plans to suit your needs. Features include:</p>
+                    <p class="mb-3">To use aisupport.bot, users need to register an account. We offer various subscription plans to suit your needs. Features include:</p>
                     <ul style="margin-left: 20px; margin-bottom: 20px;">
                         <li>Input FAQs, texts, or PDFs to create your chatbot</li>
                         <li>Select from various chatbot characters to personalize your experience</li>
@@ -88,7 +88,7 @@
 
                     <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Intellectual Property Rights</h3>
                     <p class="mb-3"><strong>Ownership:</strong> All rights to the service, software, and trademarks are owned by Snapi LLC.</p>
-                    <p class="mb-4"><strong>License:</strong> Users are granted a limited, non-exclusive, non-transferable license to use BotPal for its intended purpose.</p>
+                    <p class="mb-4"><strong>License:</strong> Users are granted a limited, non-exclusive, non-transferable license to use aisupport.bot for its intended purpose.</p>
 
                     <hr style="border-color: #e8e8e8; margin: 24px 0;">
 
@@ -121,7 +121,7 @@
                 <div class="footer-brand">
                     <a href="/" class="navbar-logo">
                         <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                        BotPal
+                        aisupport.bot
                     </a>
                     <p>AI-powered chatbots that help businesses deliver exceptional customer support.</p>
                 </div>
@@ -156,7 +156,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} BotPal. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} aisupport.bot. All rights reserved.</p>
             </div>
         </div>
     </footer>

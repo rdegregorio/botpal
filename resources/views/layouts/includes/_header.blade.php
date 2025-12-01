@@ -8,7 +8,7 @@
                     <span class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #1a1a1a; border-radius: 8px; color: white; font-size: 14px;">
                         <i class="bi bi-chat-dots-fill"></i>
                     </span>
-                    <span style="font-weight: 600; font-size: 18px; color: #1a1a1a;">BotPal</span>
+                    <span style="font-weight: 600; font-size: 18px; color: #1a1a1a;">aisupport.bot</span>
                 </a>
             </div>
             <!-- Menu Column -->
@@ -29,7 +29,7 @@
                     <span class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #1a1a1a; border-radius: 8px; color: white; font-size: 14px;">
                         <i class="bi bi-chat-dots-fill"></i>
                     </span>
-                    <span style="font-weight: 600; font-size: 18px; color: #1a1a1a;">BotPal</span>
+                    <span style="font-weight: 600; font-size: 18px; color: #1a1a1a;">aisupport.bot</span>
                 </a>
             </div>
             <div class="col-md-9 col-6 text-md-end">
@@ -55,7 +55,7 @@
 @endguest
 
 @if(!request()->routeIs('preview'))
-<!-- Start of BotPal Embed Code-->
+<!-- Start of aisupport.bot Embed Code-->
 <script async src="https://iamsam.ai/api/chat/embed/139acdc0-0345-48bc-9e53-f3b733550765"></script>
-<!-- End of BotPal Embed Code -->
+<!-- End of aisupport.bot Embed Code -->
 @endif

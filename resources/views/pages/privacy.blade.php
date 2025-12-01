@@ -1,6 +1,6 @@
 @extends('layouts.landing')
 
-@section('title', 'Privacy Policy - BotPal')
+@section('title', 'Privacy Policy - aisupport.bot')
 
 @section('content')
     <!-- Navigation -->
@@ -9,7 +9,7 @@
             <div class="navbar-inner">
                 <a href="/" class="navbar-logo">
                     <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                    BotPal
+                    aisupport.bot
                 </a>
                 <div class="navbar-right" id="navbarMenu">
                     <div class="navbar-links">
@@ -44,14 +44,14 @@
                 <p style="color: #6b6b6b; margin-bottom: 32px;">Effective date: August 21, 2023</p>
 
                 <div style="color: #444; font-size: 15px; line-height: 1.7;">
-                    <p class="mb-3">SNAPI LLC ("us", "we", or "our") operates the BotPal website (hereinafter referred to as the "Service").</p>
+                    <p class="mb-3">SNAPI LLC ("us", "we", or "our") operates the aisupport.bot website (hereinafter referred to as the "Service").</p>
                     <p class="mb-3">This page informs you of our policies regarding the collection, use and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
                     <p class="mb-4">We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.</p>
 
                     <hr style="border-color: #e8e8e8; margin: 24px 0;">
 
                     <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Definitions</h3>
-                    <p class="mb-2"><strong>Service</strong> - The BotPal website operated by SNAPI LLC</p>
+                    <p class="mb-2"><strong>Service</strong> - The aisupport.bot website operated by SNAPI LLC</p>
                     <p class="mb-2"><strong>Personal Data</strong> - Data about a living individual who can be identified from those data</p>
                     <p class="mb-2"><strong>Usage Data</strong> - Data collected automatically from the use of the Service</p>
                     <p class="mb-4"><strong>Cookies</strong> - Small files stored on your device</p>
@@ -119,7 +119,7 @@
                 <div class="footer-brand">
                     <a href="/" class="navbar-logo">
                         <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                        BotPal
+                        aisupport.bot
                     </a>
                     <p>AI-powered chatbots that help businesses deliver exceptional customer support.</p>
                 </div>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} BotPal. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} aisupport.bot. All rights reserved.</p>
             </div>
         </div>
     </footer>

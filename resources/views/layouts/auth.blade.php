@@ -291,7 +291,7 @@
             <span class="auth-logo-icon">
                 <i class="bi bi-chat-dots-fill"></i>
             </span>
-            <span class="auth-logo-text">BotPal</span>
+            <span class="auth-logo-text">aisupport.bot</span>
         </a>
 
         <div class="auth-card">

@@ -6,9 +6,9 @@
                     <span class="d-flex align-items-center justify-content-center" style="width: 24px; height: 24px; background: #1a1a1a; border-radius: 6px; color: white; font-size: 12px;">
                         <i class="bi bi-chat-dots-fill"></i>
                     </span>
-                    <span style="font-weight: 600; font-size: 14px; color: #1a1a1a;">BotPal</span>
+                    <span style="font-weight: 600; font-size: 14px; color: #1a1a1a;">aisupport.bot</span>
                 </a>
-                <p class="mb-0 mt-2" style="font-size: 13px;">&copy; {{ date('Y') }} BotPal. All rights reserved.</p>
+                <p class="mb-0 mt-2" style="font-size: 13px;">&copy; {{ date('Y') }} aisupport.bot. All rights reserved.</p>
             </div>
             <div class="col-md-8 text-md-end">
                 <a href="{{route('pricing')}}" class="text-link">Pricing</a>

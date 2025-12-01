@@ -1,6 +1,6 @@
 @extends('layouts.landing')
 
-@section('title', 'Contact Us - BotPal')
+@section('title', 'Contact Us - aisupport.bot')
 
 @section('content')
     <!-- Navigation -->
@@ -9,7 +9,7 @@
             <div class="navbar-inner">
                 <a href="/" class="navbar-logo">
                     <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                    BotPal
+                    aisupport.bot
                 </a>
                 <div class="navbar-right" id="navbarMenu">
                     <div class="navbar-links">
@@ -81,7 +81,7 @@
                 <div class="footer-brand">
                     <a href="/" class="navbar-logo">
                         <span class="navbar-logo-icon"><i class="bi bi-chat-dots-fill"></i></span>
-                        BotPal
+                        aisupport.bot
                     </a>
                     <p>AI-powered chatbots that help businesses deliver exceptional customer support.</p>
                 </div>
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} BotPal. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} aisupport.bot. All rights reserved.</p>
             </div>
         </div>
     </footer>

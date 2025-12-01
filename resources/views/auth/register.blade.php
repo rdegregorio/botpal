@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="auth-title">Create an account</h1>
-    <p class="auth-subtitle">Get started with BotPal today</p>
+    <p class="auth-subtitle">Get started with aisupport.bot today</p>
 
     @if(config('services.google.client_id'))
     <a href="{{ route('auth.google') }}" class="btn-google">

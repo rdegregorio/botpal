@@ -108,7 +108,7 @@
             <span class="current-badge">Current Plan</span>
         @endif
         <h3 class="pricing-name-billing">Free</h3>
-        <p class="pricing-description-billing">Perfect for trying out BotPal</p>
+        <p class="pricing-description-billing">Perfect for trying out aisupport.bot</p>
         <div class="pricing-price-billing">
             <span class="pricing-amount-billing">$0</span>
             <span class="pricing-period-billing">/month</span>
