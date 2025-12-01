@@ -31,18 +31,16 @@ class AppServiceProvider extends ServiceProvider
         ChatLog::observe(ChatLogObserver::class);
 
         // Temporarily allow all users full access (Stripe not configured)
-        // When Stripe is ready, restore original logic
         Blade::directive('paid', function () {
-            // Original logic would output 'data-premium' for free users
-            return "";  // Don't disable any buttons for now
+            return "";
         });
 
         Blade::if('freeUser', function () {
-            return false;  // Treat everyone as paid for now
+            return false;
         });
 
         Blade::if('paidUser', function () {
-            return true;  // Treat everyone as paid for now
+            return true;
         });
     }
 }
