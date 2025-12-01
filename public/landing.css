@@ -186,46 +186,38 @@ body {
 /* ========================================
    INTEGRATIONS SECTION
    ======================================== */
-.integrations-grid {
+.integrations-logos {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    max-width: 900px;
+    gap: 48px;
+    flex-wrap: nowrap;
+    max-width: 100%;
     margin: 0 auto;
 }
 
-.integration-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 24px;
-    background: var(--bg-primary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    min-width: 120px;
-    transition: all 0.2s;
-}
-
-.integration-item:hover {
-    border-color: var(--text-primary);
-    transform: translateY(-2px);
-}
-
-.integration-icon {
-    width: 48px;
-    height: 48px;
+.integration-logo {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
 }
 
-.integration-item span {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
+.integration-logo:hover {
+    opacity: 1;
+}
+
+.integration-logo svg {
+    width: 48px;
+    height: 48px;
+}
+
+@media (max-width: 768px) {
+    .integrations-logos {
+        flex-wrap: wrap;
+        gap: 32px;
+    }
 }
 
 /* ========================================
@@ -331,7 +323,8 @@ body {
 
 .hero-demo-content {
     padding: 32px;
-    min-height: 320px;
+    height: 320px;
+    overflow-y: auto;
     background: var(--bg-primary);
 }
 
@@ -781,6 +774,26 @@ body {
 
 .pricing-card .btn {
     width: 100%;
+}
+
+.pricing-card {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pricing-card:hover {
+    border-color: var(--text-muted);
+}
+
+.pricing-card.active {
+    border-color: var(--text-primary);
+    border-width: 2px;
+}
+
+.pricing-card.active .pricing-btn {
+    background: var(--text-primary);
+    color: white;
+    border-color: var(--text-primary);
 }
 
 /* ========================================

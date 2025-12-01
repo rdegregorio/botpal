@@ -20,7 +20,7 @@
                     </div>
                     <div class="navbar-cta">
                         @auth
-                            <a href="{{ route('account.index') }}" class="navbar-link">Account</a>
+                            <a href="/dashboard" class="navbar-link">Account</a>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                         @else
@@ -62,7 +62,7 @@
                             {!! NoCaptcha::display() !!}
                         </div>
                         <div class="col-sm-4">
-                            <button type="submit" disabled class="btn btn-primary" style="width: 100%;">
+                            <button type="submit" disabled class="btn btn-primary" style="width: 100%; background: #1a1a1a; border-color: #1a1a1a;">
                                 Send Message
                             </button>
                         </div>

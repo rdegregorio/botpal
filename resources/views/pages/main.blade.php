@@ -18,7 +18,7 @@
                     </div>
                     <div class="navbar-cta">
                         @auth
-                            <a href="{{ route('account.index') }}" class="navbar-link">Account</a>
+                            <a href="/dashboard" class="navbar-link">Account</a>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                         @else
@@ -227,64 +227,48 @@
                 <h2 class="section-title">Works with your favorite platforms</h2>
                 <p class="section-description">Easily integrate BotPal with any website. Just paste one line of code.</p>
             </div>
-            <div class="integrations-grid">
-                <div class="integration-item">
-                    <div class="integration-icon">
-                        <svg viewBox="0 0 109.5 124.5" width="40" height="40">
-                            <path fill="#95BF47" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0,0,0 c-0.3,0-0.6,0-1,0.1c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.2c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5 c-6.9,2.1-11.7,3.6-11.8,3.7c-3.5,1.1-3.6,1.2-4,4.5C9.4,40.4,0,111.9,0,111.9l75.6,13.1V14.6C75.2,14.7,74.9,14.7,74.7,14.8z"/>
-                            <path fill="#5E8E3E" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0,0,0 c-0.3,0-0.6,0-1,0.1c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.2c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5"/>
-                            <path fill="#FFF" d="M57.6,3.9c0.3,0,0.6,0,0.9,0c4.3,0,7.5,2.6,10,7.3c1.8,3.6,3,7.6,3.6,10.6c-5.5,1.7-11.4,3.5-17.5,5.4 c1.7-6.5,4.9-12.9,8.8-17.6C54.9,7.8,56.5,5.5,57.6,3.9z M49.1,0.3c0.7,0,1.4,0.2,2.1,0.5c-4.1,1.9-8.5,6.9-11.6,14.8 c-2.5,0.8-4.9,1.5-7.2,2.2c2-6.3,6.7-14.6,13.3-17.2C46.7,0.4,47.8,0.3,49.1,0.3z"/>
-                            <path fill="#F5F5F5" d="M72.8,15.5c-0.4,0.1-0.7,0.2-1.1,0.3c-0.6-3.2-1.9-7.3-3.8-11.1c3.8,0.5,6.4,4.9,4.9,10.8z"/>
-                            <path fill="#95BF47" d="M75.6,125l33.9-7.3c0,0-14.5-93.9-14.6-94.4c-0.1-0.5-0.5-0.8-0.9-0.8c-0.4,0-8.2-0.2-8.2-0.2 s-4.3-4-6.1-5.6V125z"/>
-                        </svg>
-                    </div>
-                    <span>Shopify</span>
+            <div class="integrations-logos">
+                <div class="integration-logo">
+                    <svg viewBox="0 0 109.5 124.5" width="48" height="48">
+                        <path fill="#95BF47" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0,0,0 c-0.3,0-0.6,0-1,0.1c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.2c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5 c-6.9,2.1-11.7,3.6-11.8,3.7c-3.5,1.1-3.6,1.2-4,4.5C9.4,40.4,0,111.9,0,111.9l75.6,13.1V14.6C75.2,14.7,74.9,14.7,74.7,14.8z"/>
+                        <path fill="#5E8E3E" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0,0,0 c-0.3,0-0.6,0-1,0.1c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.2c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5"/>
+                        <path fill="#FFF" d="M57.6,3.9c0.3,0,0.6,0,0.9,0c4.3,0,7.5,2.6,10,7.3c1.8,3.6,3,7.6,3.6,10.6c-5.5,1.7-11.4,3.5-17.5,5.4 c1.7-6.5,4.9-12.9,8.8-17.6C54.9,7.8,56.5,5.5,57.6,3.9z M49.1,0.3c0.7,0,1.4,0.2,2.1,0.5c-4.1,1.9-8.5,6.9-11.6,14.8 c-2.5,0.8-4.9,1.5-7.2,2.2c2-6.3,6.7-14.6,13.3-17.2C46.7,0.4,47.8,0.3,49.1,0.3z"/>
+                        <path fill="#F5F5F5" d="M72.8,15.5c-0.4,0.1-0.7,0.2-1.1,0.3c-0.6-3.2-1.9-7.3-3.8-11.1c3.8,0.5,6.4,4.9,4.9,10.8z"/>
+                        <path fill="#95BF47" d="M75.6,125l33.9-7.3c0,0-14.5-93.9-14.6-94.4c-0.1-0.5-0.5-0.8-0.9-0.8c-0.4,0-8.2-0.2-8.2-0.2 s-4.3-4-6.1-5.6V125z"/>
+                    </svg>
                 </div>
-                <div class="integration-item">
-                    <div class="integration-icon">
-                        <svg viewBox="0 0 122.5 122.5" width="40" height="40">
-                            <path fill="#21759B" d="M8.7,61.3c0,19.1,11.1,35.6,27.2,43.4L12.3,38.4C10,45.4,8.7,53.2,8.7,61.3z M96.6,58.6 c0-6-2.1-10.1-4-13.3c-2.4-4-4.7-7.3-4.7-11.3c0-4.4,3.4-8.5,8.1-8.5c0.2,0,0.4,0,0.6,0c-8.6-7.9-20-12.7-32.5-12.7 c-16.8,0-31.6,8.6-40.2,21.7c1.1,0,2.2,0.1,3.1,0.1c5,0,12.8-0.6,12.8-0.6c2.6-0.2,2.9,3.7,0.3,4c0,0-2.6,0.3-5.5,0.5l17.5,52 l10.5-31.5l-7.5-20.5c-2.6-0.2-5-0.5-5-0.5c-2.6-0.2-2.3-4.1,0.3-4c0,0,8,0.6,12.6,0.6c5,0,12.8-0.6,12.8-0.6 c2.6-0.2,2.9,3.7,0.3,4c0,0-2.6,0.3-5.5,0.5l17.4,51.7l4.8-16C95.3,67.1,96.6,62.3,96.6,58.6z M61.8,66l-14.4,41.9 c4.3,1.3,8.9,2,13.7,2c5.6,0,11-1,16-2.7c-0.1-0.2-0.3-0.5-0.4-0.7L61.8,66z M103.3,35.5c0.2,1.6,0.4,3.3,0.4,5.2 c0,5.1-1,10.9-3.9,18.1l-15.8,45.6c15.4-9,25.7-25.7,25.7-44.9C109.7,50,107.4,41.9,103.3,35.5z"/>
-                            <path fill="#21759B" d="M61.3,0C27.4,0,0,27.4,0,61.3s27.4,61.3,61.3,61.3s61.3-27.4,61.3-61.3S95.1,0,61.3,0z M61.3,119.4 c-32.1,0-58.2-26.1-58.2-58.2s26.1-58.2,58.2-58.2s58.2,26.1,58.2,58.2S93.4,119.4,61.3,119.4z"/>
-                        </svg>
-                    </div>
-                    <span>WordPress</span>
+                <div class="integration-logo">
+                    <svg viewBox="0 0 122.5 122.5" width="48" height="48">
+                        <path fill="#21759B" d="M8.7,61.3c0,19.1,11.1,35.6,27.2,43.4L12.3,38.4C10,45.4,8.7,53.2,8.7,61.3z M96.6,58.6 c0-6-2.1-10.1-4-13.3c-2.4-4-4.7-7.3-4.7-11.3c0-4.4,3.4-8.5,8.1-8.5c0.2,0,0.4,0,0.6,0c-8.6-7.9-20-12.7-32.5-12.7 c-16.8,0-31.6,8.6-40.2,21.7c1.1,0,2.2,0.1,3.1,0.1c5,0,12.8-0.6,12.8-0.6c2.6-0.2,2.9,3.7,0.3,4c0,0-2.6,0.3-5.5,0.5l17.5,52 l10.5-31.5l-7.5-20.5c-2.6-0.2-5-0.5-5-0.5c-2.6-0.2-2.3-4.1,0.3-4c0,0,8,0.6,12.6,0.6c5,0,12.8-0.6,12.8-0.6 c2.6-0.2,2.9,3.7,0.3,4c0,0-2.6,0.3-5.5,0.5l17.4,51.7l4.8-16C95.3,67.1,96.6,62.3,96.6,58.6z M61.8,66l-14.4,41.9 c4.3,1.3,8.9,2,13.7,2c5.6,0,11-1,16-2.7c-0.1-0.2-0.3-0.5-0.4-0.7L61.8,66z M103.3,35.5c0.2,1.6,0.4,3.3,0.4,5.2 c0,5.1-1,10.9-3.9,18.1l-15.8,45.6c15.4-9,25.7-25.7,25.7-44.9C109.7,50,107.4,41.9,103.3,35.5z"/>
+                        <path fill="#21759B" d="M61.3,0C27.4,0,0,27.4,0,61.3s27.4,61.3,61.3,61.3s61.3-27.4,61.3-61.3S95.1,0,61.3,0z M61.3,119.4 c-32.1,0-58.2-26.1-58.2-58.2s26.1-58.2,58.2-58.2s58.2,26.1,58.2,58.2S93.4,119.4,61.3,119.4z"/>
+                    </svg>
                 </div>
-                <div class="integration-item">
-                    <div class="integration-icon">
-                        <svg viewBox="0 0 100 100" width="40" height="40">
-                            <path fill="#F26322" d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M78.8,72.6c-0.8,1.9-2.3,3.4-4.2,4.2 c-7.2,3-30-0.2-30-0.2s-22.8,3.2-30,0.2c-1.9-0.8-3.4-2.3-4.2-4.2c-3-7.2,0.2-30,0.2-30s-3.2-22.8-0.2-30c0.8-1.9,2.3-3.4,4.2-4.2 c7.2-3,30,0.2,30,0.2s22.8-3.2,30-0.2c1.9,0.8,3.4,2.3,4.2,4.2c3,7.2-0.2,30-0.2,30S81.8,65.4,78.8,72.6z"/>
-                            <path fill="#F26322" d="M50,22.5L35.5,50L50,77.5L64.5,50L50,22.5z"/>
-                        </svg>
-                    </div>
-                    <span>Magento</span>
+                <div class="integration-logo">
+                    <svg viewBox="0 0 100 100" width="48" height="48">
+                        <path fill="#F26322" d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M78.8,72.6c-0.8,1.9-2.3,3.4-4.2,4.2 c-7.2,3-30-0.2-30-0.2s-22.8,3.2-30,0.2c-1.9-0.8-3.4-2.3-4.2-4.2c-3-7.2,0.2-30,0.2-30s-3.2-22.8-0.2-30c0.8-1.9,2.3-3.4,4.2-4.2 c7.2-3,30,0.2,30,0.2s22.8-3.2,30-0.2c1.9,0.8,3.4,2.3,4.2,4.2c3,7.2-0.2,30-0.2,30S81.8,65.4,78.8,72.6z"/>
+                        <path fill="#F26322" d="M50,22.5L35.5,50L50,77.5L64.5,50L50,22.5z"/>
+                    </svg>
                 </div>
-                <div class="integration-item">
-                    <div class="integration-icon">
-                        <svg viewBox="0 0 100 100" width="40" height="40">
-                            <rect fill="#0C6EFC" width="100" height="100" rx="10"/>
-                            <path fill="#FFF" d="M25,30h50v10H25V30z M25,45h50v10H25V45z M25,60h30v10H25V60z"/>
-                        </svg>
-                    </div>
-                    <span>Square</span>
+                <div class="integration-logo">
+                    <svg viewBox="0 0 512 512" width="48" height="48">
+                        <path fill="#FBBC04" d="M166 106.8l-44.6 25.8-25.8 44.6v157.6l25.8 44.6 44.6 25.8h180l44.6-25.8 25.8-44.6V177.2l-25.8-44.6-44.6-25.8H166z"/>
+                        <path fill="#EA4335" d="M256 181.5L166 106.8 121.4 177.2V334.8L166 405.2l90-74.7-90-74.7 90-74.3z"/>
+                        <path fill="#4285F4" d="M346 106.8l-90 74.7 90 74.3-90 74.7 90 74.7 44.6-70.4 25.8-44.6V177.2L390.6 132.6 346 106.8z"/>
+                    </svg>
                 </div>
-                <div class="integration-item">
-                    <div class="integration-icon">
-                        <svg viewBox="0 0 100 100" width="40" height="40">
-                            <rect fill="#0C6EFC" width="100" height="100" rx="10"/>
-                            <path fill="#FFF" d="M20,80l15-30l15,15l15-25l15,40H20z"/>
-                            <circle fill="#FFF" cx="35" cy="35" r="8"/>
-                        </svg>
-                    </div>
-                    <span>Wix</span>
+                <div class="integration-logo">
+                    <svg viewBox="0 0 100 100" width="48" height="48">
+                        <path fill="#FABD09" d="M0 25L25 0h50l25 25v50L75 100H25L0 75z"/>
+                        <path fill="#000" d="M33 33h10l7 20 7-20h10l-12 34h-10z"/>
+                    </svg>
                 </div>
-                <div class="integration-item">
-                    <div class="integration-icon">
-                        <svg viewBox="0 0 100 100" width="40" height="40">
-                            <rect fill="#333" width="100" height="100" rx="10"/>
-                            <text x="50" y="60" text-anchor="middle" fill="#FFF" font-size="24" font-weight="bold">&lt;/&gt;</text>
-                        </svg>
-                    </div>
-                    <span>Any Website</span>
+                <div class="integration-logo">
+                    <svg viewBox="0 0 100 100" width="48" height="48">
+                        <rect fill="#000" width="100" height="100" rx="12"/>
+                        <path fill="#fff" d="M28 28h44v44H28z"/>
+                        <path fill="#000" d="M35 35h30v30H35z"/>
+                        <path fill="#fff" d="M42 42h16v16H42z"/>
+                    </svg>
                 </div>
             </div>
             <p style="text-align: center; color: var(--text-muted); margin-top: 32px;">Just paste a single line of code to get started</p>
@@ -319,49 +303,6 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Testimonials</span>
-                <h2 class="section-title">Loved by support teams</h2>
-                <p class="section-description">See what our customers have to say about BotPal.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"BotPal reduced our support tickets by 65% in the first month. The AI actually understands our product and gives accurate answers."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">SK</div>
-                        <div class="testimonial-info">
-                            <h4>Sarah K.</h4>
-                            <p>Head of Support, TechFlow</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Setup took 10 minutes. Now our customers get instant answers at 3am instead of waiting for business hours. Game changer."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">MR</div>
-                        <div class="testimonial-info">
-                            <h4>Mike R.</h4>
-                            <p>Founder, ShopEasy</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The customization options are incredible. Our chatbot looks and feels like it was built in-house. Customers love it."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">JL</div>
-                        <div class="testimonial-info">
-                            <h4>Jennifer L.</h4>
-                            <p>CTO, CloudBase</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing Section -->
     <section class="pricing-section" id="pricing">
         <div class="container">
@@ -371,7 +312,7 @@
                 <p class="section-description">Start free. Upgrade when you're ready. Powered by the latest GPT models.</p>
             </div>
             <div class="pricing-grid">
-                <div class="pricing-card">
+                <div class="pricing-card" data-plan="free">
                     <h3 class="pricing-name">Free</h3>
                     <p class="pricing-description">Perfect for trying out BotPal</p>
                     <div class="pricing-price">
@@ -384,9 +325,9 @@
                         <li><i class="bi bi-check2"></i> Basic customization</li>
                         <li><i class="bi bi-check2"></i> Email support</li>
                     </ul>
-                    <a href="{{ route('register') }}" class="btn btn-secondary">Get started</a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary pricing-btn">Get started</a>
                 </div>
-                <div class="pricing-card featured">
+                <div class="pricing-card featured active" data-plan="pro">
                     <span class="pricing-badge">Popular</span>
                     <h3 class="pricing-name">Pro</h3>
                     <p class="pricing-description">For growing businesses</p>
@@ -402,9 +343,9 @@
                         <li><i class="bi bi-check2"></i> Analytics dashboard</li>
                         <li><i class="bi bi-check2"></i> Priority support</li>
                     </ul>
-                    <a href="{{ route('register') }}" class="btn btn-primary">Start free trial</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary pricing-btn">Get started</a>
                 </div>
-                <div class="pricing-card">
+                <div class="pricing-card" data-plan="enterprise">
                     <h3 class="pricing-name">Enterprise</h3>
                     <p class="pricing-description">For large organizations</p>
                     <div class="pricing-price">
@@ -418,7 +359,7 @@
                         <li><i class="bi bi-check2"></i> Dedicated support</li>
                         <li><i class="bi bi-check2"></i> On-premise option</li>
                     </ul>
-                    <a href="{{ route('pages.contact') }}" class="btn btn-secondary">Contact sales</a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary pricing-btn">Get started</a>
                 </div>
             </div>
         </div>
@@ -498,7 +439,6 @@
                 <p class="cta-description">Join 1,000+ businesses using BotPal to deliver instant, intelligent customer support.</p>
                 <div class="cta-buttons">
                     <a href="{{ route('register') }}" class="btn btn-primary btn-large">Get started free</a>
-                    <a href="{{ route('pages.contact') }}" class="btn btn-secondary btn-large">Contact sales</a>
                 </div>
             </div>
         </div>
@@ -585,6 +525,22 @@ document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
         const item = question.parentElement;
         item.classList.toggle('open');
+    });
+});
+
+// Pricing card selection
+document.querySelectorAll('.pricing-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        // Don't trigger when clicking the button itself
+        if (e.target.closest('.pricing-btn')) return;
+
+        // Remove active from all cards
+        document.querySelectorAll('.pricing-card').forEach(c => {
+            c.classList.remove('active');
+        });
+
+        // Add active to clicked card
+        this.classList.add('active');
     });
 });
 
