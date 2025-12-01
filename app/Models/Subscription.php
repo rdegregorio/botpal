@@ -11,6 +11,12 @@ class Subscription extends SubscriptionAlias
     public const PLAN_BUSINESS = 3;
     public const PLAN_FREE = 4;
 
+    // Aliases for cleaner code
+    public const TYPE_BASIC = self::PLAN_BASIC;
+    public const TYPE_PREMIUM = self::PLAN_PREMIUM;
+    public const TYPE_BUSINESS = self::PLAN_BUSINESS;
+    public const TYPE_FREE = self::PLAN_FREE;
+
     public const PLAN_NAMES = [
         self::PLAN_FREE => 'Free',
         self::PLAN_BASIC => 'Basic',

@@ -6,67 +6,61 @@
 
     <div class="plans-container">
         <!-- Free Plan -->
-        <div class="plan-card plan-free">
-            <div class="plan-header">
-                <h3 class="plan-name">Free</h3>
-                <div class="plan-price">
-                    <span class="price">$0</span>
-                    <span class="period">/month</span>
-                </div>
+        <div class="plan-card">
+            <h3 class="plan-name">Free</h3>
+            <p class="plan-description">Perfect for trying out aisupport.bot</p>
+            <div class="plan-price">
+                <span class="price">$0</span>
+                <span class="period">/month</span>
             </div>
             <ul class="plan-features">
-                <li><i class="bi bi-check"></i> 1,000 messages/month</li>
-                <li><i class="bi bi-check"></i> 1 Chatbot</li>
-                <li><i class="bi bi-check"></i> FAQ Knowledge Base</li>
-                <li><i class="bi bi-check"></i> Basic Analytics</li>
+                <li><i class="bi bi-check2"></i> 1,000 messages/month</li>
+                <li><i class="bi bi-check2"></i> 1 Chatbot</li>
+                <li><i class="bi bi-check2"></i> FAQ Knowledge Base</li>
+                <li><i class="bi bi-check2"></i> Basic Analytics</li>
             </ul>
             <form action="{{ route('select-plan.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="plan" value="free">
-                <button type="submit" class="btn-plan btn-plan-primary">Get Started</button>
+                <button type="submit" class="btn-plan btn-plan-outline">Get started</button>
             </form>
         </div>
 
         <!-- Premium Plan -->
-        <div class="plan-card plan-premium">
-            <div class="plan-badge">Popular</div>
-            <div class="plan-header">
-                <h3 class="plan-name">Premium</h3>
-                <div class="plan-price">
-                    <span class="price">$19.99</span>
-                    <span class="period">/month</span>
-                </div>
+        <div class="plan-card plan-featured">
+            <span class="plan-badge">POPULAR</span>
+            <h3 class="plan-name">Premium</h3>
+            <p class="plan-description">For growing businesses</p>
+            <div class="plan-price">
+                <span class="price">$19.99</span>
+                <span class="period">/month</span>
             </div>
             <ul class="plan-features">
-                <li><i class="bi bi-check"></i> 10,000 messages/month</li>
-                <li><i class="bi bi-check"></i> Unlimited Chatbots</li>
-                <li><i class="bi bi-check"></i> PDF & Plain Text KB</li>
-                <li><i class="bi bi-check"></i> Advanced Analytics</li>
-                <li><i class="bi bi-check"></i> Priority Support</li>
+                <li><i class="bi bi-check2"></i> 10,000 messages/month</li>
+                <li><i class="bi bi-check2"></i> Unlimited Chatbots</li>
+                <li><i class="bi bi-check2"></i> PDF & Plain Text KB</li>
+                <li><i class="bi bi-check2"></i> Advanced Analytics</li>
+                <li><i class="bi bi-check2"></i> Priority Support</li>
             </ul>
-            <a href="{{ route('stripe.checkout') }}" class="btn-plan btn-plan-primary">
-                Subscribe Now
-            </a>
+            <a href="{{ route('stripe.checkout') }}" class="btn-plan btn-plan-primary">Get started</a>
         </div>
 
         <!-- Enterprise Plan -->
-        <div class="plan-card plan-enterprise">
-            <div class="plan-header">
-                <h3 class="plan-name">Enterprise</h3>
-                <div class="plan-price">
-                    <span class="price">Custom</span>
-                </div>
+        <div class="plan-card">
+            <h3 class="plan-name">Enterprise</h3>
+            <p class="plan-description">For large organizations</p>
+            <div class="plan-price">
+                <span class="price">Custom</span>
             </div>
             <ul class="plan-features">
-                <li><i class="bi bi-check"></i> Unlimited messages</li>
-                <li><i class="bi bi-check"></i> Unlimited Chatbots</li>
-                <li><i class="bi bi-check"></i> Custom Integrations</li>
-                <li><i class="bi bi-check"></i> Dedicated Support</li>
-                <li><i class="bi bi-check"></i> SLA Guarantee</li>
+                <li><i class="bi bi-check2"></i> Unlimited messages</li>
+                <li><i class="bi bi-check2"></i> Unlimited Chatbots</li>
+                <li><i class="bi bi-check2"></i> Custom Integrations</li>
+                <li><i class="bi bi-check2"></i> Dedicated Support</li>
+                <li><i class="bi bi-check2"></i> SLA Guarantee</li>
+                <li><i class="bi bi-check2"></i> On-premise option</li>
             </ul>
-            <button type="button" class="btn-plan btn-plan-disabled" disabled>
-                Coming Soon
-            </button>
+            <button type="button" class="btn-plan btn-plan-disabled" disabled>Coming Soon</button>
         </div>
     </div>
 @endsection
@@ -74,18 +68,28 @@
 @push('scripts')
 <style>
     .auth-container {
-        max-width: 900px;
+        max-width: 960px;
     }
 
     .auth-card {
-        padding: 40px 30px;
+        padding: 48px 40px;
+        background: #f8f8f8;
+    }
+
+    .auth-title {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .auth-subtitle {
+        color: #6b6b6b;
+        margin-bottom: 32px;
     }
 
     .plans-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-top: 24px;
+        gap: 24px;
     }
 
     @media (max-width: 768px) {
@@ -95,103 +99,123 @@
     }
 
     .plan-card {
-        background: var(--bg-cream);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 24px;
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 16px;
+        padding: 32px;
         position: relative;
-        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
     }
 
-    .plan-card:hover {
-        border-color: #ccc;
-    }
-
-    .plan-premium {
-        border-color: var(--text-primary);
-        background: #fafafa;
+    .plan-featured {
+        border: 2px solid #1a1a1a;
     }
 
     .plan-badge {
         position: absolute;
-        top: -10px;
-        right: 20px;
-        background: var(--text-primary);
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1a1a1a;
         color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .plan-header {
-        text-align: center;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid var(--border);
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
     .plan-name {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 600;
-        margin-bottom: 8px;
-        color: var(--text-primary);
+        color: #1a1a1a;
+        margin-bottom: 4px;
+    }
+
+    .plan-description {
+        font-size: 13px;
+        color: #999;
+        margin-bottom: 20px;
+    }
+
+    .plan-price {
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #e8e8e8;
     }
 
     .plan-price .price {
-        font-size: 32px;
-        font-weight: 700;
-        color: var(--text-primary);
+        font-size: 42px;
+        font-weight: 600;
+        color: #1a1a1a;
     }
 
     .plan-price .period {
         font-size: 14px;
-        color: var(--text-secondary);
+        color: #999;
     }
 
     .plan-features {
         list-style: none;
         padding: 0;
-        margin: 0 0 24px 0;
+        margin: 0 0 32px 0;
+        flex: 1;
     }
 
     .plan-features li {
-        padding: 8px 0;
-        font-size: 14px;
-        color: var(--text-secondary);
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
+        padding: 10px 0;
+        font-size: 14px;
+        color: #6b6b6b;
     }
 
     .plan-features li i {
-        color: #22c55e;
+        color: #1a1a1a;
         font-size: 16px;
     }
 
     .btn-plan {
         width: 100%;
-        padding: 12px 20px;
+        padding: 14px 24px;
         border-radius: 8px;
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
         transition: all 0.2s;
-        border: none;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
     }
 
     .btn-plan-primary {
-        background: var(--text-primary);
+        background: #1a1a1a;
         color: white;
+        border: 2px solid #1a1a1a;
     }
 
     .btn-plan-primary:hover {
         background: #333;
+        border-color: #333;
+        color: white;
+    }
+
+    .btn-plan-outline {
+        background: white;
+        color: #1a1a1a;
+        border: 2px solid #1a1a1a;
+    }
+
+    .btn-plan-outline:hover {
+        background: #f5f5f5;
     }
 
     .btn-plan-disabled {
-        background: #e5e5e5;
+        background: #f5f5f5;
         color: #999;
+        border: 2px solid #e8e8e8;
         cursor: not-allowed;
     }
 </style>
