@@ -31,16 +31,16 @@
             margin-top: 0px;
             gap: 15px;
         }
-        
+
         .chat-block-id {
             display: none;
         }
-        
+
         .chat-message-wrapper, .chat-input {
             font-size: {{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_FONT_SIZE)}}px;
             font-family: {{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_FONT_FAMILY)}} !important;
         }
-        
+
         .chat-block-id .chat-dialog {
             position: relative;
             left: auto;
@@ -53,7 +53,7 @@
             overflow: visible;
             transform: none;
         }
-        
+
         .chat-grid-col, .chat-grid-col-auto {
             position: relative;
             width: 100%;
@@ -61,7 +61,7 @@
             flex-grow: 1;
             max-width: 100%;
         }
-        
+
         .chat-grid-col-auto {
             flex: 0 0 auto;
             width: auto;
@@ -84,14 +84,50 @@
         }
         .chat-dialog {
             background-color: white;
-            padding: 20px;
+            padding: 0;
             border-radius: 5px;
+            width: 380px;
             max-width: 435px;
-            max-height: 50vh;
-            height: 900px;
-            overflow: auto;
+            height: 500px;
+            max-height: 70vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+        .chat-dialog.expanded {
+            width: 500px;
+            height: 600px;
+            max-height: 80vh;
+        }
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 8px 12px;
+            background-color: {{$colorPrimary}};
+            border-radius: 5px 5px 0 0;
+            gap: 8px;
+        }
+        .chat-header-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 4px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .chat-header-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .chat-header-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
         }
         .chat-close {
             position: absolute;
@@ -140,11 +176,13 @@
           flex-grow: 1;
           display: flex;
           flex-direction: column;
+          padding: 15px;
+          overflow: hidden;
         }
         .chat-content {
-            height: 100px;
+            flex: 1;
             overflow-y: auto;
-            flex-grow: 1;
+            min-height: 0;
         }
         .chat-messages {
             margin-bottom: 10px;
@@ -170,6 +208,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 10px;
+            flex-shrink: 0;
         }
         .chat-input:focus {
             outline: none;
@@ -195,14 +235,16 @@
         .chat-copy {
           text-align: center;
           font-size: 12px;
-          margin-top: 12px;
+          padding: 8px 15px;
           color: #888888;
+          flex-shrink: 0;
         }
         .chat-copy a {
           font-size: 12px;
           text-decoration: none;
           color: {{\App\Models\ChatConfig::DEFAULT_COLOR}};
         }
+        /* CSS Animated Typing Indicator */
         .typing-indicator {
           display: flex;
           align-items: center;
@@ -211,9 +253,24 @@
           border-radius: 10px;
           width: fit-content;
         }
-        .typing-indicator img {
-          height: 24px;
-          width: auto;
+        .typing-dots {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+        .typing-dots span {
+          width: 8px;
+          height: 8px;
+          background: #888;
+          border-radius: 50%;
+          animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0s; }
+        @keyframes typingBounce {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+          40% { transform: scale(1); opacity: 1; }
         }
     `;
 
@@ -221,7 +278,16 @@
     const htmlTemplate = `
         <div id="chat-wrapper">
             <div @if(request('blockId')) class="chat-block-id" @else class="chat-overlay" @endif id="chatbotPreviewModal">
-                <div class="chat-dialog">
+                <div class="chat-dialog" id="chatDialog">
+                    <div class="chat-header">
+                        <button class="chat-header-btn" id="clearChatBtn" title="Clear chat">
+                            <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                        </button>
+                        <button class="chat-header-btn" id="expandChatBtn" title="Expand chat">
+                            <svg viewBox="0 0 24 24" id="expandIcon"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                            <svg viewBox="0 0 24 24" id="collapseIcon" style="display:none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+                        </button>
+                    </div>
                     <div class="chat-body">
                         <div id="chat-bot" class="chat-content">
                           <div id="chat" class="chat-messages">
@@ -231,14 +297,18 @@
                                         <img id="avatarImage" src="{{$chatConfig?->character_url}}" alt="Chat bot" width="{{$characterSize}}" style="background-color: {{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_COLOR_CHARACTER_BG)}}; border-radius: 50%">
                                     </div>
                                     <div class="chat-grid-col">
-                                        <div class="chat-message-wrapper" style="background-color: {{$colorSecondary}};; padding: 5px 10px; border-radius: 10px" id="chatbotGreeting">{{$chatConfig?->welcome_message ?? ' Hi there! I\'m an AI support agent. How can I help?'}}</div>
+                                        <div class="chat-message-wrapper" style="background-color: {{$colorSecondary}}; padding: 5px 10px; border-radius: 10px" id="chatbotGreeting">{{$chatConfig?->welcome_message ?? ' Hi there! I\'m an AI support agent. How can I help?'}}</div>
                                     </div>
                                 </div>
                             </div>
-                          
+
                           <div id="typingIndicator" style="display: none;">
                               <div class="typing-indicator">
-                                  <img src="{{url('site-icons/typing-texting.gif')}}" alt="Typing...">
+                                  <div class="typing-dots">
+                                      <span></span>
+                                      <span></span>
+                                      <span></span>
+                                  </div>
                               </div>
                           </div>
                         </div>
@@ -287,6 +357,10 @@
     }
     function showTyping(show = true) {
       document.getElementById('typingIndicator').style.display = show ? 'block' : 'none';
+      if (show) {
+        const chatElement = document.getElementById("chat-bot");
+        chatElement.scrollTop = chatElement.scrollHeight;
+      }
     }
 
     // Append styles to head
@@ -313,10 +387,45 @@
       // Use chatConfig-specific key to isolate messages per user/chatbot
       const lastChatMessageIdKey = 'lastChatMessageId_{{$chatConfig->uuid}}';
       const chatOpenedKey = 'chatOpened_{{$chatConfig->uuid}}';
+      const chatExpandedKey = 'chatExpanded_{{$chatConfig->uuid}}';
       let lastMessage = localStorage.getItem(lastChatMessageIdKey) ?
           JSON.parse(localStorage.getItem(lastChatMessageIdKey)) :
           null;
 
+      // Clear chat functionality
+      document.getElementById('clearChatBtn').addEventListener('click', function() {
+        // Clear messages except the greeting
+        const chatMessages = document.getElementById('chat');
+        const greeting = chatMessages.querySelector('.chat-title');
+        const typingIndicator = document.getElementById('typingIndicator');
+        chatMessages.innerHTML = '';
+        if (greeting) chatMessages.appendChild(greeting);
+        chatMessages.appendChild(typingIndicator);
+
+        // Clear localStorage and reset lastMessage
+        localStorage.removeItem(lastChatMessageIdKey);
+        lastMessage = null;
+      });
+
+      // Expand/collapse chat functionality
+      const chatDialog = document.getElementById('chatDialog');
+      const expandBtn = document.getElementById('expandChatBtn');
+      const expandIcon = document.getElementById('expandIcon');
+      const collapseIcon = document.getElementById('collapseIcon');
+
+      // Restore expanded state
+      if (localStorage.getItem(chatExpandedKey) === 'true') {
+        chatDialog.classList.add('expanded');
+        expandIcon.style.display = 'none';
+        collapseIcon.style.display = 'block';
+      }
+
+      expandBtn.addEventListener('click', function() {
+        const isExpanded = chatDialog.classList.toggle('expanded');
+        expandIcon.style.display = isExpanded ? 'none' : 'block';
+        collapseIcon.style.display = isExpanded ? 'block' : 'none';
+        localStorage.setItem(chatExpandedKey, isExpanded);
+      });
 
       sendButton.addEventListener('click', function() {
         const userMsg = document.getElementById('userMessage').value.trim();

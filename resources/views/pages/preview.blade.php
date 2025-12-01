@@ -105,7 +105,7 @@
             background: #fafafa;
             display: flex !important;
             flex-direction: column !important;
-            height: 450px !important;
+            height: 500px !important;
         }
         /* Hide the floating avatar button - not needed for test page */
         #chat-wrapper .chat-avatar,
@@ -129,18 +129,23 @@
             flex: 1 !important;
             height: 100% !important;
             max-height: none !important;
-            overflow: visible !important;
-            padding: 15px !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+        #chat-box .chat-header {
+            border-radius: 0 !important;
         }
         #chat-box .chat-body {
             display: flex !important;
             flex-direction: column !important;
             flex: 1 !important;
+            overflow: hidden !important;
         }
         #chat-box .chat-content {
             flex: 1 !important;
             overflow-y: auto !important;
-            margin-bottom: 15px !important;
+            min-height: 0 !important;
         }
         #chat-box .chat-input-group {
             display: flex !important;
@@ -161,6 +166,10 @@
         }
         /* Hide the copyright in preview - it shows outside container */
         #chat-box .chat-copy {
+            display: none !important;
+        }
+        /* Hide expand button in preview (already full width) */
+        #chat-box #expandChatBtn {
             display: none !important;
         }
     </style>
