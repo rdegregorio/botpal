@@ -75,6 +75,9 @@ class Subscription extends SubscriptionAlias
 
     public static function getLimitByType($type): ?int
     {
+        if ($type === null) {
+            return null;
+        }
         return \Arr::get(static::$limits, $type);
     }
 
@@ -88,6 +91,9 @@ class Subscription extends SubscriptionAlias
 
     public static function getPlanNameByType($type): ?string
     {
+        if ($type === null) {
+            return null;
+        }
         return \Arr::get(static::$planNames, $type);
     }
 
@@ -98,6 +104,9 @@ class Subscription extends SubscriptionAlias
 
     public static function getNameByType($type): ?string
     {
+        if ($type === null) {
+            return null;
+        }
         return \Arr::get(static::$names, $type, 'Archived plan');
     }
 
