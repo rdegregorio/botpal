@@ -16,7 +16,7 @@
         <p class="mb-4" style="color: var(--text-secondary);">Test your chatbot below to see how it will appear and respond to your visitors.</p>
 
         @if($isReady)
-            <div id="chat-box" style="height: 450px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
+            <div id="chat-box" style="min-height: 450px; border: 1px solid var(--border); border-radius: 12px; overflow: visible;"></div>
         @else
             <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
                 <i class="bi bi-robot" style="font-size: 48px; color: var(--text-secondary);"></i>
@@ -86,19 +86,41 @@
         .chat-dialog .chat-close {
             display: none !important;
         }
-        /* Make chat dialog contained with internal scroll */
-        #chat-wrapper .chat-dialog {
-            max-height: 420px !important;
-            height: 420px !important;
-            overflow: hidden;
+        /* Ensure embedded chat displays properly */
+        #chat-box .chat-block-id {
+            display: block !important;
         }
-        #chat-wrapper .chat-content {
+        #chat-box .chat-dialog {
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
+            padding: 15px !important;
+        }
+        #chat-box .chat-body {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        #chat-box .chat-content {
             max-height: 300px !important;
             overflow-y: auto !important;
+            margin-bottom: 15px !important;
         }
-        /* Ensure block mode displays properly */
-        #chat-wrapper .chat-block-id {
-            display: block !important;
+        #chat-box .chat-input-group {
+            display: flex !important;
+            margin-top: auto !important;
+        }
+        #chat-box .chat-input {
+            flex: 1 !important;
+            padding: 10px !important;
+            border: 1px solid #ccc !important;
+            border-radius: 5px !important;
+            margin-right: 10px !important;
+        }
+        #chat-box .chat-send-btn {
+            padding: 10px 20px !important;
+            border: none !important;
+            border-radius: 5px !important;
+            cursor: pointer !important;
         }
     </style>
     @endif
