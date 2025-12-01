@@ -20,8 +20,8 @@
                     </div>
                     <div class="navbar-cta">
                         @auth
-                            <a href="/dashboard" class="navbar-link">Account</a>
-                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary">Logout</a>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="navbar-link">Logout</a>
+                            <a href="/dashboard" class="btn btn-primary">Account</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                         @else
                             <a href="{{ route('login') }}" class="navbar-link">Log in</a>
