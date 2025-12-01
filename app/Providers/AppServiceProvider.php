@@ -30,16 +30,21 @@ class AppServiceProvider extends ServiceProvider
         Subscription::observe(SubscriptionObserver::class);
         ChatLog::observe(ChatLogObserver::class);
 
+        // Temporarily allow all users full access (Stripe not configured)
+        // When Stripe is ready, restore original logic
         Blade::directive('paid', function () {
-            return "<?php if(auth()->check() && auth()->user()->getCurrentActiveSubscription()?->isFree()) { echo 'data-premium'; } ?>";
+            // Original: return "<?php if(auth()->check() && auth()->user()->getCurrentActiveSubscription()?->isFree()) { echo 'data-premium'; } ?>";
+            return "";  // Don't disable any buttons for now
         });
 
         Blade::if('freeUser', function () {
-            return auth()->check() && auth()->user()->getCurrentActiveSubscription()?->isFree();
+            // Original: return auth()->check() && auth()->user()->getCurrentActiveSubscription()?->isFree();
+            return false;  // Treat everyone as paid for now
         });
 
         Blade::if('paidUser', function () {
-            return auth()->check() && !auth()->user()->getCurrentActiveSubscription()?->isFree();
+            // Original: return auth()->check() && !auth()->user()->getCurrentActiveSubscription()?->isFree();
+            return true;  // Treat everyone as paid for now
         });
     }
 }

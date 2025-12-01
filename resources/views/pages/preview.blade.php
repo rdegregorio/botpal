@@ -16,7 +16,7 @@
         <p class="mb-4" style="color: var(--text-secondary);">Test your chatbot below to see how it will appear and respond to your visitors.</p>
 
         @if($isReady)
-            <div id="chat-box" style="min-height: 500px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
+            <div id="chat-box" style="height: 450px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
         @else
             <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
                 <i class="bi bi-robot" style="font-size: 48px; color: var(--text-secondary);"></i>
@@ -37,8 +37,28 @@
         #chat-box {
             background: #fafafa;
         }
-        #chat-wrapper #avatar, .chat-dialog .chat-close {
+        /* Hide the floating avatar button - not needed for test page */
+        #chat-wrapper .chat-avatar,
+        #chatAvatar {
             display: none !important;
+        }
+        /* Hide close button */
+        .chat-dialog .chat-close {
+            display: none !important;
+        }
+        /* Make chat dialog contained with internal scroll */
+        #chat-wrapper .chat-dialog {
+            max-height: 420px !important;
+            height: 420px !important;
+            overflow: hidden;
+        }
+        #chat-wrapper .chat-content {
+            max-height: 300px !important;
+            overflow-y: auto !important;
+        }
+        /* Ensure block mode displays properly */
+        #chat-wrapper .chat-block-id {
+            display: block !important;
         }
     </style>
     @endif
