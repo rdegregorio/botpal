@@ -31,7 +31,7 @@
                         <p class="mb-1"><strong>Card ending in:</strong> {{ Auth::user()->card_last_four }}</p>
                         <p class="text-muted small mb-0">Your default payment method</p>
                     </div>
-                    <button data-change-card class="btn btn-outline-primary btn-sm">
+                    <button data-change-card class="btn btn-outline-dark btn-sm">
                         <i class="bi bi-pencil me-1"></i> Change
                     </button>
                 </div>
@@ -51,7 +51,7 @@
                     <h2 class="dashboard-card-title"><i class="bi bi-receipt me-2"></i>Billing History</h2>
                 </div>
                 @if($subscription && Auth::user()->stripe_id)
-                <button id="get-invoices" onclick="invoicesModal()" class="btn btn-outline-primary btn-sm">
+                <button id="get-invoices" onclick="invoicesModal()" class="btn btn-outline-dark btn-sm">
                     <i class="bi bi-file-text me-1"></i> View Invoices
                 </button>
                 @else
@@ -134,7 +134,7 @@
                 } else {
                     for (var i = 0; i < res.length; i++) {
                         var item = res[i];
-                        html += '<tr><td>' + item.date + '</td><td>' + item.total + '</td><td><a href="' + item.url + '" target="_blank" class="btn btn-sm btn-outline-primary">View</a></td></tr>';
+                        html += '<tr><td>' + item.date + '</td><td>' + item.total + '</td><td><a href="' + item.url + '" target="_blank" class="btn btn-sm btn-outline-dark">View</a></td></tr>';
                     }
                     html += '</tbody></table>';
                 }
