@@ -3,6 +3,73 @@
 @section('page-title', 'Usage & Stats')
 
 @section('content')
+    @php
+        $limit = $subscription->default_limit ?? 0;
+        $used = $subscription->requests_count ?? 0;
+        $remaining = max(0, $limit - $used);
+        $percentUsed = $limit > 0 ? min(100, round(($used / $limit) * 100)) : 0;
+        $expiresAt = $subscription->expires_at;
+    @endphp
+
+    <!-- Plan Credits Overview -->
+    <div class="dashboard-card mb-4">
+        <div class="dashboard-card-header">
+            <h2 class="dashboard-card-title"><i class="bi bi-credit-card me-2"></i>Your Plan Credits</h2>
+            <span class="badge bg-dark">{{ $subscription->getName() }} Plan</span>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3 col-6 mb-3">
+                <div class="text-center">
+                    <p class="text-muted small mb-1">Monthly Limit</p>
+                    <h3 class="mb-0">{{ number_format($limit) }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <div class="text-center">
+                    <p class="text-muted small mb-1">Used</p>
+                    <h3 class="mb-0 text-primary">{{ number_format($used) }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <div class="text-center">
+                    <p class="text-muted small mb-1">Remaining</p>
+                    <h3 class="mb-0 {{ $remaining < ($limit * 0.1) ? 'text-danger' : 'text-success' }}">{{ number_format($remaining) }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <div class="text-center">
+                    <p class="text-muted small mb-1">Resets On</p>
+                    <h3 class="mb-0" style="font-size: 1.25rem;">{{ $expiresAt ? $expiresAt->format('M j, Y') : 'N/A' }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <div class="d-flex justify-content-between mb-1">
+                <small class="text-muted">Usage Progress</small>
+                <small class="text-muted">{{ $percentUsed }}%</small>
+            </div>
+            <div class="progress" style="height: 10px;">
+                <div class="progress-bar {{ $percentUsed > 90 ? 'bg-danger' : ($percentUsed > 70 ? 'bg-warning' : 'bg-success') }}"
+                     role="progressbar"
+                     style="width: {{ $percentUsed }}%"
+                     aria-valuenow="{{ $percentUsed }}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"></div>
+            </div>
+        </div>
+
+        @if($subscription->isFree())
+            <div class="mt-3 p-3 rounded" style="background: #fef3c7;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-lightning-charge text-warning me-2"></i>
+                    <span>Need more messages? <a href="{{ route('pricing') }}" class="fw-bold">Upgrade to Premium</a> for 10,000 messages/month!</span>
+                </div>
+            </div>
+        @endif
+    </div>
+
     <!-- Usage Stats -->
     <div class="dashboard-card">
         <div class="dashboard-card-header">

@@ -341,7 +341,13 @@ class AccountController extends Controller
 
     public function usage(Request $request)
     {
-        return view('account.usage');
+        $subscription = Auth::user()->getCurrentActiveSubscription();
+
+        if(!$subscription) {
+            return redirect()->route('pricing');
+        }
+
+        return view('account.usage', compact('subscription'));
     }
 
     public function stats(Request $request)
