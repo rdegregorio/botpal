@@ -349,6 +349,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
           },
           body: JSON.stringify({
             message: userMsg,
@@ -356,20 +357,36 @@
             chatUuid: lastMessage?.chat_uuid || null,
             messageUuid: lastMessage?.message_uuid || null,
           }),
-        }).then(response => response.json()).then(data => {
+        }).then(response => {
+          if (!response.ok) {
+            return response.json().then(err => { throw new Error(err.message || 'Request failed'); });
+          }
+          return response.json();
+        }).then(data => {
           showTyping(false);
+
+          if (data.error) {
+            insertNewMessage({answer: data.message || 'Sorry, an error occurred.'}, 'server');
+            sendButton.disabled = false;
+            return;
+          }
+
           lastMessage = data.message;
           localStorage.setItem(lastChatMessageIdKey, JSON.stringify(lastMessage));
 
           // Answer comes directly in response - no polling needed
-          if (data.message.answer) {
+          if (data.message && data.message.answer) {
             insertNewMessage(data.message, 'server');
+          } else if (data.message && !data.message.processed) {
+            // If not processed yet, poll for answer
+            setTimeout(() => getAnswer(), 500);
           }
           sendButton.disabled = false;
         }).catch(error => {
           showTyping(false);
           sendButton.disabled = false;
           console.error('Chat error:', error);
+          insertNewMessage({answer: 'Sorry, I could not process your request. Please try again.'}, 'server');
         });
       });
 
@@ -377,21 +394,24 @@
         if (!lastMessage) {
           return;
         }
-        let url = '{{route("api.chat.message")}}?messageUuid=' + lastMessage.message_uuid;
+        let url = '{{route("api.chat.result")}}?messageUuid=' + lastMessage.message_uuid;
         if (withHistory) {
           url += '&with-history=1';
         }
-        fetch(url).
-            then(response => {
+        fetch(url, {
+          headers: {
+            'Accept': 'application/json',
+          }
+        }).then(response => {
               if (!response.ok) {
                 // Clear stale localStorage if message not found
                 localStorage.removeItem(lastChatMessageIdKey);
                 lastMessage = null;
+                showTyping(false);
                 return null;
               }
               return response.json();
-            }).
-            then(data => {
+            }).then(data => {
               if (!data) return;
               let msg = data.message;
 
@@ -411,7 +431,7 @@
                     return;
                   }
                 }
-
+                showTyping(false);
                 return;
               }
 
@@ -425,9 +445,9 @@
               insertNewMessage(msg, 'server');
 
               sendButton.disabled = false;
-            }).
-            catch(error => {
+            }).catch(error => {
               // Silently handle errors (e.g., old messages not found)
+              showTyping(false);
               localStorage.removeItem(lastChatMessageIdKey);
               lastMessage = null;
             });
