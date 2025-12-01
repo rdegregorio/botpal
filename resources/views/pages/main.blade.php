@@ -244,7 +244,10 @@
                     <img src="/images/squarespace.png" alt="Squarespace" height="48">
                 </div>
                 <div class="integration-logo">
-                    <img src="/images/square.png" alt="Square" height="48">
+                    <svg viewBox="0 0 48 48" width="48" height="48">
+                        <rect fill="#1a1a1a" width="48" height="48" rx="8"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">&lt;/&gt;</text>
+                    </svg>
                 </div>
             </div>
             <p style="text-align: center; color: var(--text-muted); margin-top: 32px;">Just paste a single line of code to get started</p>
