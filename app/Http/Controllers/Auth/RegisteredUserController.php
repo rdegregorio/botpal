@@ -46,9 +46,6 @@ class RegisteredUserController extends Controller
             'email_verified_at' => now(),
         ]);
 
-        // Create free subscription for new user
-        SubscriptionService::createFreeSubscription($user);
-
         // Create default chat config so user can access settings/knowledge
         ChatConfig::create([
             'user_id' => $user->id,
@@ -62,6 +59,41 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/dashboard');
+        // Redirect to plan selection page
+        return redirect()->route('select-plan');
+    }
+
+    /**
+     * Display the plan selection view.
+     */
+    public function selectPlan(): View|RedirectResponse
+    {
+        $user = Auth::user();
+
+        // If user already has a subscription, redirect to dashboard
+        if ($user->getCurrentActiveSubscription()) {
+            return redirect('/dashboard');
+        }
+
+        return view('auth.select-plan');
+    }
+
+    /**
+     * Handle plan selection.
+     */
+    public function storePlan(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'plan' => ['required', 'string', 'in:free,premium,enterprise'],
+        ]);
+
+        $user = Auth::user();
+
+        // For now, only free plan is available
+        if ($request->plan === 'free') {
+            SubscriptionService::createFreeSubscription($user);
+        }
+
+        return redirect('/dashboard')->with('success', 'Welcome! Your account is now active.');
     }
 }

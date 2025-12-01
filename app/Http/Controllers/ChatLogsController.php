@@ -11,7 +11,13 @@ class ChatLogsController extends Controller
 {
     public function index()
     {
-        $totalMessages = \Auth::user()->chatConfigLatest->messages()->regular()->count();
+        $chatConfig = \Auth::user()->chatConfigLatest;
+
+        if (!$chatConfig) {
+            return redirect()->route('dashboard')->with('warning', 'Please set up your chatbot first.');
+        }
+
+        $totalMessages = $chatConfig->messages()->regular()->count();
 
         return view('messages.index', compact('totalMessages'));
     }
@@ -36,6 +42,11 @@ class ChatLogsController extends Controller
         ]);
 
         $chatConfig = \Auth::user()->chatConfigLatest;
+
+        if (!$chatConfig) {
+            return response()->json(['error' => 'No chatbot configured'], 404);
+        }
+
         $message = ChatLog::whereMessageUuid($data['message_uuid'])->whereChatConfigId($chatConfig->id)->firstOrFail();
 
         if ($data['action'] === 'permanently_delete') {
@@ -63,12 +74,17 @@ class ChatLogsController extends Controller
             'type' => 'required|string|in:inbox,archived,flagged,deleted',
         ]);
 
+        $chatConfig = \Auth::user()->chatConfigLatest;
+
+        if (!$chatConfig) {
+            return response()->json(['data' => []]);
+        }
+
         $type = $data['type'];
 
         $perPage = 100;
 
-        $messages = \Auth::user()
-            ->chatConfigLatest
+        $messages = $chatConfig
             ->messages()
             ->when($type === 'inbox', function ($query) {
                 $query->regular();

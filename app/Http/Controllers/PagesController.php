@@ -35,16 +35,6 @@ class PagesController extends Controller
             return redirect()->route('settings')->with('warning', 'Please update your chat config first to use preview.');
         }
 
-        $user = \Auth::user();
-
-        if (!$user->open_ai_token) {
-            return redirect()->route('account.index')->with('warning', 'Please update your OpenAI key first to use preview.');
-        }
-
-        if (!$user->open_ai_model) {
-            return redirect()->route('account.index')->with('warning', 'Please update your OpenAI model first to use preview.');
-        }
-
         return view('pages.preview');
     }
 }
