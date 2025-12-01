@@ -116,20 +116,10 @@
 
 @push('bottom')
     <script>
-        // Change card handler
+        // Change card handler - redirects to Stripe billing portal
         $(document).on('click', '[data-change-card]', function () {
-            $(this).prop('disabled', true);
-            $.post('{{ route('account.checkout.get-change-card-session-id') }}', {
-                _token: '{{ csrf_token() }}'
-            }, function (e) {
-                var stripe = Stripe('{{ config('cashier.key') }}');
-                stripe.redirectToCheckout({
-                    sessionId: e.sessionId
-                });
-            }).fail(function (e) {
-                alert(e.responseJSON?.error || 'Error');
-                $('[data-change-card]').prop('disabled', false);
-            });
+            $(this).prop('disabled', true).html('<i class="bi bi-hourglass-split me-1"></i> Loading...');
+            window.location.href = '{{ route("stripe.portal") }}';
         });
 
         // Invoices modal
@@ -149,6 +139,8 @@
                     html += '</tbody></table>';
                 }
                 $modal.find('.modal-body').html(html);
+            }).fail(function() {
+                $modal.find('.modal-body').html('<p class="text-muted">Unable to load invoices. Please try again later.</p>');
             });
         }
     </script>

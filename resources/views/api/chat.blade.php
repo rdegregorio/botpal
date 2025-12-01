@@ -322,7 +322,9 @@
         }
       });
 
-      const lastChatMessageIdKey = 'lastChatMessageId';
+      // Use chatConfig-specific key to isolate messages per user/chatbot
+      const lastChatMessageIdKey = 'lastChatMessageId_{{$chatConfig->uuid}}';
+      const chatOpenedKey = 'chatOpened_{{$chatConfig->uuid}}';
       let lastMessage = localStorage.getItem(lastChatMessageIdKey) ?
           JSON.parse(localStorage.getItem(lastChatMessageIdKey)) :
           null;
@@ -442,7 +444,7 @@
 
         avatarButton.classList.toggle('chat-avatar--opened', chatOpened);
         if(isSaveState) {
-          localStorage.setItem('chatOpened', chatOpened);
+          localStorage.setItem(chatOpenedKey, chatOpened);
         }
       };
 
@@ -451,7 +453,7 @@
       });
 
       if (lastMessage) {
-        if(localStorage.getItem('chatOpened') === 'true') {
+        if(localStorage.getItem(chatOpenedKey) === 'true') {
           toggleChatModal(false);
         }
         getAnswer(true);

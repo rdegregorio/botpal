@@ -58,6 +58,19 @@
                 existingWrapper.remove();
             }
 
+            // Also remove any chat that was moved into the chat-box
+            const chatBox = document.getElementById('chat-box');
+            if (chatBox) {
+                chatBox.innerHTML = '';
+            }
+
+            // Remove any old chat styles
+            document.querySelectorAll('style').forEach(style => {
+                if (style.innerText && style.innerText.includes('chat-wrapper')) {
+                    style.remove();
+                }
+            });
+
             // Load the chat widget script
             const script = document.createElement('script');
             script.src = "{{ route('api.chat.embed', $chatConfig->uuid) }}?blockId=chat-box&t=" + Date.now();

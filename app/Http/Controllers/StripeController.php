@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -94,11 +95,28 @@ class StripeController extends Controller
 
         $subscriptionData = $session['subscription'];
         $userId = $session['metadata']['user_id'] ?? Auth::id();
+        $customerId = $session['customer'] ?? null;
+
+        // Update user with Stripe customer ID
+        if ($customerId) {
+            $user = User::find($userId);
+            if ($user) {
+                $user->stripe_id = $customerId;
+                $user->save();
+            }
+        }
+
+        // Check if user had any previous subscriptions (to determine if new or upgrade)
+        $hadPreviousSubscription = Subscription::where('user_id', $userId)->exists();
 
         // Create or update subscription
         $this->createOrUpdateSubscription($userId, $subscriptionData);
 
-        return redirect()->route('dashboard')->with('success', 'Welcome to Premium! Your subscription is now active.');
+        if (!$hadPreviousSubscription) {
+            return redirect()->route('knowledge')->with('success', 'Welcome to Premium! Let\'s set up your chatbot knowledge base.');
+        }
+
+        return redirect()->route('dashboard')->with('success', 'Upgraded to Premium! Your subscription is now active.');
     }
 
     /**
@@ -107,6 +125,50 @@ class StripeController extends Controller
     public function cancel()
     {
         return redirect()->route('select-plan')->with('info', 'Payment was cancelled. You can try again anytime.');
+    }
+
+    /**
+     * Redirect to Stripe Customer Portal for managing payment methods
+     */
+    public function portal()
+    {
+        $user = Auth::user();
+        $secretKey = config('services.stripe.secret');
+
+        if (!$user->stripe_id) {
+            return redirect()->route('account.billing')->with('error', 'No Stripe customer found. Please subscribe first.');
+        }
+
+        // Create Stripe Customer Portal session
+        $ch = curl_init('https://api.stripe.com/v1/billing_portal/sessions');
+
+        $postData = http_build_query([
+            'customer' => $user->stripe_id,
+            'return_url' => route('account.billing'),
+        ]);
+
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $secretKey,
+                'Content-Type: application/x-www-form-urlencoded',
+            ],
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        $data = json_decode($response, true);
+
+        if ($httpCode !== 200 || !isset($data['url'])) {
+            Log::error('Stripe portal creation failed', ['response' => $data]);
+            return redirect()->route('account.billing')->with('error', 'Unable to access billing portal. Please try again.');
+        }
+
+        return redirect($data['url']);
     }
 
     /**
