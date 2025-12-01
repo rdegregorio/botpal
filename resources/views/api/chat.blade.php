@@ -332,21 +332,27 @@
         insertNewMessage(userMsg, 'user');
         showTyping(true);
 
+        // Build request body - only include chatUuid if we have an existing conversation
+        const requestBody = {
+          message: userMsg,
+          chatConfig: chatConfig,
+        };
+        if (lastMessage?.chat_uuid) {
+          requestBody.chatUuid = lastMessage.chat_uuid;
+        }
+
         fetch('{{route("api.chat.message")}}', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          body: JSON.stringify({
-            message: userMsg,
-            chatConfig: chatConfig,
-            chatUuid: lastMessage?.chat_uuid || null,
-            messageUuid: lastMessage?.message_uuid || null,
-          }),
+          body: JSON.stringify(requestBody),
         }).then(response => {
           if (!response.ok) {
-            return response.json().then(err => { throw new Error(err.message || 'Request failed'); });
+            return response.json().catch(() => ({ message: 'Request failed' })).then(err => {
+              throw new Error(err.message || err.errors?.message?.[0] || 'Request failed');
+            });
           }
           return response.json();
         }).then(data => {
@@ -373,7 +379,7 @@
           showTyping(false);
           sendButton.disabled = false;
           console.error('Chat error:', error);
-          insertNewMessage({answer: 'Sorry, I could not process your request. Please try again.'}, 'server');
+          insertNewMessage({answer: error.message || 'Sorry, I could not process your request. Please try again.'}, 'server');
         });
       });
 
