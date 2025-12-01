@@ -40,4 +40,11 @@ return [
         'default_model' => env('OPENAI_DEFAULT_MODEL', 'gpt-5-mini'),
     ],
 
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'price_premium' => env('STRIPE_PRICE_PREMIUM'),
+    ],
+
 ];

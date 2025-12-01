@@ -49,7 +49,21 @@
 
 @push('bottom')
     @if($isReady)
-    <script async src="{{ route('api.chat.embed', $chatConfig->uuid) }}?blockId=chat-box"></script>
+    <script>
+        // Clear and reload chat widget when navigating back to the page
+        (function() {
+            // Remove any existing chat widget to prevent duplicates
+            const existingWrapper = document.getElementById('chat-wrapper');
+            if (existingWrapper) {
+                existingWrapper.remove();
+            }
+
+            // Load the chat widget script
+            const script = document.createElement('script');
+            script.src = "{{ route('api.chat.embed', $chatConfig->uuid) }}?blockId=chat-box&t=" + Date.now();
+            document.body.appendChild(script);
+        })();
+    </script>
     <script>
         function copyEmbedCode() {
             var codeBox = document.getElementById('chatCodeBox');
