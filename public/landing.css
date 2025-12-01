@@ -208,9 +208,10 @@ body {
     opacity: 1;
 }
 
-.integration-logo svg {
-    width: 48px;
+.integration-logo img {
     height: 48px;
+    width: auto;
+    object-fit: contain;
 }
 
 @media (max-width: 768px) {
@@ -323,8 +324,7 @@ body {
 
 .hero-demo-content {
     padding: 32px;
-    height: 320px;
-    overflow-y: auto;
+    min-height: 400px;
     background: var(--bg-primary);
 }
 
@@ -706,7 +706,6 @@ body {
 }
 
 .pricing-card.featured {
-    border-color: var(--text-primary);
     position: relative;
 }
 
@@ -786,14 +785,20 @@ body {
 }
 
 .pricing-card.active {
-    border-color: var(--text-primary);
+    border-color: var(--text-primary) !important;
     border-width: 2px;
 }
 
 .pricing-card.active .pricing-btn {
-    background: var(--text-primary);
-    color: white;
-    border-color: var(--text-primary);
+    background: var(--text-primary) !important;
+    color: white !important;
+    border-color: var(--text-primary) !important;
+}
+
+.pricing-card:not(.active) .pricing-btn.btn-primary {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
 }
 
 /* ========================================
