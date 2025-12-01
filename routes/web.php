@@ -10,6 +10,7 @@ use App\Http\Controllers\ChatLogsController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
 // Google OAuth Routes
@@ -102,5 +103,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account', 'as' => 'account.']
         Route::get('change-card', [AccountController::class, 'changeCard'])->name('change-card');
     });
 });
+
+// Stripe Routes
+Route::middleware('auth')->group(function () {
+    Route::get('stripe/checkout', [StripeController::class, 'checkout'])->name('stripe.checkout');
+    Route::get('stripe/success', [StripeController::class, 'success'])->name('stripe.success');
+    Route::get('stripe/cancel', [StripeController::class, 'cancel'])->name('stripe.cancel');
+});
+
+// Stripe Webhook (no CSRF, no auth)
+Route::post('stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
 
 require __DIR__.'/auth.php';

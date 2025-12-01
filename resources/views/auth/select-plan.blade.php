@@ -33,7 +33,7 @@
             <div class="plan-header">
                 <h3 class="plan-name">Premium</h3>
                 <div class="plan-price">
-                    <span class="price">$9.99</span>
+                    <span class="price">$19.99</span>
                     <span class="period">/month</span>
                 </div>
             </div>
@@ -44,9 +44,9 @@
                 <li><i class="bi bi-check"></i> Advanced Analytics</li>
                 <li><i class="bi bi-check"></i> Priority Support</li>
             </ul>
-            <button type="button" class="btn-plan btn-plan-disabled" disabled>
-                Coming Soon
-            </button>
+            <a href="{{ route('stripe.checkout') }}" class="btn-plan btn-plan-primary">
+                Subscribe Now
+            </a>
         </div>
 
         <!-- Enterprise Plan -->
