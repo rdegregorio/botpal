@@ -89,9 +89,10 @@
             max-width: 435px;
             max-height: 50vh;
             height: 900px;
-            overflow: auto;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         .chat-close {
             position: absolute;
@@ -142,9 +143,9 @@
           flex-direction: column;
         }
         .chat-content {
-            height: 100px;
+            min-height: 0;
             overflow-y: auto;
-            flex-grow: 1;
+            flex: 1 1 auto;
         }
         .chat-messages {
             margin-bottom: 10px;
@@ -206,14 +207,69 @@
         .typing-indicator {
           display: flex;
           align-items: center;
-          padding: 8px 12px;
+          padding: 12px 16px;
           background: {{$colorSecondary}};
           border-radius: 10px;
           width: fit-content;
+          gap: 4px;
         }
-        .typing-indicator img {
-          height: 24px;
-          width: auto;
+        .typing-dot {
+          width: 8px;
+          height: 8px;
+          background-color: #666;
+          border-radius: 50%;
+          animation: typing-bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) {
+          animation-delay: -0.32s;
+        }
+        .typing-dot:nth-child(2) {
+          animation-delay: -0.16s;
+        }
+        .typing-dot:nth-child(3) {
+          animation-delay: 0s;
+        }
+        @keyframes typing-bounce {
+          0%, 80%, 100% {
+            transform: scale(0.6);
+            opacity: 0.5;
+          }
+          40% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+        .chat-header-actions {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          display: flex;
+          gap: 8px;
+          z-index: 10;
+        }
+        .chat-header-btn {
+          width: 28px;
+          height: 28px;
+          border: none;
+          background: #f0f0f0;
+          border-radius: 4px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.2s;
+        }
+        .chat-header-btn:hover {
+          background: #e0e0e0;
+        }
+        .chat-header-btn svg {
+          width: 16px;
+          height: 16px;
+          fill: #666;
+        }
+        .chat-dialog.chat-expanded {
+          max-width: 600px;
+          max-height: 70vh;
         }
     `;
 
@@ -221,7 +277,15 @@
     const htmlTemplate = `
         <div id="chat-wrapper">
             <div @if(request('blockId')) class="chat-block-id" @else class="chat-overlay" @endif id="chatbotPreviewModal">
-                <div class="chat-dialog">
+                <div class="chat-dialog" id="chatDialog">
+                    <div class="chat-header-actions">
+                        <button class="chat-header-btn" id="refreshChatBtn" title="Clear chat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                        </button>
+                        <button class="chat-header-btn" id="expandChatBtn" title="Expand chat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="expandIcon"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                        </button>
+                    </div>
                     <div class="chat-body">
                         <div id="chat-bot" class="chat-content">
                           <div id="chat" class="chat-messages">
@@ -238,7 +302,9 @@
                           
                           <div id="typingIndicator" style="display: none;">
                               <div class="typing-indicator">
-                                  <img src="{{url('site-icons/typing-texting.gif')}}" alt="Typing...">
+                                  <div class="typing-dot"></div>
+                                  <div class="typing-dot"></div>
+                                  <div class="typing-dot"></div>
                               </div>
                           </div>
                         </div>
@@ -313,6 +379,7 @@
       // Use chatConfig-specific key to isolate messages per user/chatbot
       const lastChatMessageIdKey = 'lastChatMessageId_{{$chatConfig->uuid}}';
       const chatOpenedKey = 'chatOpened_{{$chatConfig->uuid}}';
+      const chatExpandedKey = 'chatExpanded_{{$chatConfig->uuid}}';
       let lastMessage = localStorage.getItem(lastChatMessageIdKey) ?
           JSON.parse(localStorage.getItem(lastChatMessageIdKey)) :
           null;
@@ -464,6 +531,51 @@
 
       avatarButton.addEventListener('click', function() {
         toggleChatModal();
+      });
+
+      // Refresh/Clear chat button
+      const refreshBtn = document.getElementById('refreshChatBtn');
+      refreshBtn.addEventListener('click', function() {
+        // Clear all messages except the welcome message
+        const chatMessages = document.getElementById('chat');
+        const welcomeMessage = chatMessages.querySelector('.chat-title');
+        chatMessages.innerHTML = '';
+        if (welcomeMessage) {
+          chatMessages.appendChild(welcomeMessage);
+        }
+        // Re-add the typing indicator
+        const typingIndicator = document.createElement('div');
+        typingIndicator.id = 'typingIndicator';
+        typingIndicator.style.display = 'none';
+        typingIndicator.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+        chatMessages.appendChild(typingIndicator);
+
+        // Clear localStorage and reset lastMessage
+        localStorage.removeItem(lastChatMessageIdKey);
+        lastMessage = null;
+      });
+
+      // Expand/Collapse chat button
+      const expandBtn = document.getElementById('expandChatBtn');
+      const chatDialog = document.getElementById('chatDialog');
+      const expandIcon = document.getElementById('expandIcon');
+
+      // Restore expanded state from localStorage
+      if (localStorage.getItem(chatExpandedKey) === 'true') {
+        chatDialog.classList.add('chat-expanded');
+        expandIcon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+      }
+
+      expandBtn.addEventListener('click', function() {
+        const isExpanded = chatDialog.classList.toggle('chat-expanded');
+        localStorage.setItem(chatExpandedKey, isExpanded);
+
+        // Toggle icon between expand and collapse
+        if (isExpanded) {
+          expandIcon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+        } else {
+          expandIcon.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+        }
       });
 
       if (lastMessage) {
