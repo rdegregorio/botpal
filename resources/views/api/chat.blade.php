@@ -203,28 +203,17 @@
           text-decoration: none;
           color: {{\App\Models\ChatConfig::DEFAULT_COLOR}};
         }
-        .typing-dots {
+        .typing-indicator {
           display: flex;
           align-items: center;
-          gap: 4px;
           padding: 8px 12px;
           background: {{$colorSecondary}};
           border-radius: 10px;
           width: fit-content;
         }
-        .typing-dots span {
-          width: 8px;
-          height: 8px;
-          background: #888;
-          border-radius: 50%;
-          animation: typing 1.4s infinite ease-in-out both;
-        }
-        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0s; }
-        @keyframes typing {
-          0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
-          40% { transform: scale(1); opacity: 1; }
+        .typing-indicator img {
+          height: 24px;
+          width: auto;
         }
     `;
 
@@ -248,10 +237,8 @@
                             </div>
                           
                           <div id="typingIndicator" style="display: none;">
-                              <div class="typing-dots">
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
+                              <div class="typing-indicator">
+                                  <img src="{{url('site-icons/typing-texting.gif')}}" alt="Typing...">
                               </div>
                           </div>
                         </div>

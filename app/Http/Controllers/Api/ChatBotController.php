@@ -12,6 +12,7 @@ use App\Models\ChatLog;
 use App\Services\OpenAIService;
 use App\Services\Subscriptions\SubscriptionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ChatBotController extends Controller
 {
@@ -81,13 +82,17 @@ class ChatBotController extends Controller
             ]);
         }
 
-        $chatUuid = $request->input('chatUuid');
+        // Generate new chat_uuid for first message, or use existing one for conversation continuity
+        $chatUuid = $request->input('chatUuid') ?: (string) Str::uuid();
+        // Always generate a new message_uuid for each message
+        $messageUuid = (string) Str::uuid();
         $ip = $request->ip();
 
         /** @var ChatLog $message */
         $message = $chatConfig->messages()->create([
             'question' => $request->input('message'),
             'chat_uuid' => $chatUuid,
+            'message_uuid' => $messageUuid,
             'ip_address' => $ip,
         ]);
 
