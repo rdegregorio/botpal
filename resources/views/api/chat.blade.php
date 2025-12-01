@@ -379,8 +379,17 @@
           url += '&with-history=1';
         }
         fetch(url).
-            then(response => response.json()).
+            then(response => {
+              if (!response.ok) {
+                // Clear stale localStorage if message not found
+                localStorage.removeItem(lastChatMessageIdKey);
+                lastMessage = null;
+                return null;
+              }
+              return response.json();
+            }).
             then(data => {
+              if (!data) return;
               let msg = data.message;
 
               if (data.history) {
@@ -415,7 +424,9 @@
               sendButton.disabled = false;
             }).
             catch(error => {
-              alert('error answer');
+              // Silently handle errors (e.g., old messages not found)
+              localStorage.removeItem(lastChatMessageIdKey);
+              lastMessage = null;
             });
       }
 

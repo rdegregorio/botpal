@@ -16,7 +16,7 @@
         <p class="mb-4" style="color: var(--text-secondary);">Test your chatbot below to see how it will appear and respond to your visitors.</p>
 
         @if($isReady)
-            <div id="chat-box" style="min-height: 450px; border: 1px solid var(--border); border-radius: 12px; overflow: visible;"></div>
+            <div id="chat-box" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
         @else
             <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
                 <i class="bi bi-robot" style="font-size: 48px; color: var(--text-secondary);"></i>
@@ -76,6 +76,9 @@
     <style>
         #chat-box {
             background: #fafafa;
+            display: flex !important;
+            flex-direction: column !important;
+            height: 450px !important;
         }
         /* Hide the floating avatar button - not needed for test page */
         #chat-wrapper .chat-avatar,
@@ -86,12 +89,18 @@
         .chat-dialog .chat-close {
             display: none !important;
         }
-        /* Ensure embedded chat displays properly */
+        /* Make chat fill the container */
         #chat-box .chat-block-id {
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+            height: 100% !important;
         }
         #chat-box .chat-dialog {
-            height: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+            height: 100% !important;
             max-height: none !important;
             overflow: visible !important;
             padding: 15px !important;
@@ -99,15 +108,16 @@
         #chat-box .chat-body {
             display: flex !important;
             flex-direction: column !important;
+            flex: 1 !important;
         }
         #chat-box .chat-content {
-            max-height: 300px !important;
+            flex: 1 !important;
             overflow-y: auto !important;
             margin-bottom: 15px !important;
         }
         #chat-box .chat-input-group {
             display: flex !important;
-            margin-top: auto !important;
+            flex-shrink: 0 !important;
         }
         #chat-box .chat-input {
             flex: 1 !important;
@@ -121,6 +131,10 @@
             border: none !important;
             border-radius: 5px !important;
             cursor: pointer !important;
+        }
+        /* Hide the copyright in preview - it shows outside container */
+        #chat-box .chat-copy {
+            display: none !important;
         }
     </style>
     @endif
