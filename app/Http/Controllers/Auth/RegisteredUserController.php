@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Services\Subscriptions\SubscriptionService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,6 +44,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'email_verified_at' => now(),
         ]);
+
+        // Create free subscription for new user
+        SubscriptionService::createFreeSubscription($user);
 
         event(new Registered($user));
 
