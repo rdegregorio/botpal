@@ -9,44 +9,46 @@
 @section('page-title', 'Preview ChatBot')
 
 @section('content')
+    @if($isReady)
+    <div class="row">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="dashboard-card h-100">
+                <div class="dashboard-card-header">
+                    <h2 class="dashboard-card-title"><i class="bi bi-eye me-2"></i>Live Preview</h2>
+                </div>
+                <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Test your chatbot below to see how it will appear and respond to your visitors.</p>
+                <div id="chat-box" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="dashboard-card h-100">
+                <div class="dashboard-card-header">
+                    <h2 class="dashboard-card-title"><i class="bi bi-code-slash me-2"></i>Chat Widget Code</h2>
+                </div>
+                <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
+                <div class="code-container position-relative">
+                    <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; font-size: 13px; overflow-x: auto;">&lt;!-- Start of aisupport.bot Embed Code--&gt;
+&lt;script async src="{{ route('api.chat.embed', $chatConfig->uuid) }}"&gt;&lt;/script&gt;
+&lt;!-- End of aisupport.bot Embed Code --&gt;</pre>
+                    <button class="btn btn-sm btn-outline-secondary copy-btn" style="position: absolute; top: 10px; right: 10px;" onclick="copyEmbedCode()" title="Copy Code">
+                        <i class="bi bi-clipboard"></i> Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
     <div class="dashboard-card">
         <div class="dashboard-card-header">
             <h2 class="dashboard-card-title"><i class="bi bi-eye me-2"></i>Live Preview</h2>
         </div>
-        <p class="mb-4" style="color: var(--text-secondary);">Test your chatbot below to see how it will appear and respond to your visitors.</p>
-
-        @if($isReady)
-            <div class="d-flex justify-content-end mb-2">
-                <button class="btn btn-sm btn-outline-secondary" id="clearChatBtn">
-                    <i class="bi bi-arrow-clockwise me-1"></i> Clear Chat
-                </button>
-            </div>
-            <div id="chat-box" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
-        @else
-            <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
-                <i class="bi bi-robot" style="font-size: 48px; color: var(--text-secondary);"></i>
-                <h5 class="mt-3 mb-3">Complete Setup to Preview</h5>
-                <p style="color: var(--text-secondary);">Configure your chatbot in the Appearance section first.</p>
-                <a href="{{ route('settings') }}" class="btn btn-primary">
-                    <i class="bi bi-palette me-1"></i> Go to Appearance
-                </a>
-            </div>
-        @endif
-    </div>
-
-    @if($isReady)
-    <div class="dashboard-card">
-        <div class="dashboard-card-header">
-            <h2 class="dashboard-card-title"><i class="bi bi-code-slash me-2"></i>Chat Widget Code</h2>
-        </div>
-        <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
-        <div class="code-container position-relative">
-            <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; font-size: 13px; overflow-x: auto;">&lt;!-- Start of aisupport.bot Embed Code--&gt;
-&lt;script async src="{{ route('api.chat.embed', $chatConfig->uuid) }}"&gt;&lt;/script&gt;
-&lt;!-- End of aisupport.bot Embed Code --&gt;</pre>
-            <button class="btn btn-sm btn-outline-secondary copy-btn" style="position: absolute; top: 10px; right: 10px;" onclick="copyEmbedCode()" title="Copy Code">
-                <i class="bi bi-clipboard"></i> Copy
-            </button>
+        <div class="text-center py-5" style="background: var(--bg-cream); border-radius: 12px;">
+            <i class="bi bi-robot" style="font-size: 48px; color: var(--text-secondary);"></i>
+            <h5 class="mt-3 mb-3">Complete Setup to Preview</h5>
+            <p style="color: var(--text-secondary);">Configure your chatbot in the Appearance section first.</p>
+            <a href="{{ route('settings') }}" class="btn btn-primary">
+                <i class="bi bi-palette me-1"></i> Go to Appearance
+            </a>
         </div>
     </div>
     @endif
@@ -55,7 +57,7 @@
 @push('bottom')
     @if($isReady)
     <script>
-        // Clear and reload chat widget when navigating back to the page
+        // Load chat widget
         (function() {
             function loadChatWidget() {
                 // Remove any existing chat widget to prevent duplicates
@@ -88,11 +90,6 @@
 
             // Initial load
             loadChatWidget();
-
-            // Clear Chat button handler
-            document.getElementById('clearChatBtn').addEventListener('click', function() {
-                loadChatWidget();
-            });
         })();
     </script>
     <script>
@@ -158,6 +155,14 @@
             flex: 1 !important;
             overflow-y: auto !important;
             min-height: 0 !important;
+        }
+        #chat-box .chat-input-group {
+            display: flex !important;
+            flex-shrink: 0 !important;
+            margin-top: 10px !important;
+        }
+        #chat-box .chat-send-btn {
+            display: inline-block !important;
         }
     </style>
     @endif
