@@ -544,15 +544,19 @@
         chatOpened = !chatOpened;
         modal.style.display = chatOpened ? 'block' : 'none';
 
-        avatarButton.classList.toggle('chat-avatar--opened', chatOpened);
+        if (avatarButton) {
+          avatarButton.classList.toggle('chat-avatar--opened', chatOpened);
+        }
         if(isSaveState) {
           localStorage.setItem(chatOpenedKey, chatOpened);
         }
       };
 
-      avatarButton.addEventListener('click', function() {
-        toggleChatModal();
-      });
+      if (avatarButton) {
+        avatarButton.addEventListener('click', function() {
+          toggleChatModal();
+        });
+      }
 
       // Refresh/Clear chat button
       const refreshBtn = document.getElementById('refreshChatBtn');
