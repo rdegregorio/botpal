@@ -10,31 +10,26 @@
 
 @section('content')
     @if($isReady)
-    <div class="row">
-        <div class="col-lg-6 mb-4 mb-lg-0">
-            <div class="dashboard-card h-100">
-                <div class="dashboard-card-header">
-                    <h2 class="dashboard-card-title"><i class="bi bi-eye me-2"></i>Live Preview</h2>
-                </div>
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Test your chatbot below to see how it will appear and respond to your visitors.</p>
-                <div id="chat-box" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
-            </div>
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <h2 class="dashboard-card-title"><i class="bi bi-eye me-2"></i>Live Preview</h2>
         </div>
-        <div class="col-lg-6">
-            <div class="dashboard-card h-100">
-                <div class="dashboard-card-header">
-                    <h2 class="dashboard-card-title"><i class="bi bi-code-slash me-2"></i>Chat Widget Code</h2>
-                </div>
-                <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
-                <div class="code-container position-relative">
-                    <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; font-size: 13px; overflow-x: auto;">&lt;!-- Start of aisupport.bot Embed Code--&gt;
+        <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Test your chatbot below to see how it will appear and respond to your visitors.</p>
+        <div id="chat-box" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;"></div>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <h2 class="dashboard-card-title"><i class="bi bi-code-slash me-2"></i>Chat Widget Code</h2>
+        </div>
+        <p class="mb-3" style="color: var(--text-secondary); font-size: 14px;">Copy and paste this code into your website to add the chatbot.</p>
+        <div class="code-container position-relative">
+            <pre id="chatCodeBox" class="code-box p-3 rounded" style="background: #f5f5f5; border: 1px solid #ddd; font-size: 13px; overflow-x: auto;">&lt;!-- Start of aisupport.bot Embed Code--&gt;
 &lt;script async src="{{ route('api.chat.embed', $chatConfig->uuid) }}"&gt;&lt;/script&gt;
 &lt;!-- End of aisupport.bot Embed Code --&gt;</pre>
-                    <button class="btn btn-sm btn-outline-secondary copy-btn" style="position: absolute; top: 10px; right: 10px;" onclick="copyEmbedCode()" title="Copy Code">
-                        <i class="bi bi-clipboard"></i> Copy
-                    </button>
-                </div>
-            </div>
+            <button class="btn btn-sm btn-outline-secondary copy-btn" style="position: absolute; top: 10px; right: 10px;" onclick="copyEmbedCode()" title="Copy Code">
+                <i class="bi bi-clipboard"></i> Copy
+            </button>
         </div>
     </div>
     @else
