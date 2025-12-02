@@ -53,6 +53,10 @@
             overflow: visible;
             transform: none;
         }
+
+        .chat-block-id #expandChatBtn {
+            display: none;
+        }
         
         .chat-grid-col, .chat-grid-col-auto {
             position: relative;
@@ -138,9 +142,11 @@
             opacity: 95%;
         }
         .chat-body {
-          flex-grow: 1;
+          flex: 1 1 auto;
           display: flex;
           flex-direction: column;
+          min-height: 0;
+          overflow: hidden;
         }
         .chat-content {
             min-height: 0;
@@ -171,6 +177,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
+            margin-top: 10px;
         }
         .chat-input:focus {
             outline: none;
