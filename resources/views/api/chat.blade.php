@@ -52,10 +52,11 @@
             max-height: none;
             overflow: visible;
             transform: none;
-            padding: 0;
+            padding: 15px;
+            padding-top: 40px;
         }
 
-        .chat-block-id .chat-header-actions {
+        .chat-block-id #expandChatBtn {
             display: none;
         }
 
@@ -341,7 +342,7 @@
                 @endif
                 </div>
             </div>
-            <div id="chatAvatar" class="chat-avatar"><img src="{{$chatConfig?->character_url}}" width="{{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_CHARACTER_SIZE)}}" /></div>
+            @if(!request('blockId'))<div id="chatAvatar" class="chat-avatar"><img src="{{$chatConfig?->character_url}}" width="{{$chatConfig->getSettings(\App\Models\ChatConfig::SETTINGS_CHARACTER_SIZE)}}" /></div>@endif
         </div>
     `;
 
