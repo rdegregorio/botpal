@@ -130,9 +130,8 @@
         #chatAvatar {
             display: none !important;
         }
-        /* Hide close and expand buttons in embedded mode */
-        #chat-box .chat-close-btn,
-        #chat-box #chatExpandBtn {
+        /* Hide expand button in embedded mode - only show refresh */
+        #chat-box #expandChatBtn {
             display: none !important;
         }
         /* Make chat fill the container */
@@ -142,10 +141,12 @@
             flex: 1 !important;
             height: 100% !important;
         }
-        #chat-box .chat-widget {
+        #chat-box .chat-dialog {
             height: 100% !important;
             max-height: none !important;
-            border-radius: 12px !important;
+            border-radius: 0 !important;
+            padding: 15px !important;
+            padding-top: 40px !important;
         }
         #chat-box .chat-body {
             display: flex !important;
@@ -153,14 +154,10 @@
             flex: 1 !important;
             min-height: 0 !important;
         }
-        #chat-box .chat-messages {
+        #chat-box .chat-content {
             flex: 1 !important;
             overflow-y: auto !important;
             min-height: 0 !important;
-        }
-        /* Hide the copyright in preview - it shows outside container */
-        #chat-box .chat-copy {
-            display: none !important;
         }
     </style>
     @endif
